@@ -1,0 +1,37 @@
+% PFM.tex 
+\documentclass[a4paper,10pt,titlepage]{article}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{mathtools, amsthm}
+\usepackage[colorlinks]{hyperref}
+
+
+%Use the command below to add references to ToC numbered
+%\usepackage[nottoc,numbib]{tocbibind}
+
+%\includeonly{Intro}
+
+\begin{document}
+% define the title
+\author{José Miguel Suárez Alvarado}
+\title{Final Project - Draft}
+% generates the title
+\maketitle
+% insert the table of contents
+\tableofcontents
+%Include all the sections
+\include{Intro}
+\include{PrevWork}
+\include{Method}
+\include{Results}
+\include{Discussion}
+\include{Conclusions}
+%Scratch Sheet; used to test stuff
+%\include{scratchsheet}
+%%%%%%%
+\clearpage
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{abbrv}
+\bibliography{PFM-Biblio}
+
+\end{document}

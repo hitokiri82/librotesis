@@ -256,7 +256,7 @@ The second component of the solution is the implementation of some modern
 \end_layout
 
 \begin_layout Standard
-The ESPina tool, is built as an extension of Paraview, an open-source, multi-pla
+The ESPina tool, is built as an extension of ParaView, an open-source, multi-pla
 tform data analysis and visualization application (
 \begin_inset Flex URL
 status collapsed
@@ -268,7 +268,7 @@ http://www.paraview.org/
 
 \end_inset
 
-)/ In order to be compatible with ESPina/Paraview, the implementation of
+)/ In order to be compatible with ESPina/ParaView, the implementation of
  our segmentation algorithms has to be done using Kitware's Visualization
  Toolkit (VTK) which is a free, open source software system for 3D computer
  graphics, image processing and visualization (
@@ -282,7 +282,7 @@ http://www.vtk.org
 
 \end_inset
 
-) created by the same company that created Paraview.
+) created by the same company that created ParaView.
  
 \end_layout
 
@@ -770,11 +770,11 @@ www.itk.org
 \end_layout
 
 \begin_layout Itemize
-Paraview: an open-source, multi-platform data analysis and visualization
+ParaView: an open-source, multi-platform data analysis and visualization
  application.
  It is designed as a client-server application aimed at allowing the use
  of a massively parallel architecture for data processing.
- ESPina is built as an extension to the Paraview ecosystem, and uses its
+ ESPina is built as an extension to the ParaView ecosystem, and uses its
  server implementation as a backbone 
 \begin_inset Flex URL
 status collapsed
@@ -859,11 +859,11 @@ name "sec:ImplementationAlgorithms"
 \end_layout
 
 \begin_layout Standard
-Given that ESPina is based on Paraview, and that Paraview (since they are
+Given that ESPina is based on ParaView, and that ParaView (since they are
  made by he same company) is compatible with VTK and allows user-provided
  VTK filters to be added to its filter pool, the most straightforward way
  to implement new image segmentation algorithms to be used in ESPina is
- to program them as VTK filters and then make them available for the Paraview
+ to program them as VTK filters and then make them available for the ParaView
  server instance behind ESPina.
  In order to do that our filters had to comply with the following conventions:
 \end_layout
@@ -1419,16 +1419,16 @@ Segmentation Logic Filter
 
 \begin_layout Standard
 In addition to the VTK filters required for the segmentation algorithm,
- we needed to develop an additional filter that would be necessary later
- on for our user interaction model.
+ we needed to develop an additional filter that would be necessary for our
+ user interaction model.
  
 \end_layout
 
 \begin_layout Standard
 This filter is relatively simple, it receives two images (in our use of
- it these will always be representations of snakes) and an operation parameter
- (Addition or Subtraction), and returns a single binary image that represents
- the result of applying the selected operation.
+ it, these will always be representations of snakes) and an operation parameter
+ (Addition or Subtraction), and returns a binary image that represents the
+ result of applying the selected operation.
  Addition is a simple disjunction of the binary images and the subtraction
  is equivalent to first negating the first image and then doing a conjunction
  with the second one, effectively subtracting the second image from the
@@ -1475,8 +1475,8 @@ ESPina Plug-in
 
 \begin_layout Standard
 The plug-in for ESPina has two primary functions: to wrap the functionality
- of the VTK filters already built in a way compatible with ESPina and also
- to model the interface for the user.
+ of the VTK filters already built in a way compatible with ESPina/ParaView
+ and also to model the interface for the user.
 \end_layout
 
 \begin_layout Subsection
@@ -1486,16 +1486,16 @@ Wrapping VTK functionality
 \begin_layout Standard
 In ESPina's architecture all VTK filters have to be wrapped in an object
  of type pqFilter.
- This object will handle which handle the calling of the VTK filter in ParaView'
-s server with all the right parameters.
+ This object will handle all calls to the VTK filter in ParaView's server,
+ ensuring that all parameters are of the right type.
  Additionally, every VTK filter's interface must be made known to the server
  via an XML file that describes its expected inputs, the name of the class
- that contains its implementation and name to register it on the server.
+ that contains its implementation and a name to register it on the server.
  
 \end_layout
 
 \begin_layout Standard
-In our case, both algorithmic filters MGAC and MACWB are wrapped in the
+In our case, both algorithmic filters (MGAC and MACWB) are wrapped in the
  same class (
 \family typewriter
 MorphologicalSnakesFilter
@@ -1506,19 +1506,19 @@ MorphologicalSnakesFilter
 \end_layout
 
 \begin_layout Standard
-The filter done for adding and subtracting segmentations was wrapped in
- a class called 
+The filter for adding and subtracting segmentations was wrapped in a class
+ called 
 \family typewriter
 SegmentationLogicFilter.
 \end_layout
 
 \begin_layout Standard
-In case the user needs to call any of VTK's own filters directly from ESPina,
- it is possible to do so, but i has to be exposed to the server in the same
- way as user-provided filters.
- That means that an XML file has to be loaded when building the plug-in
- with the interface of that filter.
- In our case we used this option to be able to use the filter 
+In case the user needs to call any of VTK's own filters directly from an
+ ESPina plug-in, it is possible to do so, but it has to be exposed to the
+ server in the same way as user-provided filters.
+ That means that an XML file describing the interface of that filter has
+ to be included when building the plug-in.
+ In our case we used this option to enable the use of the filter 
 \family typewriter
 vtkImageEllipsoidSource
 \family default
@@ -1539,14 +1539,14 @@ User Interaction
 
 \begin_layout Standard
 The objective of a user when working with this plug-in is to generate a
- segmentation object in the ESPina's data model.
+ segmentation object in ESPina's data model.
  In this model a segmentation is a group of voxels that have been labeled
- as belonging to a structure according to certain taxonomoy (i.e.
+ as belonging to a structure according to certain taxonomy (i.e.
  a synapse).
- Before starting to segment a structure the user must choose what kind of
- structure he is going to be labeling using a taxonomy selector.
- Once he has done that he must proceed to follow these step to create a
- valid segmentation using our plug-in: 
+ Before starting the process of segmentation the user must choose what kind
+ of structure he is going to be labeling using ESPina's taxonomy selector.
+ Once a class for the object has been selected, the user must perform the
+ following steps to create a valid segmentation using our plug-in: 
 \end_layout
 
 \begin_layout Itemize
@@ -1563,7 +1563,7 @@ Click on the selector tool to get the proper cursor.
 \end_layout
 
 \begin_layout Itemize
-When moving the cursor over the image a green are will become highlighted
+When moving the cursor over the image a green area will become highlighted
  (a disk if using MGAC and a sphere if using MACWB), this represents the
  initial contour that will be the seed for the iterative growing process.
  
@@ -1577,7 +1577,7 @@ At this stage the user can change the radius of the initial mask by holding
 
 \begin_layout Itemize
 Once the user is satisfied with the location of the initial mask he must
- click again to indicate that the evolution process has begun.
+ left click to indicate that the evolution process has begun.
  The color of the mask will change from green to dark blue.
  
 \end_layout
@@ -1585,9 +1585,15 @@ Once the user is satisfied with the location of the initial mask he must
 \begin_layout Itemize
 At this point the user can control the growth of the curve by holding the
  CTRL key and using the wheel of the mouse.
- In this way it can move forward or backwards (up to the initial seed curve)
- until satisfied with the results.
+ In this way, the user can go forward or backwards (up to the initial seed
+ curve) until satisfied with the results.
  
+\end_layout
+
+\begin_layout Itemize
+If at any moment in this step the user wants to stop this curve's evolution
+ and wants to delete it, a right click will delete the current curve and
+ send the user back to the last stage in the segmentation process.
 \end_layout
 
 \begin_layout Itemize
@@ -1596,7 +1602,7 @@ Once the curve has reached the desired size the user must left click again
  The color of the curve will change from dark blue to light blue.
  Now the user has a choice, he could repeat the process and grow a new curve
  which when done will be annexed to the existing (light blue) curve or if
- he is satisfied with the current state of the segmenation he will click
+ he is satisfied with the current state of the segmentation he will click
  on the Add Segmentation button on the tool bar which will add the curve
  to ESPina's model as a completed segmentation.
  
@@ -1628,9 +1634,9 @@ reference "fig:classdiag"
 \family typewriter
 MorphologicalSnakes
 \family default
-, technically it represents the toolbar that is loaded in the ESPina system
+, technically it represents the tool bar that is loaded in the ESPina system
  when the plug-in is loaded but it also acts as the main container and controlle
-r of our classes.
+r of the rest of our classes.
  The classes that are located in the top right part of the diagram are the
  ones more related to user interaction:
 \end_layout
@@ -1642,8 +1648,8 @@ MorphologicalSnakesSelector
 \family default
 : is the class tasked with interpreting most of the user input.
  It captures mouse movement to draw the green mask on the image.
- It also captures the clicks to adjust the radius of the initial mask as
- well as for the evolution of the mask.
+ It also captures the wheel movement used to adjust the radius of the initial
+ mask as well as for the evolution of the mask.
 \end_layout
 
 \begin_layout Itemize
@@ -1659,8 +1665,8 @@ RadiusAction
 \family typewriter
 AlgCBAction
 \family default
-: controls and monitors the algorithm the user wants to control the curve
- evolution.
+: controls and monitors the algorithm the user has chosen to control the
+ curve evolution.
  
 \end_layout
 
@@ -1682,12 +1688,11 @@ SegmentationLogicFilter
 \family typewriter
 SnakesFilterManager
 \family default
-: is the class that handles the actual evolution of the curve.
- As explained earlier the user controls the evolution of the curve with
- the mouse wheel, this is the class that handles all the calls to the correspond
-ing filter to generate every iteration of the evolution of the curve.
+: it's the class that handles the actual evolution of the curve.
+ It calls the corresponding filter to generate every iteration of the evolution
+ of the curve.
  It also keeps a history of the previous steps of the evolution, allowing
- the user to go back and forth when interracting with the curve.
+ the user to go back and forth when interacting with the curve.
 \end_layout
 
 \begin_layout Itemize
@@ -1713,7 +1718,7 @@ status open
 \begin_inset Graphics
 	filename Images/classdiag.svg
 	display false
-	width 100col%
+	width 100text%
 
 \end_inset
 
@@ -1762,21 +1767,22 @@ We have already explained the way our algorithms were implemented and also
  in ESPina is the use of Cmake.
  As we said in the prerequisites section, this is a building tool that is
  very configurable and it is indispensable for building our plug-in.
- One of it greatest strengths is that it allows for expert user to define
+ One of it greatest strengths is that it allows for expert users to define
  macros and routines specific for their application.
- In this case, since our plug-in is technically a plug-in for Paraview,
+ In this case, since our plug-in is technically a plug-in for ParaView,
  it is built using some macros specifically created for that purpose by
  Kitware to be used in a CMake configuration file.
  Cmake works based on a file that is called CMakeLists.txt which contains
  all the instructions to build a file using CMake.
- For further reference, we recommend going to CMake documentation and consulting
- our own CMakeLists.txt file which is distributed with our codebase.
+ For further reference, we recommend going to CMake documentation online
+ and consulting our own CMakeLists.txt file which is distributed with our
+ codebase.
  
 \end_layout
 
 \begin_layout Standard
 What CMake actually does is to generate all the files necessary to build
- the binary files, and this depends on the toolset that is being used.
+ the binaries, depending on the toolset that is being used.
  During our work we generated files to be compiled using the standard GNU
  make tool that comes with most modern *NIX systems.
  It can also generate files to be compiled using certain IDEs like Code::Blocks,
@@ -1785,13 +1791,41 @@ What CMake actually does is to generate all the files necessary to build
 \end_layout
 
 \begin_layout Standard
-Once a working binary library is available the way to load the plug-in in
- ESPina is to go to the menu: Settings 
+Once a working binary library is compiled, the way to load the plug-in in
+ ESPina is to go to the menu: Settings
 \begin_inset Formula $\rightarrow$
 \end_inset
 
-Manage Plugins Load New...
- and then navigate to our compiled binary file.
+Manage Plugins
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+Load New...
+ and then navigate to the compiled binary file.
  After successfully executing these steps, there should be a new toolbar
  on ESPina that allows the user to interact with our plug-in.
  
@@ -1834,10 +1868,6 @@ name "fig:Toolbar_loaded"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -1855,10 +1885,8 @@ name "chap:Results"
 \end_layout
 
 \begin_layout Standard
-In this kind if work, its difficult to quantify the results in a way that
- is comparable to similar works.
- Since our objective was to implement the MGAC and MACWB algorithms proposed
- by 
+Since our main objective was to implement the MGAC and MACWB algorithms
+ proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Marquez_2012"
@@ -1872,28 +1900,27 @@ key "Marquez_2012"
 
 \begin_layout Standard
 From our preliminary testing and evaluation we find that both algorithms
- work as expected, but present have shortcomings on their performance, specially
+ work as expected, but present some shortcomings on their performance, specially
  the MGAC.
 \end_layout
 
 \begin_layout Standard
 In figure [IMAGEN DE LA EVOLUCION DEL ALGORITUMO] we can appreciate the
  evolution of both algorithms when trying to segment the same structure
- from approximately the same point (remember that they cannot start exactly
- with the same curve because MGAC's initial curve is a disk while MACWB's
- is a sphere).
+ from approximately the same starting condition (remember that they cannot
+ start exactly with the same curve because MGAC's initial curve is a disk
+ while MACWB's is a sphere).
 \end_layout
 
 \begin_layout Standard
-As we can see, from the very limited point we have here to compare, MGAC
- grows faster but it's less accurate on the borders, it presents a lot of
- "leaking" in some points.
+As we can see, MGAC grows faster but it's less accurate on the borders,
+ it presents a lot of "leaking" in some points.
  MACWB on the other hand evolves more slowly, but is more accurate in keeping
  within the borders of the objective structure.
- In this medium, is not much what we can show regarding the performance
- of this two models on different circumstances, but is clear to us that
- none of the two is right for every situation and that the performance of
- each depends on a lot of variables.
+ It is very hard to show on this report the performance of both algorithms
+ in every situation, however, it's clear to us that none of the two is right
+ for every situation and that the performance of each depends on a lot of
+ both external and internal variables.
  
 \end_layout
 
@@ -1902,10 +1929,11 @@ To go a little more into detail into what we perceive were the factors impending
  the performance of the MGAC, we find that is highly dependant on two external
  factors, one is the selection of the parameters for the algorithm and the
  other is in the selection of the stop criterion used to guide the evolution
- (for example, when images have fuzzy edges, it might not be the best idea
- to choose a stop criterion that favors stopping at edges).
- Further ahead we discuss some ideas that we have about ways to overcome
- this problems, and enhance the results obtained from this approach.
+ (for example, when images have fuzzy edges, a criterion that favors stopping
+ on edges might have some trouble to actually stop the evolution in the
+ right area).
+ Further ahead we discuss some ideas about ways to overcome this problems,
+ and enhance the results obtained from this approach.
  
 \end_layout
 
@@ -1913,7 +1941,7 @@ To go a little more into detail into what we perceive were the factors impending
 As for MACWB we find that it works pretty well "out-of- the-box", and is
  even capable of overcoming some of the challenges posed by the images we
  had on hand to try our tool.
- We think that this has a lot to do with the fact the ist doesn't rely so
+ We think that this has a lot to do with the fact that it doesn't rely so
  heavily on external parameters bur rather works with global information
  directly from the image.
  We did run into some situations where the curve instead of growing, disappears
@@ -1935,36 +1963,38 @@ reference "sec:ImplementationAlgorithms"
 \end_layout
 
 \begin_layout Standard
-We will now discuss some impressions about the issues we ran into while
- doing the work presented, as well of some avenues of progress we think
- could be explored in the future.
+One of the aspects that we found greatly affected the performance of these
+ algorithms was the quality of the image being processed, in our case our
+ main test image had some issues regarding the distribution of data on its
+ Z axis.
+ This was caused by the fact that the image had a different resolution on
+ that axis than on the X and Y axes.
+ This resulted in some distortions on the image that made it difficult for
+ the curve to stay within certain boundaries, specially on the Z axis.
+ We found that the distortions on the image were not evenly distributed
+ along the Z axis, while in some areas the discontinuity was barely perceivable
+ in other parts of the image we found big leaps from one slice to another,
+ this inconsistency had a great effect on the performance of our tool.
+ [IMAGEN DE LA DISCONTINUIDAD]
+\end_layout
+
+\begin_layout Section
+Possible Improvements And Future Work
+\end_layout
+
+\begin_layout Standard
+For the improvement of the performance of WGAC we have to focus our attention
+ on the selection of the parametric components of the algorithms, as well
+ as in the selection of a stop criterion function.
  
 \end_layout
 
 \begin_layout Standard
-One of the aspects that we found greatly affected the performance of these
- algorithms was the quality of the image being processed, in our case our
- main test image had some issues regarding the distirbution of data on its
- Z axis.
- This was caused by the fact that the image had a different resolution on
- that axis than on the X and Y axes.
- This resulted in some distorsions on the image that made it difficult for
- the curve to stay within certain boundaries on the Z axis.
- We found that the distortions on the image were not evenly distributed
- along the Z axis, but found that some areas were a little bit discontinuous
- while in other parts of the image we found big leaps from one slice to
- another, this inconsistency had a great effect on the performance of our
- tool.
- [IMAGEN DE LA DISCONTINUIDAD]
-\end_layout
-
-\begin_layout Standard
-We think an area for potential improvement is in the paramter selection
- for MGAC, as stated before, this model is extremely sensitive, and although
- we found that with the authors recommended parameters we obtained good
- results, it might be interesting to try to come up with this parameters
- in a more automated fashion, taking into account user input as well as
- any other characteristic of the image that could be extracted automatically.
+Although we found that with the parameters used by the authors in their
+ work we obtained acceptable results, it might be interesting to try to
+ come up with this parameters in a more automated fashion, taking into account
+ user input as well as any other characteristics of the image that could
+ be extracted automatically.
  
 \end_layout
 
@@ -1973,49 +2003,78 @@ INCLUDE SOME EXAMPLES
 \end_layout
 
 \begin_layout Standard
-In the same direction as last comment, one other key factor for performance
- is the selection of the stop criterion function used for the curve evolution.
+As for the selection of the stop criterion function used for the curve evolution.
  Right now we are using a known function that favors stopping in the image
- borders, but could there be another way to construct that function.
- The kind of images that we have been working on, have very fuzzy borders
- so that criteria might not necessarily be the best.
+ borders, however, the kind of images that we have been working on have
+ very fuzzy borders so that criteria might not necessarily be the best.
+ Could there be another way to select, construct or improve the performance
+ of that function?.
  Could this function be derived using user input, including interactive
  information about where the function should stop?.
- Maybe a set of filters could be identified that produce stop criteria that
- is particularly well suited for certain kinds of structures, and we could
- propose to the users a kit of preprocessing filters that should be used
- before starting segmentation depending on the objective structure.
- Another step that could be interesting to compensate for the problems in
- acuiring a good stop function could be to increase the interactivity of
- the tool by giving the user to set special attraction and repulsion areas
- in the image, to actively aid in the evolution of the curve.
+ Some alternatives that could be considered to address this issue:
+\end_layout
+
+\begin_layout Itemize
+From a certain perspective, the stop function is not more than a preprocessing
+ step, or filtering, of the initial image to extract from it certain information
+ that is useful for the next step of the process.
+ Maybe different sets of filters or operations could be identified that
+ produce stop criteria that is particularly well suited for certain kinds
+ of structures.
+ We could provide the users with a methodology to obtain the best possible
+ stop criterion before starting segmentation depending on the objective
+ structure.
  
 \end_layout
 
+\begin_layout Itemize
+Sometimes, user input is indispensable for the proper labeling of an image,
+ in those cases, it would be interesting if the user could provide the algorithm
+ an aid to use in conjuction with the stop function obtained automatically.
+ The main idea would be to provide the user with the tool to set special
+ attraction and repulsion areas in the image, to actively aid in the evolution
+ of the curve.
+\end_layout
+
+\begin_layout Itemize
+The user could also edit the result of the function.
+ Maybe lower or raise some values in order to correct deficiencies.
+ [MAYBE INSERT AN IMAGE OF THE FUNCTION, ITS KINDA COOL]
+\end_layout
+
 \begin_layout Standard
-Another area that is worth exploring is the selection of the shape and size
- of the initial curve.
+The following ideas are not aimed specifically at improving the performance
+ of a specific algorithm but rather of the tool as a whole.
+\end_layout
+
+\begin_layout Standard
+We believe that the initial shape and size of the curve has an impact on
+ the effectiveness of the tool to evolve the curve correctly.
  For example, in our images there are a lot of structures that have a sort
  of tubular shape along the Z axis.
- If we knew beforehand, with the input of the experts that kind of details,
+ If we knew that kind of details beforehand, with the input of the experts,
  the shape of the initial curve as well as that of the VOI could be designed
- to detect that kind of structure.
- For example, instead of a disk or a sphere, like we are using now, it could
- be useful to start with some kind of "strand" that goes from top to bottom
- that the user could approximate to the position of the structure, that
- might be a better starting point for the evolution of our curves in that
- context.
+ to improve the performance of the algorithm in detecting that kind of structure.
+ Instead of a disk or a sphere, like we are using now, it could be useful
+ to start with some kind of "strand" that goes from the top slice to the
+ bottom slice that the user could approximate to the position of the structure,
+ that might be a better starting point for the evolution of our curves in
+ that context.
+ A library could be developed with the initial shapes that are found to
+ be of use and this could help speed up the process of labeling by allowing
+ the user to always start the evolution with the most fitting initial shape
+ for the curve.
  
 \end_layout
 
 \begin_layout Standard
 With regards to the usability of our tool and the value added to the scientists,
- we think that the next step would be a series of live tests with the users
+ we think that the next step should be a series of live tests with the users
  to get some data about the increase in efficiency in the segmentation process
- when comparing the status quo with our tool.
- Once that data is available we could do some A/B tests to try out alternatives
- and fine tune the interface of the tool with the aim of maximizing the
- productivity of the experts and allowing them to process as many images
+ when comparing the status quo with the use of our tool.
+ Once that data is available we could do some A/B tests to try out interaction
+ alternatives and fine tune the interface of the tool with the aim of maximizing
+ the productivity of the experts and allowing them to process as many images
  as possible rapidly and correctly.
  
 \end_layout
@@ -2026,7 +2085,7 @@ On a more practical note and this work being more of a proof-of-concept
  with an eye on improving the computational efficiency of the code, in particula
 r aiming to take advantage of multi-threading or other possible parallelizations
  of the code.This could also be achieved, with a loss in modularity, by replacing
- the use of some of the more generic VTK filters sith some custom made filters
+ the use of some of the more generic VTK filters with some custom made filters
  that could combine multiple operations in one.
 \end_layout
 
@@ -2166,17 +2225,6 @@ The objectives of projects Blue Brain and Cajal Blue Brain are large and
  that it opens up several paths that could eventually lead to a more solid
  solution.
  
-\end_layout
-
-\begin_layout Chapter
-References
-\begin_inset CommandInset label
-LatexCommand label
-name "chap:References"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard

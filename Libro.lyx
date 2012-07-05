@@ -1975,7 +1975,63 @@ One of the aspects that we found greatly affected the performance of these
  along the Z axis, while in some areas the discontinuity was barely perceivable
  in other parts of the image we found big leaps from one slice to another,
  this inconsistency had a great effect on the performance of our tool.
- [IMAGEN DE LA DISCONTINUIDAD]
+ In figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:discontinuity"
+
+\end_inset
+
+ we can appreciate the kinds of discontinuity that are very detrimental
+ to the performance of 3D segmentation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Images/discontinuidad.png
+	display false
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A cross-cut of a stack of images that shows discontinuities on the Z axis
+ (a).
+ Details of a portion of the cross-cut (b).
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:discontinuity"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2036,10 +2092,65 @@ Sometimes, user input is indispensable for the proper labeling of an image,
  of the curve.
 \end_layout
 
-\begin_layout Itemize
-The user could also edit the result of the function.
- Maybe lower or raise some values in order to correct deficiencies.
- [MAYBE INSERT AN IMAGE OF THE FUNCTION, ITS KINDA COOL]
+\begin_layout Standard
+In figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:stopCriterionImage"
+
+\end_inset
+
+ we can better appreciate the aspect the stop criterion function has once
+ it has been computed, and how some of the actions we have just described
+ could work.
+ The objective would be to obtain a function with very clear dark zones
+ (low values) in the parts of the image we would like it to stop.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Images/stopCriterion.png
+	display false
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Visualization of a slice of an image (top) and the stop criterion function
+ derived from it (bottom).
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:stopCriterionImage"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

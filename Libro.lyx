@@ -1,0 +1,2194 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[colorlinks, linkcolor=black, citecolor = Sepia]{hyperref}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8x
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command bibtex8
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{roman}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+An interactive 3D image segmentation tool based on Morphological Snakes
+\end_layout
+
+\begin_layout Author
+Francisco Antonio Caraballo La Riva
+\end_layout
+
+\begin_layout Chapter*
+Acknowledgments
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+clearpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{arabic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Section
+The problem
+\end_layout
+
+\begin_layout Standard
+Advances in medical imaging provides scientists with a huge number of highly
+ detailed images that contain a lot of information.
+ Images need to be processed to extract meaningful data that can later be
+ used to do, for example, statistical analysis.
+ The processing of the image is a very time consuming task that is very
+ labor intensive if done by hand.
+\end_layout
+
+\begin_layout Standard
+One of the main techniques used for the extraction of meaningful data from
+ digital images is segmentation.
+ Segmentation is the labeling or clustering of the pixels of an image according
+ to their characteristics.
+ A good example of image segmentation would be to be able to label all the
+ pixels in an aerial image of a road.
+ The result of the process would be that every pixel would be given a label
+ (road or no-road) depending on whether or not the pixel belongs to the
+ road.
+ When applied to a medical image, the proper segmentation of an image might
+ allow the user to obtain data, for example, about the quantity of a given
+ structure in a given area, the average shape or size of an interesting
+ feature, etc.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Images/segment.png
+	display false
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Example of a segmented image.
+ Image A is the original picture.
+ Image B is the result of the segmentation, with blue labeled pixels representin
+g the road and red labeled pixels representing not-road.
+ [Original image source: http://www.flickr.com/photos/liao/2549120611]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The tool that we are building is going to be used by the scientists of the
+ Cajal Blue Brain project to segment images of brain tissue obtained with
+ electronic microscopes with the objective of differentiating several types
+ of structures within brain cells (i.e.
+ synapses, vesicles, spines, dendrites).
+ So with this objective in mind, the problem becomes: how to allow the scientist
+s to process the images in the easiest, fastest and most automated way?
+\end_layout
+
+\begin_layout Section
+The solution
+\end_layout
+
+\begin_layout Standard
+Given the previous description of the problem, we propose a solution based
+ on two elements.
+ First we need an environment or framework that allows us to interact with
+ the images in a useful way and secondly we need an actual implementation
+ of an algorithm that allows the scientist to segment the images in a time
+ efficient way.
+ 
+\end_layout
+
+\begin_layout Standard
+For the first part of the solution we are going to be developing a plug-in
+ for a system called ESPina, developed as part of the Cajal Blue Brain initiativ
+e.
+ This program allows a user to load 3D stack of images and interact with
+ them in useful ways.
+ It also provides two key functionalities, first it was designed from the
+ ground up to support image segmentation and provides a system for categorizing
+ hierarchically the labeled structures and secondly and more important,
+ it provides an open architecture that can be enhanced with external plug-ins
+ which will allow us to model the user interaction with our implementation
+ of some segmentation algorithms.
+ 
+\end_layout
+
+\begin_layout Standard
+The second component of the solution is the implementation of some modern
+ segmentation algorithms.
+ The segmentation problem has been around for quite some time and a lot
+ of approaches have been tried in solving it.
+ In the next chapter we provide an overview of what some of those approaches
+ have been and their limitations.
+ We have decided to base our solution on the use of Active Contours, also
+ known as snakes.
+ This approach is based on the idea of iteratively evolving a curve using
+ a gradient descent technique based on the minimization of some energy function.
+ The classical way of solving this problem is using Partial Differential
+ Equations (PDEs) but, as we will explain later on, this process has some
+ limitations that can be overcome by the use of certain morphological operators
+ that have been proposed recently.
+ The use of morphological operators, has the advantage of being simpler,
+ faster and more numerically stable than the their differential counterparts.
+ 
+\end_layout
+
+\begin_layout Standard
+The ESPina tool, is built as an extension of Paraview, an open-source, multi-pla
+tform data analysis and visualization application (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.paraview.org/
+\end_layout
+
+\end_inset
+
+)/ In order to be compatible with ESPina/Paraview, the implementation of
+ our segmentation algorithms has to be done using Kitware's Visualization
+ Toolkit (VTK) which is a free, open source software system for 3D computer
+ graphics, image processing and visualization (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.vtk.org
+\end_layout
+
+\end_inset
+
+) created by the same company that created Paraview.
+ 
+\end_layout
+
+\begin_layout Standard
+One of our main objectives in the design of the segmentation tool is for
+ the user to be able to interactivley control the segmentation process,
+ even the evolution of the Active Contour curve, or snake.
+ This approach allows us to overcome some of the limitations of the segmentation
+ algorithms by incorporating the knowledge of the expert in the process.
+ 
+\end_layout
+
+\begin_layout Chapter
+Previous Work
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Previous-Work"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Image Segmentation
+\end_layout
+
+\begin_layout Standard
+Image segmentation is the process of labeling the pixels of an image in
+ way that allows us to group together pixels that share certain characteristics.
+ A common use of segmentation is labeling pixels in an image as foreground
+ and background pixels.
+ This problem has been approached from several directions: Split and merge
+ techniques (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pavlidis_Liow_1990"
+
+\end_inset
+
+), normalized cuts (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Shi_Malik_2000"
+
+\end_inset
+
+), graph cuts (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Boykov_Jolly_2001"
+
+\end_inset
+
+), active contours/snakes (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kass_Witkin_Terzopoulos_1988"
+
+\end_inset
+
+,
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Malladi_Sethian_Vemuri_1995"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The algorithms we are going to use in our tool are based on the Active Contours
+ approach so we are going to discuss it in a little more detail.
+ Some examples of the utilization of snakes for image segmentation can be
+ found in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Nilsson_Heyden_2003,Chan_Vese_2001,Mortensen_Barrett_1995"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Active contour methods iteratively move towards a solution (segmentation)
+ under the combination of image and optional user guidance forces (
+\begin_inset CommandInset citation
+LatexCommand citet
+after "p. 270"
+key "Szeliski_2010"
+
+\end_inset
+
+).
+ The first active contour models, relied on parametric curves, but they
+ had difficulty adapting the topology of the curve as it evolved.
+ As an alternative, level-set methods represent the curve as the zero-crossing
+ of a characteristic function (
+\begin_inset CommandInset citation
+LatexCommand citet
+after "p. 281"
+key "Szeliski_2010"
+
+\end_inset
+
+) and the evolution of the curve is done by modifying the underlying embedding
+ function.
+ We are going to analyze two models that use this representation: 
+\shape italic
+Geodesic Active Contours 
+\shape default
+(GAC) was proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Caselles_Kimmel_Sapiro_1997"
+
+\end_inset
+
+, the main idea in this model is that the evolution of the curve is dictated
+ by the minimizing of an energy function, commonly called 
+\begin_inset Formula $g(x)$
+\end_inset
+
+, that generates attraction to the edges in the original image and whose
+ gradient dictates the direction of movement for the curve.
+ Another model, originally proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chan_Vese_2001"
+
+\end_inset
+
+, is called 
+\shape italic
+Active Contours Without Edges
+\shape default
+ (ACWE), it doesn't require an energy function but instead relies in global
+ information regarding the contents of pixels inside and outside of the
+ evolving curve.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Images/ACC.png
+	display false
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A curve being evolved using Active Contours Without Edges.
+ [Image source: 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chan_Vese_2001"
+
+\end_inset
+
+]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Both of this approaches require the calculation of partial differential
+ equations which can be computationally costly , add complexity to the implement
+ation and can introduce numerical instabilities that sometimes require the
+ reinitialization of the level-set function.
+ 
+\end_layout
+
+\begin_layout Standard
+As a proposed solution to this shortcomings of the traditional approach
+ to snakes evolution 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baumela_2010"
+
+\end_inset
+
+propose a method that replaces the terms of the PDEs in traditional algorithms
+ with infinitesimally equivalent morphological operators.
+ Using these new operators the curve can be represented more simply and
+ the operations required to obtain it become become simpler and less costly.
+ 
+\end_layout
+
+\begin_layout Subsection
+Morphological Geodesic Active Contours (MGAC)
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Morphological-Geodesic-Active"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As seen in [REFERENCIA AL PAPER DE PABLO/LUIS], it is possible to approximate
+ the behavior of the PDE that controls curve evolution in the traditional
+ GAC as the composition of three morphological operators.
+ In general the PDE can be divided in three components, one represents the
+ attraction applied to the curve by the areas of interest in the image (i.e.
+ edges), one represents the balloon force that ensures that the curve doesn't
+ get stuck in parts of the image with little information and the third component
+ is the mean curvature operator which can be seen as a smoothing force on
+ the curve.
+ With this in mind, the following steps applied sequentially are equivalent
+ to the PDE:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{flalign}
+u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)>\theta\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)<\theta\\
+u^{n}\left(x\right) & \text{otherwise}
+\end{cases}\nonumber \\
+u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
+1 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)>0\\
+0 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)<0\\
+u^{n+\frac{1}{3}}\left(x\right) & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)=0
+\end{cases}\label{eq:mgac}\\
+u^{n+1}\left(x\right) & =\begin{cases}
+\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right) & \text{if }g\left(I\right)\left(x\right)>\theta\\
+u^{n+\frac{2}{3}}\left(x\right) & \text{otherwise}
+\end{cases}\nonumber 
+\end{flalign}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $u$
+\end_inset
+
+ represents the embedding function, 
+\begin_inset Formula $D_{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{d}$
+\end_inset
+
+ represent the discretized dilation and erosion operators respectively,
+\begin_inset Formula $g\left(I\right)\left(x\right)$
+\end_inset
+
+ represents a function that has low values in the areas of interest of the
+ image, 
+\begin_inset Formula $v$
+\end_inset
+
+ is a parameter tha controls the effect of the balloon force and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is a parameter that controls the effect of both the balloon force and the
+ smoothing force.
+ 
+\end_layout
+
+\begin_layout Standard
+In theory 
+\begin_inset Formula $g\left(I\right)$
+\end_inset
+
+ could be any function that takes low values in the areas of interest of
+ the image, a good example of a function that can be used here is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+g\left(I\right)=\frac{1}{\sqrt{1+\alpha|G_{\sigma}*I|}},\label{eq:stopf}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+which takes low values in the edges of the image.
+\end_layout
+
+\begin_layout Subsection
+Morphological Active Contours Without Borders (MACWB)
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Morphological-ACWB"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the same manner that GAC can be approximated with morphological operators
+ the ACWB model can also be approximated in a similar fashion by composing
+ several morphological operators.
+ In the case of ACWB the energy function to be minimized is not dependent
+ on an external function but is derived directly from information from the
+ image.
+ In that sense, is different from GAC in that it uses more global information
+ instead of just local information around the curve.
+ 
+\end_layout
+
+\begin_layout Standard
+As with MGAC the steps necessary to model the evolution of the curve are
+ the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{flalign}
+u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }v>0\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }v<0\\
+u^{n}\left(x\right) & \text{otherwise}
+\end{cases}\nonumber \\
+u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
+1 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)<0\\
+0 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)>0\\
+u^{n+\frac{1}{3}}\left(x\right) & \text{otherwise}
+\end{cases}\label{eq:macwb}\\
+u^{n+1}\left(x\right) & =\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right)\nonumber 
+\end{flalign}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $\lambda_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+ represent the strength of each term and 
+\begin_inset Formula $C_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{2}$
+\end_inset
+
+ represent the mean values of the image inside and outside the contour.
+\end_layout
+
+\begin_layout Chapter
+The ESPina Environment
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:The-Espina-Environment"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Brief description of the application.
+ COmo vimos en 
+\end_layout
+
+\begin_layout Itemize
+ESPina's purpose and audience.
+\end_layout
+
+\begin_layout Itemize
+ESPina's architecture.
+\end_layout
+
+\begin_layout Chapter
+Implementation
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Implementation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This chapter will document the work that was necessary to get a functional
+ tool that a scientist could use for segmenting an image using the ESPina
+ system.
+ First a small section specifying the requisites necessary for anyone trying
+ to replicate or do some derivative work based on our work.
+ We will then explain the work done to implement the algorithms and finally
+ we'll document the implementation of the user interaction logic and the
+ ESPina plug-in.
+\end_layout
+
+\begin_layout Section
+Prerequisites
+\end_layout
+
+\begin_layout Standard
+In order to be able to replicate our work, the interested party would need
+ the following components:
+\end_layout
+
+\begin_layout Itemize
+Cmake: a cross-platform, open-source build system.
+ It's necessary to build from sources all the other required libraries as
+ well as our own code 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.cmake.org
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+ITK: an open-source, cross-platform system that provides developers with
+ an extensive suite of software tools for image analysis.
+ It's required by ESPina 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.itk.org
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+Paraview: an open-source, multi-platform data analysis and visualization
+ application.
+ It is designed as a client-server application aimed at allowing the use
+ of a massively parallel architecture for data processing.
+ ESPina is built as an extension to the Paraview ecosystem, and uses its
+ server implementation as a backbone 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.paraview.org
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+VTK: is an open-source, freely available software system for 3D computer
+ graphics, image processing and visualization.
+ VTK consists of a C++ class library and several interpreted interface layers.
+ It's used extensively in our work 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.vtk.org
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+ESPina: the ESPina Interactive Neuron Analizer is the system that hosts
+ our plug-in and provides user interaction capabilities.
+ A copy should be available upon request in 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://cajalbbp.cesvima.upm.es/espina
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+QuaZIP: is a simple C++ wrapper that can be used to access ZIP archives.
+ It's required by ESPina 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://quazip.sourceforge.net/
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+The source code for our tool, which should be available from the same source
+ as this document.
+ [WOULD IT BE OK TO PUT HERE A LINK TO A GITHUB REPOSITORY?]
+\end_layout
+
+\begin_layout Section
+Implementation Of The Algorithms
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:ImplementationAlgorithms"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Given that ESPina is based on Paraview, and that Paraview (since they are
+ made by he same company) is compatible with VTK and allows user-provided
+ VTK filters to be added to its filter pool, the most straightforward way
+ to implement new image segmentation algorithms to be used in ESPina is
+ to program them as VTK filters and then make them available for the Paraview
+ server instance behind ESPina.
+ In order to do that our filters had to comply with the following conventions:
+\end_layout
+
+\begin_layout Itemize
+Images are represented as objects of type 
+\family typewriter
+vtkImageData
+\family default
+ and are grayscale.
+ The pixels are stored as 
+\family typewriter
+unsigned char
+\family default
+, that is scalars between 0 and 255.
+ 
+\end_layout
+
+\begin_layout Itemize
+The curve to be evolved by our morphological operators will be represented
+ as a binary image, where black pixels (gray level 0) are considered outside
+ of the curve and white pixels (gray level 255) are considered inside of
+ the curve.
+\end_layout
+
+\begin_layout Itemize
+Our filter will receive as an input the image that is being processed and
+ the output it provides must be a binary image that represents the labeling
+ of the pixels in the image (background pixels are black and foreground
+ pixels are white).
+\end_layout
+
+\begin_layout Itemize
+Upon receiving the output from our filter, ESPina will add a new segmentation
+ object to its model.
+\end_layout
+
+\begin_layout Standard
+The use of VTK provides several advantages because it provides an abundant
+ library of filters that can be used internally by our own filters (ie.
+ Gaussian smooth operators, dilate and erode operators).
+ This filters are very efficient and by lowering the amount of work that
+ has to be done "by hand" they help to reduce the amount of code needed
+ to implement new filters.
+ 
+\end_layout
+
+\begin_layout Standard
+For performance reasons, it is not advisable to always use the whole image/stack
+ when executing the algorithms.
+ To address this issue we pass along the pipeline only a fraction of the
+ image, called the Volume of Interest (VOI), right now in our tool that
+ parameter is fixed and the box that we pass to our filters is 120 x 120
+ x 120 voxels, centered around the initial seed of the curve.
+ As we will discuss in chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Results"
+
+\end_inset
+
+ we believe this is having a negative effect on the performance of the WACWB
+ and propose an alternative way to handle this situation when using that
+ algorithm.
+\end_layout
+
+\begin_layout Subsection
+Morphological Geodesic Active Contours
+\end_layout
+
+\begin_layout Standard
+The execution of the MGAC is divided in two stages, implemented separately
+ as independent VTK filters.
+ 
+\end_layout
+
+\begin_layout Standard
+As was explained earlier, in this model the evolution is dependent on an
+ energy function 
+\begin_inset Formula $g\left(x\right)$
+\end_inset
+
+ so the first stage is obtaining the values of this function.
+ The motivation to separate the evaluation of this function from the actual
+ evolution of the curve is that it gives us the flexibility to eventually
+ use different functions as stop criteria for the evolution of the snakes
+ on images with different characteristics (ie.
+ you might be interested on using a function that favors stopping the curve
+ evolution on the edges of the image, or in the center of dark segments,
+ for example).
+ 
+\end_layout
+
+\begin_layout Standard
+The stop function that we are using is the one shown in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:stopf"
+
+\end_inset
+
+ that takes low values on the edges of the image.
+ The filter that evaluates this function takes as an input an image and
+ the parameters 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma$
+\end_inset
+
+ (a scaling parameter and the standard deviation for the Gaussian filter,
+ respectively), and returns the values of the function for the specified
+ image.
+ We do this by sequentially applying several VTK filters to the image, by
+ doing it like this it is very easy to develop any number of stop functions
+ that could be used for trying out alternatives.
+ 
+\end_layout
+
+\begin_layout Standard
+This implementation can be found in the class 
+\family typewriter
+vtkStopCriterion
+\family default
+ of the solution.
+\end_layout
+
+\begin_layout Standard
+The second filter necessary for the execution of MGAC takes as input the
+ result of the previous stage, optionally it takes a second image that represent
+s an initial curve to be evolved.
+ If this second image is not present then the filter expects amongst its
+ inputs a "seed" parameter and a radius, additionally the filter takes four
+ additional parameters: the number of evolution iterations that have to
+ be executed, the size of the dilation/erosion kernel (typically 3) and
+ 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ that were already explained in subsection  
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Morphological-Geodesic-Active"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Upon beginning its execution the filter will check for the existence of
+ an input curve, if it finds one it goes straight to the curve evolution
+ steps.
+ If it doesn't, then it will create one using the seed parameter which is
+ nothing more than the three values corresponding to a point in space around
+ which the filter will create a disc of the specified radius that becomes
+ the curve to be evolved.
+ 
+\end_layout
+
+\begin_layout Standard
+Once the initial phase is over, the filter will execute the specified number
+ of iterations of the steps in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mgac"
+
+\end_inset
+
+.
+ Most of the operations that have to be performed during this steps could
+ be done with a combination of VTK filters.
+ One exception to that is the SIoIS operator, which was implemented by the
+ author as an independent filter, details about this implementation are
+ provided in a following section.
+ 
+\end_layout
+
+\begin_layout Standard
+This implementation can be found in the class 
+\family typewriter
+vtkMGAC
+\family default
+ of the solution.
+\end_layout
+
+\begin_layout Subsection
+Morphological Active Contours Without Borders
+\end_layout
+
+\begin_layout Standard
+The execution of the MACWB is relatively simpler, because it works directly
+ with the data from the image, so its not necessary to pre calculate an
+ energy function, as was the case with the MGAC.
+ 
+\end_layout
+
+\begin_layout Standard
+The MACWB filter takes as input the image being processed, optionally it
+ takes a second image that represents an initial curve.
+ If this second image is not present then the filter expects amongst its
+ inputs a "seed" parameter and a radius, additionally the filter takes as
+ a parameter the number of evolution iterations that have to be executed.
+ 
+\end_layout
+
+\begin_layout Standard
+Upon beginning its execution the filter will check for the existence of
+ an input curve, if it finds one it goes straight to the curve evolution
+ steps.
+ If it doesn't, then it will create one using the seed and radius parameters,
+ with the difference that in this case the initial curve created around
+ this point is a sphere and not a disk.
+ 
+\end_layout
+
+\begin_layout Standard
+Once the initial phase is over, the filter will execute the specified number
+ of iterations of the steps in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:macwb"
+
+\end_inset
+
+.
+ Again we use functionality already implemented in VTK's libraries and the
+ SIoIS operator.
+ 
+\end_layout
+
+\begin_layout Standard
+This implementation can be found in the class 
+\family typewriter
+vtkMACWB
+\family default
+ of the solution.
+\end_layout
+
+\begin_layout Subsection
+Morphological Curvature Operator
+\end_layout
+
+\begin_layout Standard
+Both MGAC and MACWB require a morphological curvature operator that acts
+ as a kind of "smoothing" force on the evolving curve.
+ It is based on the composition of the Sup - Inf (SI) and Inf-Sup (IS) morpholog
+ical operators (this composition is noted from now on as 
+\begin_inset Formula $SI\circ IS$
+\end_inset
+
+).
+ For a demonstration of how this composition is equivalent to its continuous
+ counterparts please refer to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Marquez_2012"
+
+\end_inset
+
+.
+ Since this operator was needed by both the previous filters it was developed
+ as a standalone filter that could be included in their internal pipelines.
+ 
+\end_layout
+
+\begin_layout Standard
+In order to get an intuitive idea about what this operator does, one could
+ think of it as applying sand-paper to the figure to eliminate all rough
+ edges and protruding parts while at the same time applying filling paste
+ in order to fill in small gaps and indentations.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Images/effectSIIS.png
+	display false
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A demonstration of the effect of the SI (a) and IS(b) operators.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:effectSIIS"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+for (z = 0, i< maxZ, i++)
+\end_layout
+
+\begin_layout Plain Layout
+
+ for (y = 0, i< maxY, i++)
+\end_layout
+
+\begin_layout Plain Layout
+
+  for (x = 0, i< maxX, i++)
+\end_layout
+
+\begin_layout Plain Layout
+
+   pixel = image(x,y,z)
+\end_layout
+
+\begin_layout Plain Layout
+
+   if (operator = = SI and pixel = = white) OR 
+\end_layout
+
+\begin_layout Plain Layout
+
+      (operator = = IS and pixel = = black)
+\end_layout
+
+\begin_layout Plain Layout
+
+    if the pixel is in an edge or a vertex
+\end_layout
+
+\begin_layout Plain Layout
+
+	 ignore it
+\end_layout
+
+\begin_layout Plain Layout
+
+    else 
+\end_layout
+
+\begin_layout Plain Layout
+
+     try to find a straight edge
+\end_layout
+
+\begin_layout Plain Layout
+
+     if straight edge not found
+\end_layout
+
+\begin_layout Plain Layout
+
+      the pixel is switched
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+SIoIS Algorithm
+\begin_inset CommandInset label
+LatexCommand label
+name "alg:Algorithm1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When applied to a binary image the SI operator only affects white pixels
+ and the IS operator only affects black pixels.
+ These operators will switch those pixels (white for SI and black for IS)
+ that are not found to belong to a straight edge, this is shown more clearly
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:effectSIIS"
+
+\end_inset
+
+.
+ What constitutes a straight edge, depends on whether we are dealing with
+ a bi-dimensional or a three-dimensional image.
+ In the first case a straight edge would be a straight line and in the second
+ case it would be a plane.
+ Please refer to algorithm 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "alg:Algorithm1"
+
+\end_inset
+
+ for a pseudo-code representation of our implementation.
+ To make this more clear, we can see in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:2dbase"
+
+\end_inset
+
+ what straight edges we will be looking for in each case.
+ 
+\end_layout
+
+\begin_layout Standard
+As we can see the filter does only one of the operations each time it's
+ called, so it has to be called twice in order to count as one application
+ of the 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $SI\circ IS$
+\end_inset
+
+ operator.
+ It has been found that better results are obtained by alternating the order
+ on which the operators are called (sometimes using 
+\begin_inset Formula $SI\circ IS$
+\end_inset
+
+ and sometimes using 
+\begin_inset Formula $IS\circ SI$
+\end_inset
+
+), so in practice we have to call this filter two times for every smoothing
+ pass we want to take on a curve.
+\end_layout
+
+\begin_layout Standard
+This implementation can be found in the class 
+\family typewriter
+vtkSIoISFilter
+\family default
+ of the solution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Images/bases.png
+	display false
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Straight edges in a bi-dimensional image (a) and a three-dimensional image
+ (b).
+ [Figure taken from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Marquez_2012"
+
+\end_inset
+
+] 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:2dbase"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Segmentation Logic Filter
+\end_layout
+
+\begin_layout Standard
+In addition to the VTK filters required for the segmentation algorithm,
+ we needed to develop an additional filter that would be necessary later
+ on for our user interaction model.
+ 
+\end_layout
+
+\begin_layout Standard
+This filter is relatively simple, it receives two images (in our use of
+ it these will always be representations of snakes) and an operation parameter
+ (Addition or Subtraction), and returns a single binary image that represents
+ the result of applying the selected operation.
+ Addition is a simple disjunction of the binary images and the subtraction
+ is equivalent to first negating the first image and then doing a conjunction
+ with the second one, effectively subtracting the second image from the
+ first one (
+\begin_inset Formula $Img_{1}\vee Img_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\neg Img_{1}\wedge Img_{2}$
+\end_inset
+
+, respectively).
+\end_layout
+
+\begin_layout Standard
+In VTK an image doesn't necessarily start at the origin, but it can start
+ from any point in space as needed.
+ The property of the image that contains this information is called the
+ 
+\family typewriter
+\shape slanted
+extent
+\family default
+\shape default
+.
+ In case this filter receives two images with different extents, the resulting
+ image will have an extent large enough to accommodate both images.
+ This sets off a warning when used in ESPina, but it works correctly.
+ 
+\end_layout
+
+\begin_layout Standard
+This implementation cam be found in the class 
+\family typewriter
+vtkSegmentationLogicFilter
+\family default
+ of the solution.
+ 
+\end_layout
+
+\begin_layout Section
+ESPina Plug-in 
+\end_layout
+
+\begin_layout Standard
+The plug-in for ESPina has two primary functions: to wrap the functionality
+ of the VTK filters already built in a way compatible with ESPina and also
+ to model the interface for the user.
+\end_layout
+
+\begin_layout Subsection
+Wrapping VTK functionality
+\end_layout
+
+\begin_layout Standard
+In ESPina's architecture all VTK filters have to be wrapped in an object
+ of type pqFilter.
+ This object will handle which handle the calling of the VTK filter in ParaView'
+s server with all the right parameters.
+ Additionally, every VTK filter's interface must be made known to the server
+ via an XML file that describes its expected inputs, the name of the class
+ that contains its implementation and name to register it on the server.
+ 
+\end_layout
+
+\begin_layout Standard
+In our case, both algorithmic filters MGAC and MACWB are wrapped in the
+ same class (
+\family typewriter
+MorphologicalSnakesFilter
+\family default
+) and they will be called depending on a selection made at runtime by the
+ user.
+ 
+\end_layout
+
+\begin_layout Standard
+The filter done for adding and subtracting segmentations was wrapped in
+ a class called 
+\family typewriter
+SegmentationLogicFilter.
+\end_layout
+
+\begin_layout Standard
+In case the user needs to call any of VTK's own filters directly from ESPina,
+ it is possible to do so, but i has to be exposed to the server in the same
+ way as user-provided filters.
+ That means that an XML file has to be loaded when building the plug-in
+ with the interface of that filter.
+ In our case we used this option to be able to use the filter 
+\family typewriter
+vtkImageEllipsoidSource
+\family default
+ to draw the starting mask on the image as the user moves the mouse around
+ the screen.
+ 
+\end_layout
+
+\begin_layout Standard
+All XML files created for the purposes described in this section can be
+ found alongside the code of the plug-in for further reference.
+ 
+\end_layout
+
+\begin_layout Subsection
+User Interaction
+\end_layout
+
+\begin_layout Standard
+The objective of a user when working with this plug-in is to generate a
+ segmentation object in the ESPina's data model.
+ In this model a segmentation is a group of voxels that have been labeled
+ as belonging to a structure according to certain taxonomoy (i.e.
+ a synapse).
+ Before starting to segment a structure the user must choose what kind of
+ structure he is going to be labeling using a taxonomy selector.
+ Once he has done that he must proceed to follow these step to create a
+ valid segmentation using our plug-in: 
+\end_layout
+
+\begin_layout Itemize
+Select from the drop-down menu what algorithm is going to be used, at this
+ point the only alternatives are MACWB or MGAC but more could be added in
+ the future.
+ 
+\end_layout
+
+\begin_layout Itemize
+Click on the selector tool to get the proper cursor.
+ This indicates to the plug-in that the user is starting a new segmentation.
+ 
+\end_layout
+
+\begin_layout Itemize
+When moving the cursor over the image a green are will become highlighted
+ (a disk if using MGAC and a sphere if using MACWB), this represents the
+ initial contour that will be the seed for the iterative growing process.
+ 
+\end_layout
+
+\begin_layout Itemize
+At this stage the user can change the radius of the initial mask by holding
+ the CTRL key and using the wheel of the mouse.
+ 
+\end_layout
+
+\begin_layout Itemize
+Once the user is satisfied with the location of the initial mask he must
+ click again to indicate that the evolution process has begun.
+ The color of the mask will change from green to dark blue.
+ 
+\end_layout
+
+\begin_layout Itemize
+At this point the user can control the growth of the curve by holding the
+ CTRL key and using the wheel of the mouse.
+ In this way it can move forward or backwards (up to the initial seed curve)
+ until satisfied with the results.
+ 
+\end_layout
+
+\begin_layout Itemize
+Once the curve has reached the desired size the user must left click again
+ to signal the end of the evolution of this particular curve.
+ The color of the curve will change from dark blue to light blue.
+ Now the user has a choice, he could repeat the process and grow a new curve
+ which when done will be annexed to the existing (light blue) curve or if
+ he is satisfied with the current state of the segmenation he will click
+ on the Add Segmentation button on the tool bar which will add the curve
+ to ESPina's model as a completed segmentation.
+ 
+\end_layout
+
+\begin_layout Itemize
+When creating additional curves the user has the option of holding the SHIFT
+ key when clicking on the image and this will tell the system that the curve
+ that is being evolved must be considered as "negative" and thus not annexed
+ but subtracted from the current segmentation.
+ In this case instead of being dark blue the curve will be colored white.
+ 
+\end_layout
+
+\begin_layout Subsection
+Architecture Of The Plug-in
+\end_layout
+
+\begin_layout Standard
+In figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:classdiag"
+
+\end_inset
+
+ we present a schematic representation of the architecture of our plug-in.
+ The main class of the system is called 
+\family typewriter
+MorphologicalSnakes
+\family default
+, technically it represents the toolbar that is loaded in the ESPina system
+ when the plug-in is loaded but it also acts as the main container and controlle
+r of our classes.
+ The classes that are located in the top right part of the diagram are the
+ ones more related to user interaction:
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+MorphologicalSnakesSelector
+\family default
+: is the class tasked with interpreting most of the user input.
+ It captures mouse movement to draw the green mask on the image.
+ It also captures the clicks to adjust the radius of the initial mask as
+ well as for the evolution of the mask.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+RadiusAction
+\family default
+: controls and monitors the radius selection widget.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+AlgCBAction
+\family default
+: controls and monitors the algorithm the user wants to control the curve
+ evolution.
+ 
+\end_layout
+
+\begin_layout Standard
+The classes in the lower part of the diagram are the ones that control the
+ segmentation per se:
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+SegmentationLogicFilter
+\family default
+: wrapper for the segmentation logic filter implemented in VTK.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+SnakesFilterManager
+\family default
+: is the class that handles the actual evolution of the curve.
+ As explained earlier the user controls the evolution of the curve with
+ the mouse wheel, this is the class that handles all the calls to the correspond
+ing filter to generate every iteration of the evolution of the curve.
+ It also keeps a history of the previous steps of the evolution, allowing
+ the user to go back and forth when interracting with the curve.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+MorphologicalSnakesFilter
+\family default
+: wrapper for MGAC and MACWB filters implemented in VTK.
+\end_layout
+
+\begin_layout Itemize
+VTK files: already explained in the previous section.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Images/classdiag.svg
+	display false
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Relations between the different classes of the plug-in.
+ Yellow classes are exclusively VTK classes and purple classes were made
+ to fit into ESPina's model.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:classdiag"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Putting It All Together
+\end_layout
+
+\begin_layout Standard
+We have already explained the way our algorithms were implemented and also
+ how the plug-in was designed.
+ The key to putting it all together and actually being able to use the plug-in
+ in ESPina is the use of Cmake.
+ As we said in the prerequisites section, this is a building tool that is
+ very configurable and it is indispensable for building our plug-in.
+ One of it greatest strengths is that it allows for expert user to define
+ macros and routines specific for their application.
+ In this case, since our plug-in is technically a plug-in for Paraview,
+ it is built using some macros specifically created for that purpose by
+ Kitware to be used in a CMake configuration file.
+ Cmake works based on a file that is called CMakeLists.txt which contains
+ all the instructions to build a file using CMake.
+ For further reference, we recommend going to CMake documentation and consulting
+ our own CMakeLists.txt file which is distributed with our codebase.
+ 
+\end_layout
+
+\begin_layout Standard
+What CMake actually does is to generate all the files necessary to build
+ the binary files, and this depends on the toolset that is being used.
+ During our work we generated files to be compiled using the standard GNU
+ make tool that comes with most modern *NIX systems.
+ It can also generate files to be compiled using certain IDEs like Code::Blocks,
+ QT Creator and Visual Studio on a Windows environment.
+ 
+\end_layout
+
+\begin_layout Standard
+Once a working binary library is available the way to load the plug-in in
+ ESPina is to go to the menu: Settings 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+Manage Plugins Load New...
+ and then navigate to our compiled binary file.
+ After successfully executing these steps, there should be a new toolbar
+ on ESPina that allows the user to interact with our plug-in.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Images/loaded.svg
+	display false
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The result of correctly loading our plug-in on ESPina.
+ Accented in red is the new tool bar.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Toolbar_loaded"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Results and Discussion
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Results"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this kind if work, its difficult to quantify the results in a way that
+ is comparable to similar works.
+ Since our objective was to implement the MGAC and MACWB algorithms proposed
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Marquez_2012"
+
+\end_inset
+
+, we can report that the objective was reached and that both the algorithms
+ were successfully implemented and that the result is a tool which allows
+ the users to interactively segment an image in 3D.
+\end_layout
+
+\begin_layout Standard
+From our preliminary testing and evaluation we find that both algorithms
+ work as expected, but present have shortcomings on their performance, specially
+ the MGAC.
+\end_layout
+
+\begin_layout Standard
+In figure [IMAGEN DE LA EVOLUCION DEL ALGORITUMO] we can appreciate the
+ evolution of both algorithms when trying to segment the same structure
+ from approximately the same point (remember that they cannot start exactly
+ with the same curve because MGAC's initial curve is a disk while MACWB's
+ is a sphere).
+\end_layout
+
+\begin_layout Standard
+As we can see, from the very limited point we have here to compare, MGAC
+ grows faster but it's less accurate on the borders, it presents a lot of
+ "leaking" in some points.
+ MACWB on the other hand evolves more slowly, but is more accurate in keeping
+ within the borders of the objective structure.
+ In this medium, is not much what we can show regarding the performance
+ of this two models on different circumstances, but is clear to us that
+ none of the two is right for every situation and that the performance of
+ each depends on a lot of variables.
+ 
+\end_layout
+
+\begin_layout Standard
+To go a little more into detail into what we perceive were the factors impending
+ the performance of the MGAC, we find that is highly dependant on two external
+ factors, one is the selection of the parameters for the algorithm and the
+ other is in the selection of the stop criterion used to guide the evolution
+ (for example, when images have fuzzy edges, it might not be the best idea
+ to choose a stop criterion that favors stopping at edges).
+ Further ahead we discuss some ideas that we have about ways to overcome
+ this problems, and enhance the results obtained from this approach.
+ 
+\end_layout
+
+\begin_layout Standard
+As for MACWB we find that it works pretty well "out-of- the-box", and is
+ even capable of overcoming some of the challenges posed by the images we
+ had on hand to try our tool.
+ We think that this has a lot to do with the fact the ist doesn't rely so
+ heavily on external parameters bur rather works with global information
+ directly from the image.
+ We did run into some situations where the curve instead of growing, disappears
+ within a few iterations of the algorithm, we believe this has to do with
+ the selection of the initial volume of interest (as discussed in section
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:ImplementationAlgorithms"
+
+\end_inset
+
+).
+ Maybe a more sensitive approach would be to modify the selection of the
+ VOI so that it is not fixed, but it is always kept at at certain distance
+ from the edges of the curve.
+ For reasons of time we couldn't test this hypothesis.
+ 
+\end_layout
+
+\begin_layout Standard
+We will now discuss some impressions about the issues we ran into while
+ doing the work presented, as well of some avenues of progress we think
+ could be explored in the future.
+ 
+\end_layout
+
+\begin_layout Standard
+One of the aspects that we found greatly affected the performance of these
+ algorithms was the quality of the image being processed, in our case our
+ main test image had some issues regarding the distirbution of data on its
+ Z axis.
+ This was caused by the fact that the image had a different resolution on
+ that axis than on the X and Y axes.
+ This resulted in some distorsions on the image that made it difficult for
+ the curve to stay within certain boundaries on the Z axis.
+ We found that the distortions on the image were not evenly distributed
+ along the Z axis, but found that some areas were a little bit discontinuous
+ while in other parts of the image we found big leaps from one slice to
+ another, this inconsistency had a great effect on the performance of our
+ tool.
+ [IMAGEN DE LA DISCONTINUIDAD]
+\end_layout
+
+\begin_layout Standard
+We think an area for potential improvement is in the paramter selection
+ for MGAC, as stated before, this model is extremely sensitive, and although
+ we found that with the authors recommended parameters we obtained good
+ results, it might be interesting to try to come up with this parameters
+ in a more automated fashion, taking into account user input as well as
+ any other characteristic of the image that could be extracted automatically.
+ 
+\end_layout
+
+\begin_layout Standard
+INCLUDE SOME EXAMPLES
+\end_layout
+
+\begin_layout Standard
+In the same direction as last comment, one other key factor for performance
+ is the selection of the stop criterion function used for the curve evolution.
+ Right now we are using a known function that favors stopping in the image
+ borders, but could there be another way to construct that function.
+ The kind of images that we have been working on, have very fuzzy borders
+ so that criteria might not necessarily be the best.
+ Could this function be derived using user input, including interactive
+ information about where the function should stop?.
+ Maybe a set of filters could be identified that produce stop criteria that
+ is particularly well suited for certain kinds of structures, and we could
+ propose to the users a kit of preprocessing filters that should be used
+ before starting segmentation depending on the objective structure.
+ Another step that could be interesting to compensate for the problems in
+ acuiring a good stop function could be to increase the interactivity of
+ the tool by giving the user to set special attraction and repulsion areas
+ in the image, to actively aid in the evolution of the curve.
+ 
+\end_layout
+
+\begin_layout Standard
+Another area that is worth exploring is the selection of the shape and size
+ of the initial curve.
+ For example, in our images there are a lot of structures that have a sort
+ of tubular shape along the Z axis.
+ If we knew beforehand, with the input of the experts that kind of details,
+ the shape of the initial curve as well as that of the VOI could be designed
+ to detect that kind of structure.
+ For example, instead of a disk or a sphere, like we are using now, it could
+ be useful to start with some kind of "strand" that goes from top to bottom
+ that the user could approximate to the position of the structure, that
+ might be a better starting point for the evolution of our curves in that
+ context.
+ 
+\end_layout
+
+\begin_layout Standard
+With regards to the usability of our tool and the value added to the scientists,
+ we think that the next step would be a series of live tests with the users
+ to get some data about the increase in efficiency in the segmentation process
+ when comparing the status quo with our tool.
+ Once that data is available we could do some A/B tests to try out alternatives
+ and fine tune the interface of the tool with the aim of maximizing the
+ productivity of the experts and allowing them to process as many images
+ as possible rapidly and correctly.
+ 
+\end_layout
+
+\begin_layout Standard
+On a more practical note and this work being more of a proof-of-concept
+ approach, the particulars of our implementation could use some polishing
+ with an eye on improving the computational efficiency of the code, in particula
+r aiming to take advantage of multi-threading or other possible parallelizations
+ of the code.This could also be achieved, with a loss in modularity, by replacing
+ the use of some of the more generic VTK filters sith some custom made filters
+ that could combine multiple operations in one.
+\end_layout
+
+\begin_layout Chapter
+Conclusions
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Conclusions"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The extraction of meaningful and useful data from images is a complex and
+ time consuming task.
+ More specifically the scientists of the Cajal Blue Brain have a clear need
+ for a tool that allows them to address the problem of having too many images
+ to process and the amount it takes to manually label every slice of every
+ image.
+ This labeling is needed, in the context of the project, to be able to extract
+ meaningful data from electronic microscopy images of brain tissue that
+ would allow to fulfill one of the objectives of the Blue Brain Project
+ which is the simulation of a big network of neuronal cells based on modelling
+ the interaction of this kind of cells in a real brain.
+ 
+\end_layout
+
+\begin_layout Standard
+This problem of labeling the elements in an image is known in the computer
+ vision domain as segmentation.
+ The application of known segmentation techniques could be a potential solution
+ to the problem of the massive labeling needed by the brain scientists of
+ the Cajal Blue Brain project.
+ In chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Previous-Work"
+
+\end_inset
+
+ we gave a very brief overview of the many approaches that have been proposed
+ in the literature regarding the segmentation problem.
+ One of the most succesful of these approaches is known as Active Contours,
+ or Snakes.
+ These techniques are based on the evolution of a curve, normally by finding
+ the solution of a partial differential equation (PDE).
+ The use of PDEs has a number of disadvantages, specially about the complexity
+ of the calculations involved as well as the numerical stability of the
+ methods.
+ A recent proposal was made by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Marquez_2012"
+
+\end_inset
+
+ to apply a morphological approach to the evolution of the Snakes, avoiding
+ the use of PDEs and lowering the computational cost of the solution.
+ The algorithms they propose are called Morphological Geodesic Active Contours
+ (MGAC) and Morphological Active Contours Without Borders (MACWB).
+ An explanation of the workings of these algorithm can be found in sections
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Morphological-Geodesic-Active"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Morphological-ACWB"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Our main objective in the present work was to create a tool to allow a scientist
+ to interactively segment an image with the aid of the MGAC and MACWB algorithms.
+ This tool is a plug-in for a software system called ESPina that was developed
+ by members of the Cajal Blue Brain Project as an interaction and visualization
+ tool for the analysis of neuronal images.
+ Our plug-in adds a toolbar to ESPina that allows the user to do segmentation
+ with the morphological algorithms described earlier.
+ This toool was designed to be interactive in order to fully harnesss the
+ input of the experts at hand.
+ The way this works is that the user have full control over where the initial
+ curve is placed, and then controls the evolution of that curve until they
+ are satisfied with the results.
+ This iterative process allows for the user to iteratively add togeteher
+ several independantly evolved curves into final labeling of a single structure.
+ 
+\end_layout
+
+\begin_layout Standard
+In chapter
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Implementation"
+
+\end_inset
+
+the interested user can find all the technical details of the way the algorithms
+ and the user interaction were implemented.
+ As a brief reminder, we can say that the algorithmical part of the implementati
+on was done using VTK, a library develeoped by Kitware for image data processing
+, analysis and visualization, it required the use of some filters that come
+ bundled in VTK's libraries and also the development of some new stand-alone
+ filters.
+ The user interaction parts of the tool were done complying with ESPina's
+ extensibility model.
+\end_layout
+
+\begin_layout Standard
+The primary result of our work is a tool that allows a user to interactively
+ do 3D image segmentation in the ESPina environment, based on morphological
+ active contour algorithms.
+ The performance of this tool is relatively good, but depends heavily on
+ several factors for its accuracy (paramaterization, quality of image, shape
+ of initial curve, etc.).
+ Seeign these results, we propose several avenues for further development
+ of this subject: the use of machine learning techniques for automatic parameter
+ization, and a redesign of user input and interactivity being the ones with
+ the most potential.
+\end_layout
+
+\begin_layout Standard
+The objectives of projects Blue Brain and Cajal Blue Brain are large and
+ inspiring, and reliable image segmentation techniques are a key part of
+ the puzzle these projects are trying to solve.
+ Our tool aims to take a bold step into solving that problem and we consider
+ that it opens up several paths that could eventually lead to a more solid
+ solution.
+ 
+\end_layout
+
+\begin_layout Chapter
+References
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:References"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "references"
+options "bibtotoc,plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

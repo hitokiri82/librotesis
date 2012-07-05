@@ -1,0 +1,576 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass report
+\begin_preamble
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[colorlinks, linkcolor=black, citecolor = Sepia]{hyperref}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding utf8x
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command bibtex8
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{roman}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+An interactive 3D image segmentation tool based on Morphological Snakes
+\end_layout
+
+\begin_layout Author
+Francisco Antonio Caraballo La Riva
+\end_layout
+
+\begin_layout Chapter*
+Acknowledgments
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+clearpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{arabic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Standard
+Planteamiento del problema (imágenes, estructuras a segmentar, .....).
+ The problem to be solved by the proposed tool is the need of biologists
+ and other scientists to be able to segment images of brain tissue obtained
+ with electronic microscopes with the objective of differentiating several
+ types of structures within brain cells (i.e.
+ synapses, vesicles, spines, dendrites).
+ 
+\end_layout
+
+\begin_layout Standard
+¿por qué es necesario hacerlo interactivo? The tool is designed to be interactiv
+e, in order to allow the scientists to be able to guide the process of segmentat
+ion.
+ This approach allows us to overcome some of the limitations of the segmentation
+ algorithms by incorporating the knowledge of the expert in the process.
+ 
+\end_layout
+
+\begin_layout Standard
+Describir brevemente la solución que se va a detallar en los siguientes
+ capítulos, basada en evolución de contornos.
+\end_layout
+
+\begin_layout Standard
+Contar muy brevemente qué aportan los snakes morfológicos.
+ In general, for the solution of the segmentation problem, a very effective
+ approach is the evolution of curves, also known as contours.
+ The traditional approach used to compute the evolution of this curves is
+ to use partial differential equations (PDE) however, the segmentation algorithm
+s implemented for our solution are based on a proposal by {REFERENCE} to
+ approximate the evolution of the curves using morphological operators instead
+ of the PDEs.
+ The use of morphological operators, has the advantage of being simpler,
+ faster and more numerically stable the their counterparts.
+ 
+\end_layout
+
+\begin_layout Chapter
+Previous Work
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Previous-Work"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Image Segmentation
+\end_layout
+
+\begin_layout Standard
+Image segmentation is the process of labeling the pixels of an image in
+ way that allows us to group together pixels that share certain characteristics.
+ A common use of segmentation is labeling pixels in an image as foreground
+ and background pixels.
+ This problem has been approached from several directions: Split and merge
+ techniques (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pavlidis_Liow_1990"
+
+\end_inset
+
+), normalized cuts (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Shi_Malik_2000"
+
+\end_inset
+
+), graph cuts (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Boykov_Jolly_2001"
+
+\end_inset
+
+), active contours/snakes (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kass_Witkin_Terzopoulos_1988"
+
+\end_inset
+
+,
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Malladi_Sethian_Vemuri_1995"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Some examples of the utilization of snakes for image segmentation can be
+ found in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Nilsson_Heyden_2003,Chan_Vese_2001,Mortensen_Barrett_1995"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Active contours that are based on parametric curves have difficulty adapting
+ the topology of the curve as it evolves.
+ An alternative way of representing the curve is by using a level set where
+ the curve is represented as the interface of two levels of a binary function.
+ There are two relevant models that use this representation, 
+\shape italic
+Geodesic Active Contours 
+\shape default
+(GAC) was proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Caselles_Kimmel_Sapiro_1997"
+
+\end_inset
+
+, the main idea in this model is that the evolution of the curve is dictated
+ by an energy function, commonly called 
+\begin_inset Formula $g(x)$
+\end_inset
+
+, that generates attraction to the edges in the original image and whose
+ gradient dictates the direction of movement for the curve.
+ Another model, originally proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chan_Vese_2001"
+
+\end_inset
+
+, is called 
+\shape italic
+Active Contours Without Edges
+\shape default
+ (ACWE), it doesn't require an energy function but instead relies in global
+ information regarding the contents of pixels inside and outside of the
+ evolving curve.
+\end_layout
+
+\begin_layout Standard
+Both of this approaches require the calculation of partial differential
+ equations which can be costly computationally, adds complexity to implementatio
+ns and can introduce numerical instabilities that sometimes require a reinitiali
+zation of the level set function.
+  
+\end_layout
+
+\begin_layout Standard
+As a proposed solution to this shortcomings of the traditional approach
+ to level set evolution 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baumela_2010"
+
+\end_inset
+
+propose a method that replaces the terms of the PDEs in traditional algorithms
+ with infinitesimally equivalent morphological operators.
+ Using these new operators the curve can be represented more simply and
+ the operations to obtain it become become simplers and less costly.
+ 
+\end_layout
+
+\begin_layout Subsection
+Morphological Geodesic Active Contours (MGAC)
+\end_layout
+
+\begin_layout Standard
+As seen in [REFRENCIA AL PAPER DE PABLO], it is possible to approximate
+ the behavior of the PDE that controls curve evolution in the traditional
+ GAC as the composition of three morphological operators.
+ In general the PDE can be divided in three components, one represents the
+ attraction applied to the curve by the areas of interest in the image (i.e.
+ edges), one represents the balloon force that mensures that the curve doesn't
+ get stuck in parts of the image with little information and the third component
+ is the mean curvature operator which can be seen as a smoothing force on
+ the curve.
+ With this in mind, the following steps applied sequentially are equivalent
+ to the PDE:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{flalign*}
+u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)>\theta\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)<\theta\\
+u^{n}\left(x\right) & \text{otherwise}
+\end{cases}\\
+u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
+1 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)>0\\
+0 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)<0\\
+u^{n+\frac{1}{3}}\left(x\right) & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)=0
+\end{cases}\\
+u^{n+1}\left(x\right) & =\begin{cases}
+\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right) & \text{if }g\left(I\right)\left(x\right)>\theta\\
+u^{n+\frac{2}{3}}\left(x\right) & \text{otherwise}
+\end{cases}
+\end{flalign*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $u$
+\end_inset
+
+ represents the embedding function, 
+\begin_inset Formula $D_{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{d}$
+\end_inset
+
+ represent the discretized dilation and erosion operators respectively,
+\begin_inset Formula $g\left(I\right)\left(x\right)$
+\end_inset
+
+ represents a function that has low values in the areas of interest of the
+ image, 
+\begin_inset Formula $v$
+\end_inset
+
+ is a parameter that allows to control the effect of the balloon force and
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is a parameter that allows to control the effect of both the balloon force
+ and the smoothing force.
+ 
+\end_layout
+
+\begin_layout Standard
+In theory 
+\begin_inset Formula $g\left(I\right)$
+\end_inset
+
+ could be any function that takes low values in the areas of interest of
+ the image, a good example of a function that can be used here is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+g\left(I\right)=\frac{1}{\sqrt{1+\alpha|G_{\sigma}*I|}},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+which takes low values in the edges of the image.
+\end_layout
+
+\begin_layout Subsection
+Morphological Active Contours Without Borders (MACWB)
+\end_layout
+
+\begin_layout Standard
+In the same manner that GAC can be approximated with morphological operators
+ the ACWB model can also be approximated in a similar fashion by composing
+ several morphological operators.
+ In the case of ACWB the energy function to be minimized is not dependent
+ on an external function but is derived directly from information from the
+ image.
+ In that sense, is different from GAC in that it uses more global information
+ instead of just local information around the curve.
+ 
+\end_layout
+
+\begin_layout Standard
+As with MGAC the steps necessary to model the evolution of the curve are
+ the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{flalign*}
+u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }v>0\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }v<0\\
+u^{n}\left(x\right) & \text{otherwise}
+\end{cases}\\
+u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
+1 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)<0\\
+0 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)>0\\
+u^{n+\frac{1}{3}}\left(x\right) & \text{otherwise}
+\end{cases}\\
+u^{n+1}\left(x\right) & =\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right)
+\end{flalign*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $\lambda_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+ represent the stength of each term and 
+\begin_inset Formula $C_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{2}$
+\end_inset
+
+ represent the mean values of the image inside and outside the contour.
+\end_layout
+
+\begin_layout Chapter
+The Espina Environment
+\end_layout
+
+\begin_layout Itemize
+Brief description of the application.
+ COmo vimos en 
+\end_layout
+
+\begin_layout Itemize
+Espina's purpose and audience.
+\end_layout
+
+\begin_layout Itemize
+Espina's architecture.
+\end_layout
+
+\begin_layout Chapter
+Implementation
+\end_layout
+
+\begin_layout Standard
+Due to the nature of Espina work on the implementation has two very distinct
+ dimensions: the implementation of the algorithms and the coding of the
+ plugin for Espina which included all the logic of the user interaction.
+ Given this pecualiarity this chapter will be organized accordingly, first
+ detailing the work done in VTK to implement the algorithm and then detailing
+ the implementation of the inteaction logic done in Espina.
+\end_layout
+
+\begin_layout Section
+Algorithmical implementation
+\end_layout
+
+\begin_layout Standard
+vtkSioIS Filter
+\end_layout
+
+\begin_layout Standard
+vtkStopCriterion
+\end_layout
+
+\begin_layout Standard
+vtkMorphologicalSnakes
+\end_layout
+
+\begin_layout Standard
+vtkChanVese
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section
+Espina Plugin
+\end_layout
+
+\begin_layout Standard
+This chapter would include all the details of the work done to implement
+ the algorithms, including any changes or peculiarities introduced to the
+ teorethical base of the algorithms by the implementation.
+ Should I include things like UML class diagrams or things of that sort?
+ Or should I focus on the Computer Vision Stuff?
+\end_layout
+
+\begin_layout Chapter
+Results
+\end_layout
+
+\begin_layout Standard
+The results of the implementation.
+\end_layout
+
+\begin_layout Chapter
+Discussion
+\end_layout
+
+\begin_layout Standard
+Point out areas for improvement and potential future work.
+ 
+\end_layout
+
+\begin_layout Chapter
+Conclusions
+\end_layout
+
+\begin_layout Chapter
+References
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "references"
+options "bibtotoc,plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -102,6 +102,14 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -679,27 +687,279 @@ Where
 \end_layout
 
 \begin_layout Chapter
-The ESPina Environment
+A little context.
+ The Cajal Blue Brain Project.
 \begin_inset CommandInset label
 LatexCommand label
-name "chap:The-Espina-Environment"
+name "chap:Context"
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Itemize
-Brief description of the application.
- COmo vimos en 
+\begin_layout Standard
+The Cajal Blue Brain Project
+\end_layout
+
+\begin_layout Standard
+In 2005, a neuroscientist named Henry Markram at Ecole Polytechnique Fédérale
+ de Lausanne (EPFL)  joined efforts with IBM with a very ambitious objective,
+ they planned to build a perfect replica of the human brain inside a computer.
+ According to their website (
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://bluebrain.epfl.ch
+\end_layout
+
+\end_inset
+
+) the objectives of this project were:
+\end_layout
+
+\begin_layout Enumerate
+Create a Brain Simulation Facility with the ability to build models of the
+ healthy and diseased brain, at different scales, with different levels
+ of detail in different species.
+\end_layout
+
+\begin_layout Enumerate
+Demonstrate the feasibility and value of this strategy by creating and validatin
+g a biologically detailed model of the neocortical column in the somatosensory
+ cortex of young rats.
+\end_layout
+
+\begin_layout Enumerate
+Use this model to discover basic principles governing the structure and
+ function of the brain.
+\end_layout
+
+\begin_layout Enumerate
+Exploit these principles to create larger more detailed brain models, and
+ to develop strategies to model the complete human brain.
+\end_layout
+
+\begin_layout Standard
+As the project advanced, a collaboration effort with several spanish institution
+s was forged (namely Madrid Technical University (UPM) and the Instituto
+ Cajal, part of the Consejo Superior de Investigaciones Cientificas (CSIC)).
+ This Spanish contribution to the project was designated Cajal Blue Brain,
+ in honor to the Nobel laureate Santiago Ramon y Cajal (Nobel Prize in Physiolog
+y or Medicine, 1906) for his discoveries in neuroscience and for setting
+ up the foundations of what would eventually become the "neuron theory".
+\end_layout
+
+\begin_layout Standard
+According to the memory of the project, its Vision, Mission and Objectives
+ are:
+\end_layout
+
+\begin_layout Subsection*
+Vision
+\end_layout
+
+\begin_layout Standard
+Biologically accurate computer models of ammalian and human brains could
+ provide a new foundation for understanding functions and malfuncion of
+ the brain a dor a new generation of informacion based, customizes medicine.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Mission
+\end_layout
+
+\begin_layout Standard
+To gather all existing knowledge of the brain, accelerate the global research
+ effort of reverse engineering the structure and function of the components
+ of the brain, and to build a complete theoretical framework that can orchestrat
+e the reconstruction of the brain of mammals ans man from the genetic to
+ the whole brain level, into computer model for simulation, visualization
+ and automatic knowledge archiving by 2015.
+\end_layout
+
+\begin_layout Subsection*
+Objectives
+\end_layout
+
+\begin_layout Enumerate
+Assemble all existing knowledge of the brain by providing a new model and
+ informatics platform as a service to "publish" their data and models.
+\end_layout
+
+\begin_layout Enumerate
+Accelerate the process of reverse engineering the brain by stimulating and
+ facilitating neuroscientists to shift towards industrial-scale neuroscience.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Align experimentalists and theoreticians to further derive the structure
+ and function of the brain in a manner that allows the construction of computer
+ models for all components of the brain.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Construct a new generation data-driven, model-oriented, emergent and evolvable
+ and database-architecture that allows dynamic assembling of the components
+ of the brain into whole brain models that can be used to simulate the functions
+ and malfunctions of the brain and to explore new treatments.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Establish an international brain simulation capability to serve as a foundation
+ for future basic and clinical research and medical treatment.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Couple future brain research funding to the global industry that it produces
+ and supports.
+ 
+\end_layout
+
+\begin_layout Standard
+This general definition of the project echoes the definition of the Internationa
+l Blue Brain Projects that it belongs to.
+\end_layout
+
+\begin_layout Standard
+To attain its objectives, the CBBP is organized according to two more tactical
+ axes:
 \end_layout
 
 \begin_layout Itemize
-ESPina's purpose and audience.
+The anatomical and functional micro organization of the cortical column.
+ 
 \end_layout
 
 \begin_layout Itemize
-ESPina's architecture.
+The development of potentially transferable biomedical technology.
+ 
+\end_layout
+
+\begin_layout Standard
+Of these technologies that have to be developed some of the must crucial
+ ones are image analysis and visualization technologies.
+ 
+\end_layout
+
+\begin_layout Standard
+The use of modern electronic microscopy techniques (cross-beam type microscopes)
+ allows for the automatic obtention of highly detailed 3D images of brain
+ tissue samples, a very large number of these can be obtained very fast
+ when compared to traditional ways of doing this.
+ This images are obtained by serially imaging "cuts" of the brain tissue
+ (ie.
+ every 25 nm) and then stacking this slices into 3D representations of the
+ sampled tissue.
+ This images have to be analyzed with the objective of obtaining morphological
+ data about the cerebral cortex.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/brainTissue.png
+	display false
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A slice of a brain tissue image stack obtained with a cross-beam microscope.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Brain-tissue"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The problem is that these images have to be analyzed by hand by trained
+ scientists that are capable of labeling the different structures within
+ the image and thus enabling the quantification of, for example, the density
+ of synapses in a given volume.
+ It goes without saying that is a very expensive, error prone and time consuming
+ task that could be addressed by new advances in image segmentation and
+ analysis.
+ To give the reader an idea of the magnitude of the amount of data that
+ this task requires, in order to visualize a volume equivalent to 1 cubic
+ mm of brain tissue, we would have to process 35 petabytes (to put this
+ into perspective, as of this writing (2012) Google's worldwide servers
+ are reported to handle between 20 and 30 petabytes of data every day).
+\end_layout
+
+\begin_layout Standard
+The images collected pose a number of challenges to be processed automatically
+ (noise, blurred edges, large number of objects), so new techniques will
+ have to be developed in order to achieve this goal.
+ 
+\end_layout
+
+\begin_layout Section
+ESPina
+\end_layout
+
+\begin_layout Standard
+The ESPina Interacive Neuron Analyzer, is a tool develeoped by the Cajal
+ Blue Brain Project to allow the scientists to visualize the images obtained
+ with the electronic microscopes.
+ 
+\end_layout
+
+\begin_layout Standard
+The tool is built on top of ParaView, a parallel visualization framework
+ developed by Kitware Inc..
+ It is designed as a client/server model that allows the use of processing
+ in a massive cluster (using MPI messaging technology), a single stand-alone
+ server or in a local machine.
+ It was designed around the worfkflow of the neuroscientists that are working
+ on CBBP and BBP, and so the visualization and interaction with the images
+ is done in way that it's natural for them.
+\end_layout
+
+\begin_layout Standard
+ESPina provides some basic interaction and segmentation tools "out of the
+ box", but its greatest potential comes from the fact that it can be enhanced
+ by the use of plug-ins that can be built to include almost any new functionalit
+y into the system (new segmentation tools, ways to extract information from
+ images, interaction techniques, etc.).
+ The tool that is being presented in this work is built as a plug-in for
+ ESPina, in order to harness all the functionality that it has already built
+ in as well as the familiarity that the neuroscientists already posses with
+ the system.
+ 
 \end_layout
 
 \begin_layout Chapter
@@ -865,7 +1125,7 @@ Given that ESPina is based on ParaView, and that ParaView (since they are
  to implement new image segmentation algorithms to be used in ESPina is
  to program them as VTK filters and then make them available for the ParaView
  server instance behind ESPina.
- In order to do that our filters had to comply with the following conventions:
+ In order to do that our tool had to comply with the following conventions:
 \end_layout
 
 \begin_layout Itemize
@@ -890,14 +1150,14 @@ The curve to be evolved by our morphological operators will be represented
 \end_layout
 
 \begin_layout Itemize
-Our filter will receive as an input the image that is being processed and
+Our tool will receive as an input the image that is being processed and
  the output it provides must be a binary image that represents the labeling
  of the pixels in the image (background pixels are black and foreground
  pixels are white).
 \end_layout
 
 \begin_layout Itemize
-Upon receiving the output from our filter, ESPina will add a new segmentation
+Upon receiving the output from our tool, ESPina will add a new segmentation
  object to its model.
 \end_layout
 
@@ -916,8 +1176,8 @@ For performance reasons, it is not advisable to always use the whole image/stack
  when executing the algorithms.
  To address this issue we pass along the pipeline only a fraction of the
  image, called the Volume of Interest (VOI), right now in our tool that
- parameter is fixed and the box that we pass to our filters is 120 x 120
- x 120 voxels, centered around the initial seed of the curve.
+ parameter is fixed and we pass to our filters a box that is 121 x 121 x
+ 121 voxels, centered around the initial seed of the curve.
  As we will discuss in chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -925,9 +1185,9 @@ reference "chap:Results"
 
 \end_inset
 
- we believe this is having a negative effect on the performance of the WACWB
- and propose an alternative way to handle this situation when using that
- algorithm.
+ we believe this is having a negative effect in some cases on the performance
+ of the WACWB and propose an alternative way to handle this situation when
+ using that algorithm.
 \end_layout
 
 \begin_layout Subsection

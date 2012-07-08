@@ -7,6 +7,7 @@
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[colorlinks, linkcolor=black, citecolor = Sepia]{hyperref}
 \end_preamble
+\options openright
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -28,10 +29,10 @@
 \output_sync 0
 \bibtex_command bibtex8
 \index_command default
-\paperfontsize default
+\paperfontsize 12
 \spacing single
 \use_hyperref false
-\papersize default
+\papersize a4paper
 \use_geometry false
 \use_amsmath 1
 \use_esint 1
@@ -53,7 +54,7 @@
 \paragraph_indentation default
 \quotes_language english
 \papercolumns 1
-\papersides 1
+\papersides 2
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
@@ -141,28 +142,48 @@ The problem
 \end_layout
 
 \begin_layout Standard
-Advances in medical imaging provides scientists with a huge number of highly
- detailed images that contain a lot of information.
- Images need to be processed to extract meaningful data that can later be
- used to do, for example, statistical analysis.
- The processing of the image is a very time consuming task that is very
- labor intensive if done by hand.
+The Blue Brain Project, a collaboration between Switzerland's EPFL and IBM,
+ is a project with a bold objective.
+ Their goal is to make a virtual model of the human brain, down to the last
+ neuron, and host it on a supercomputer.
+ Needless to say, this kind of project has a very big set of challenges
+ to overcome.
+ The Technical University of Madrid (UPM) as well as some other Spanish
+ scientific institutions are strategic partners in this project.
+ The entity that represents the Spanish contributions to this project is
+ called Cajal Blue Brain Project.
+\end_layout
+
+\begin_layout Standard
+In order to obtain morphological information about the structure of the
+ brain directly from actual brain tissue very modern electronic microscopy
+ techniques are being used to obtain highly detailed images from samples
+ of cerebral cortex.
+ These images are extremely useful because when properly analyzed by trained
+ scientist they can yield very important quantitative as well as qualitative
+ data.
+ When done by hand, the processing of the images is a very time consuming
+ task that is very labor intensive and therefore expensive.
+ Combine the cost (in every sense) of this process to the fact that the
+ amount of images that have to be processed is immense and you have a really
+ hard problem in your hands 
 \end_layout
 
 \begin_layout Standard
 One of the main techniques used for the extraction of meaningful data from
- digital images is segmentation.
- Segmentation is the labeling or clustering of the pixels of an image according
- to their characteristics.
- A good example of image segmentation would be to be able to label all the
- pixels in an aerial image of a road.
+ digital images, and that could be a possible solution for the problem at
+ hand, is image segmentation.
+ Segmentation is the process of labeling or clustering the pixels of an
+ image according to their characteristics.
+ A good example of image segmentation would be to label all the pixels in
+ an aerial image depending if they are part of a road or not.
  The result of the process would be that every pixel would be given a label
  (road or no-road) depending on whether or not the pixel belongs to the
  road.
  When applied to a medical image, the proper segmentation of an image might
- allow the user to obtain data, for example, about the quantity of a given
- structure in a given area, the average shape or size of an interesting
- feature, etc.
+ allow the user to obtain data, for example, about the amount of instances
+ of a given structure in a given area, the average shape or size of an interesti
+ng feature, etc.
  
 \end_layout
 
@@ -205,13 +226,13 @@ g the road and red labeled pixels representing not-road.
 \end_layout
 
 \begin_layout Standard
-The tool that we are building is going to be used by the scientists of the
- Cajal Blue Brain project to segment images of brain tissue obtained with
- electronic microscopes with the objective of differentiating several types
- of structures within brain cells (i.e.
- synapses, vesicles, spines, dendrites).
- So with this objective in mind, the problem becomes: how to allow the scientist
-s to process the images in the easiest, fastest and most automated way?
+To summarize, the problem that we are attempting to offer a solution for
+ is the following: how can we aid the scientists of the Cajal Blue Brain
+ project to segment images of brain tissue obtained with electronic microscopes
+ with the objective of differentiating several types of structures within
+ those cells (i.e.
+ synapses, vesicles, spines, dendrites) in the easiest, fastest and most
+ automated way?
 \end_layout
 
 \begin_layout Section
@@ -224,7 +245,7 @@ Given the previous description of the problem, we propose a solution based
  First we need an environment or framework that allows us to interact with
  the images in a useful way and secondly we need an actual implementation
  of an algorithm that allows the scientist to segment the images in a time
- efficient way.
+ efficient manner.
  
 \end_layout
 
@@ -232,11 +253,11 @@ Given the previous description of the problem, we propose a solution based
 For the first part of the solution we are going to be developing a plug-in
  for a system called ESPina, developed as part of the Cajal Blue Brain initiativ
 e.
- This program allows a user to load 3D stack of images and interact with
+ This program allows a user to load a 3D stack of images and interact with
  them in useful ways.
  It also provides two key functionalities, first it was designed from the
  ground up to support image segmentation and provides a system for categorizing
- hierarchically the labeled structures and secondly and more important,
+ hierarchically the labeled structures and secondly and more importantly,
  it provides an open architecture that can be enhanced with external plug-ins
  which will allow us to model the user interaction with our implementation
  of some segmentation algorithms.
@@ -250,7 +271,7 @@ The second component of the solution is the implementation of some modern
  of approaches have been tried in solving it.
  In the next chapter we provide an overview of what some of those approaches
  have been and their limitations.
- We have decided to base our solution on the use of Active Contours, also
+ We have decided to base our solution on the use of active contours, also
  known as snakes.
  This approach is based on the idea of iteratively evolving a curve using
  a gradient descent technique based on the minimization of some energy function.
@@ -265,425 +286,22 @@ The second component of the solution is the implementation of some modern
 
 \begin_layout Standard
 The ESPina tool, is built as an extension of ParaView, an open-source, multi-pla
-tform data analysis and visualization application (
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://www.paraview.org/
-\end_layout
-
-\end_inset
-
-)/ In order to be compatible with ESPina/ParaView, the implementation of
- our segmentation algorithms has to be done using Kitware's Visualization
- Toolkit (VTK) which is a free, open source software system for 3D computer
- graphics, image processing and visualization (
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://www.vtk.org
-\end_layout
-
-\end_inset
-
-) created by the same company that created ParaView.
+tform data analysis and visualization application.
+ In order to be compatible with ESPina/ParaView, the implementation of our
+ segmentation algorithms has to be done using Kitware's Visualization Toolkit
+ (VTK) which is a free, open source software system for 3D computer graphics,
+ image processing and visualization created by the same company that created
+ ParaView, Kitware Inc..
  
 \end_layout
 
 \begin_layout Standard
 One of our main objectives in the design of the segmentation tool is for
- the user to be able to interactivley control the segmentation process,
- even the evolution of the Active Contour curve, or snake.
+ the user to be able to interactively control the segmentation process,
+ even the evolution of the active contour curve.
  This approach allows us to overcome some of the limitations of the segmentation
  algorithms by incorporating the knowledge of the expert in the process.
  
-\end_layout
-
-\begin_layout Chapter
-Previous Work
-\begin_inset CommandInset label
-LatexCommand label
-name "chap:Previous-Work"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Image Segmentation
-\end_layout
-
-\begin_layout Standard
-Image segmentation is the process of labeling the pixels of an image in
- way that allows us to group together pixels that share certain characteristics.
- A common use of segmentation is labeling pixels in an image as foreground
- and background pixels.
- This problem has been approached from several directions: Split and merge
- techniques (
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Pavlidis_Liow_1990"
-
-\end_inset
-
-), normalized cuts (
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Shi_Malik_2000"
-
-\end_inset
-
-), graph cuts (
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Boykov_Jolly_2001"
-
-\end_inset
-
-), active contours/snakes (
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Kass_Witkin_Terzopoulos_1988"
-
-\end_inset
-
-,
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Malladi_Sethian_Vemuri_1995"
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-The algorithms we are going to use in our tool are based on the Active Contours
- approach so we are going to discuss it in a little more detail.
- Some examples of the utilization of snakes for image segmentation can be
- found in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Nilsson_Heyden_2003,Chan_Vese_2001,Mortensen_Barrett_1995"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Standard
-Active contour methods iteratively move towards a solution (segmentation)
- under the combination of image and optional user guidance forces (
-\begin_inset CommandInset citation
-LatexCommand citet
-after "p. 270"
-key "Szeliski_2010"
-
-\end_inset
-
-).
- The first active contour models, relied on parametric curves, but they
- had difficulty adapting the topology of the curve as it evolved.
- As an alternative, level-set methods represent the curve as the zero-crossing
- of a characteristic function (
-\begin_inset CommandInset citation
-LatexCommand citet
-after "p. 281"
-key "Szeliski_2010"
-
-\end_inset
-
-) and the evolution of the curve is done by modifying the underlying embedding
- function.
- We are going to analyze two models that use this representation: 
-\shape italic
-Geodesic Active Contours 
-\shape default
-(GAC) was proposed by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Caselles_Kimmel_Sapiro_1997"
-
-\end_inset
-
-, the main idea in this model is that the evolution of the curve is dictated
- by the minimizing of an energy function, commonly called 
-\begin_inset Formula $g(x)$
-\end_inset
-
-, that generates attraction to the edges in the original image and whose
- gradient dictates the direction of movement for the curve.
- Another model, originally proposed by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Chan_Vese_2001"
-
-\end_inset
-
-, is called 
-\shape italic
-Active Contours Without Edges
-\shape default
- (ACWE), it doesn't require an energy function but instead relies in global
- information regarding the contents of pixels inside and outside of the
- evolving curve.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename Images/ACC.png
-	display false
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-A curve being evolved using Active Contours Without Edges.
- [Image source: 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Chan_Vese_2001"
-
-\end_inset
-
-]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Both of this approaches require the calculation of partial differential
- equations which can be computationally costly , add complexity to the implement
-ation and can introduce numerical instabilities that sometimes require the
- reinitialization of the level-set function.
- 
-\end_layout
-
-\begin_layout Standard
-As a proposed solution to this shortcomings of the traditional approach
- to snakes evolution 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "Baumela_2010"
-
-\end_inset
-
-propose a method that replaces the terms of the PDEs in traditional algorithms
- with infinitesimally equivalent morphological operators.
- Using these new operators the curve can be represented more simply and
- the operations required to obtain it become become simpler and less costly.
- 
-\end_layout
-
-\begin_layout Subsection
-Morphological Geodesic Active Contours (MGAC)
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Morphological-Geodesic-Active"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-As seen in [REFERENCIA AL PAPER DE PABLO/LUIS], it is possible to approximate
- the behavior of the PDE that controls curve evolution in the traditional
- GAC as the composition of three morphological operators.
- In general the PDE can be divided in three components, one represents the
- attraction applied to the curve by the areas of interest in the image (i.e.
- edges), one represents the balloon force that ensures that the curve doesn't
- get stuck in parts of the image with little information and the third component
- is the mean curvature operator which can be seen as a smoothing force on
- the curve.
- With this in mind, the following steps applied sequentially are equivalent
- to the PDE:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{flalign}
-u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
-\left(D_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)>\theta\\
-\left(E_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)<\theta\\
-u^{n}\left(x\right) & \text{otherwise}
-\end{cases}\nonumber \\
-u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
-1 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)>0\\
-0 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)<0\\
-u^{n+\frac{1}{3}}\left(x\right) & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)=0
-\end{cases}\label{eq:mgac}\\
-u^{n+1}\left(x\right) & =\begin{cases}
-\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right) & \text{if }g\left(I\right)\left(x\right)>\theta\\
-u^{n+\frac{2}{3}}\left(x\right) & \text{otherwise}
-\end{cases}\nonumber 
-\end{flalign}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Where 
-\begin_inset Formula $u$
-\end_inset
-
- represents the embedding function, 
-\begin_inset Formula $D_{d}$
-\end_inset
-
- and 
-\begin_inset Formula $E_{d}$
-\end_inset
-
- represent the discretized dilation and erosion operators respectively,
-\begin_inset Formula $g\left(I\right)\left(x\right)$
-\end_inset
-
- represents a function that has low values in the areas of interest of the
- image, 
-\begin_inset Formula $v$
-\end_inset
-
- is a parameter tha controls the effect of the balloon force and 
-\begin_inset Formula $\theta$
-\end_inset
-
- is a parameter that controls the effect of both the balloon force and the
- smoothing force.
- 
-\end_layout
-
-\begin_layout Standard
-In theory 
-\begin_inset Formula $g\left(I\right)$
-\end_inset
-
- could be any function that takes low values in the areas of interest of
- the image, a good example of a function that can be used here is:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-g\left(I\right)=\frac{1}{\sqrt{1+\alpha|G_{\sigma}*I|}},\label{eq:stopf}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\noindent
-which takes low values in the edges of the image.
-\end_layout
-
-\begin_layout Subsection
-Morphological Active Contours Without Borders (MACWB)
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Morphological-ACWB"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In the same manner that GAC can be approximated with morphological operators
- the ACWB model can also be approximated in a similar fashion by composing
- several morphological operators.
- In the case of ACWB the energy function to be minimized is not dependent
- on an external function but is derived directly from information from the
- image.
- In that sense, is different from GAC in that it uses more global information
- instead of just local information around the curve.
- 
-\end_layout
-
-\begin_layout Standard
-As with MGAC the steps necessary to model the evolution of the curve are
- the following:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{flalign}
-u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
-\left(D_{d}u^{n}\right)\left(x\right) & \text{if }v>0\\
-\left(E_{d}u^{n}\right)\left(x\right) & \text{if }v<0\\
-u^{n}\left(x\right) & \text{otherwise}
-\end{cases}\nonumber \\
-u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
-1 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)<0\\
-0 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)>0\\
-u^{n+\frac{1}{3}}\left(x\right) & \text{otherwise}
-\end{cases}\label{eq:macwb}\\
-u^{n+1}\left(x\right) & =\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right)\nonumber 
-\end{flalign}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Where 
-\begin_inset Formula $\lambda_{1}$
-\end_inset
-
-, 
-\begin_inset Formula $\lambda_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $v$
-\end_inset
-
- and 
-\begin_inset Formula $\mu$
-\end_inset
-
- represent the strength of each term and 
-\begin_inset Formula $C_{1}$
-\end_inset
-
- and 
-\begin_inset Formula $C_{2}$
-\end_inset
-
- represent the mean values of the image inside and outside the contour.
 \end_layout
 
 \begin_layout Chapter
@@ -696,10 +314,6 @@ name "chap:Context"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-The Cajal Blue Brain Project
 \end_layout
 
 \begin_layout Standard
@@ -747,9 +361,10 @@ As the project advanced, a collaboration effort with several spanish institution
 s was forged (namely Madrid Technical University (UPM) and the Instituto
  Cajal, part of the Consejo Superior de Investigaciones Cientificas (CSIC)).
  This Spanish contribution to the project was designated Cajal Blue Brain,
- in honor to the Nobel laureate Santiago Ramon y Cajal (Nobel Prize in Physiolog
-y or Medicine, 1906) for his discoveries in neuroscience and for setting
- up the foundations of what would eventually become the "neuron theory".
+ in honor to the Nobel laureate Santiago Ramon y Cajal.
+ Ramon y Cajal received the Nobel Prize in Physiology or Medicine in 1906
+ for his discoveries in neuroscience and for setting up the foundations
+ of what would eventually become the "neuron theory".
 \end_layout
 
 \begin_layout Standard
@@ -762,9 +377,9 @@ Vision
 \end_layout
 
 \begin_layout Standard
-Biologically accurate computer models of ammalian and human brains could
- provide a new foundation for understanding functions and malfuncion of
- the brain a dor a new generation of informacion based, customizes medicine.
+Biologically accurate computer models of mammalian and human brains could
+ provide a new foundation for understanding functions and malfunctions of
+ the brain and for a new generation of information-based, customized medicine.
  
 \end_layout
 
@@ -776,8 +391,8 @@ Mission
 To gather all existing knowledge of the brain, accelerate the global research
  effort of reverse engineering the structure and function of the components
  of the brain, and to build a complete theoretical framework that can orchestrat
-e the reconstruction of the brain of mammals ans man from the genetic to
- the whole brain level, into computer model for simulation, visualization
+e the reconstruction of the brain of mammals and man from the genetic to
+ the whole brain levels, into computer models for simulation, visualization
  and automatic knowledge archiving by 2015.
 \end_layout
 
@@ -932,7 +547,7 @@ ESPina
 \end_layout
 
 \begin_layout Standard
-The ESPina Interacive Neuron Analyzer, is a tool develeoped by the Cajal
+The ESPina Interacive Neuron Analyzer, is a tool developed by the Cajal
  Blue Brain Project to allow the scientists to visualize the images obtained
  with the electronic microscopes.
  
@@ -944,7 +559,7 @@ The tool is built on top of ParaView, a parallel visualization framework
  It is designed as a client/server model that allows the use of processing
  in a massive cluster (using MPI messaging technology), a single stand-alone
  server or in a local machine.
- It was designed around the worfkflow of the neuroscientists that are working
+ It was designed around the workflow of the neuroscientists that are working
  on CBBP and BBP, and so the visualization and interaction with the images
  is done in way that it's natural for them.
 \end_layout
@@ -960,6 +575,396 @@ y into the system (new segmentation tools, ways to extract information from
  in as well as the familiarity that the neuroscientists already posses with
  the system.
  
+\end_layout
+
+\begin_layout Chapter
+Previous Work
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Previous-Work"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Image Segmentation
+\end_layout
+
+\begin_layout Standard
+Image segmentation is the process of labeling the pixels of an image in
+ way that allows us to group together pixels that share certain characteristics.
+ A common use of segmentation is labeling pixels in an image as foreground
+ and background pixels.
+ This problem has been approached from several directions: Split and merge
+ techniques (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Pavlidis_Liow_1990"
+
+\end_inset
+
+), normalized cuts (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Shi_Malik_2000"
+
+\end_inset
+
+), graph cuts (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Boykov_Jolly_2001"
+
+\end_inset
+
+), active contours/snakes (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kass_Witkin_Terzopoulos_1988"
+
+\end_inset
+
+,
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Malladi_Sethian_Vemuri_1995"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The algorithms we are going to use in our tool are based on the Active Contours
+ approach so we are going to discuss it in a little more detail.
+ Some examples of the utilization of snakes for image segmentation can be
+ found in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Nilsson_Heyden_2003,Chan_Vese_2001,Mortensen_Barrett_1995"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Active contour methods iteratively move towards a solution (segmentation)
+ under the combination of image and optional user guidance forces (
+\begin_inset CommandInset citation
+LatexCommand citet
+after "p. 270"
+key "Szeliski_2010"
+
+\end_inset
+
+).
+ The first active contour models relied on parametric curves, but they had
+ difficulty adapting the topology of the curve as it evolved.
+ As an alternative, level-set methods represent the curve as the zero-crossing
+ of a characteristic function (
+\begin_inset CommandInset citation
+LatexCommand citet
+after "p. 281"
+key "Szeliski_2010"
+
+\end_inset
+
+) and the evolution of the curve is done by modifying the underlying embedding
+ function.
+ We are going to analyze two models that use this representation: 
+\shape italic
+Geodesic Active Contours 
+\shape default
+(GAC) was proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Caselles_Kimmel_Sapiro_1997"
+
+\end_inset
+
+, the main idea in this model is that the evolution of the curve is dictated
+ by the minimizing of an energy function, commonly called 
+\begin_inset Formula $g(x)$
+\end_inset
+
+, that generates attraction to the edges in the original image and whose
+ gradient dictates the direction of movement for the curve.
+ Another model, originally proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chan_Vese_2001"
+
+\end_inset
+
+, is called 
+\shape italic
+Active Contours Without Edges
+\shape default
+ (ACWE), it doesn't require an energy function but instead relies in global
+ information regarding the contents of pixels inside and outside of the
+ evolving curve.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Images/ACC.png
+	display false
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A curve being evolved using Active Contours Without Edges.
+ [Image source: 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Chan_Vese_2001"
+
+\end_inset
+
+]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Both of this approaches require the calculation of partial differential
+ equations which can be computationally costly, add complexity to the implementa
+tion and can introduce numerical instabilities that sometimes require the
+ reinitialization of the level-set function.
+ 
+\end_layout
+
+\begin_layout Standard
+As a proposed solution to this shortcomings of the traditional approach
+ to snakes evolution 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baumela_2010"
+
+\end_inset
+
+propose a method that replaces the terms of the PDEs in traditional algorithms
+ with infinitesimally equivalent morphological operators.
+ Using these new operators the curve can be represented more simply and
+ the operations required to obtain it become become simpler and less costly.
+ 
+\end_layout
+
+\begin_layout Subsection
+Morphological Geodesic Active Contours (MGAC)
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Morphological-Geodesic-Active"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As seen in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Marquez_2012"
+
+\end_inset
+
+, it is possible to approximate the behavior of the PDE that controls curve
+ evolution in the traditional GAC as the composition of three morphological
+ operators.
+ In general the PDE can be divided in three components, one represents the
+ attraction applied to the curve by the areas of interest in the image (i.e.
+ edges), one represents the balloon force that ensures that the curve doesn't
+ get stuck in parts of the image with little information and the third component
+ is the mean curvature operator which can be seen as a smoothing force on
+ the curve.
+ With this in mind, the following steps applied sequentially are equivalent
+ to the PDE:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{flalign}
+u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)>\theta\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)<\theta\\
+u^{n}\left(x\right) & \text{otherwise}
+\end{cases}\nonumber \\
+u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
+1 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)>0\\
+0 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)<0\\
+u^{n+\frac{1}{3}}\left(x\right) & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)=0
+\end{cases}\label{eq:mgac}\\
+u^{n+1}\left(x\right) & =\begin{cases}
+\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right) & \text{if }g\left(I\right)\left(x\right)>\theta\\
+u^{n+\frac{2}{3}}\left(x\right) & \text{otherwise}
+\end{cases}\nonumber 
+\end{flalign}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $u$
+\end_inset
+
+ represents the embedding function, 
+\begin_inset Formula $D_{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{d}$
+\end_inset
+
+ represent the discretized dilation and erosion operators respectively,
+\begin_inset Formula $g\left(I\right)\left(x\right)$
+\end_inset
+
+ represents a function that has low values in the areas of interest of the
+ image, 
+\begin_inset Formula $v$
+\end_inset
+
+ is a parameter that controls the effect of the balloon force and 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is a parameter that controls the effect of both the balloon force and the
+ smoothing force.
+ 
+\end_layout
+
+\begin_layout Standard
+In theory 
+\begin_inset Formula $g\left(I\right)$
+\end_inset
+
+ could be any function that takes low values in the areas of interest of
+ the image, a good example of a function that can be used here is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+g\left(I\right)=\frac{1}{\sqrt{1+\alpha|G_{\sigma}*I|}},\label{eq:stopf}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+which takes low values in the edges of the image.
+\end_layout
+
+\begin_layout Subsection
+Morphological Active Contours Without Edges (MACWE)
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Morphological-ACWB"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the same manner that GAC can be approximated with morphological operators
+ the ACWE model can also be approximated in a similar fashion by composing
+ several morphological operators.
+ In the case of ACWE the energy function to be minimized is not dependent
+ on an external function but is derived directly from information from the
+ image.
+ In that sense, is different from GAC in that it uses more global information
+ instead of just local information around the curve.
+ 
+\end_layout
+
+\begin_layout Standard
+As with MGAC the steps necessary to model the evolution of the curve are
+ the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{flalign}
+u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }v>0\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }v<0\\
+u^{n}\left(x\right) & \text{otherwise}
+\end{cases}\nonumber \\
+u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
+1 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)<0\\
+0 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)>0\\
+u^{n+\frac{1}{3}}\left(x\right) & \text{otherwise}
+\end{cases}\label{eq:macwb}\\
+u^{n+1}\left(x\right) & =\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right)\nonumber 
+\end{flalign}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $\lambda_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\lambda_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $v$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+ represent the strength of each term and 
+\begin_inset Formula $C_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $C_{2}$
+\end_inset
+
+ represent the mean values of the image inside and outside the contour.
 \end_layout
 
 \begin_layout Chapter
@@ -1186,7 +1191,7 @@ reference "chap:Results"
 \end_inset
 
  we believe this is having a negative effect in some cases on the performance
- of the WACWB and propose an alternative way to handle this situation when
+ of the WACWE and propose an alternative way to handle this situation when
  using that algorithm.
 \end_layout
 
@@ -1317,18 +1322,18 @@ vtkMGAC
 \end_layout
 
 \begin_layout Subsection
-Morphological Active Contours Without Borders
+Morphological Active Contours Without Edges
 \end_layout
 
 \begin_layout Standard
-The execution of the MACWB is relatively simpler, because it works directly
+The execution of the MACWE is relatively simpler, because it works directly
  with the data from the image, so its not necessary to pre calculate an
  energy function, as was the case with the MGAC.
  
 \end_layout
 
 \begin_layout Standard
-The MACWB filter takes as input the image being processed, optionally it
+The MACWE filter takes as input the image being processed, optionally it
  takes a second image that represents an initial curve.
  If this second image is not present then the filter expects amongst its
  inputs a "seed" parameter and a radius, additionally the filter takes as
@@ -1364,7 +1369,7 @@ reference "eq:macwb"
 \begin_layout Standard
 This implementation can be found in the class 
 \family typewriter
-vtkMACWB
+vtkMACWE
 \family default
  of the solution.
 \end_layout
@@ -1374,7 +1379,7 @@ Morphological Curvature Operator
 \end_layout
 
 \begin_layout Standard
-Both MGAC and MACWB require a morphological curvature operator that acts
+Both MGAC and MACWE require a morphological curvature operator that acts
  as a kind of "smoothing" force on the evolving curve.
  It is based on the composition of the Sup - Inf (SI) and Inf-Sup (IS) morpholog
 ical operators (this composition is noted from now on as 
@@ -1755,7 +1760,7 @@ In ESPina's architecture all VTK filters have to be wrapped in an object
 \end_layout
 
 \begin_layout Standard
-In our case, both algorithmic filters (MGAC and MACWB) are wrapped in the
+In our case, both algorithmic filters (MGAC and MACWE) are wrapped in the
  same class (
 \family typewriter
 MorphologicalSnakesFilter
@@ -1811,7 +1816,7 @@ The objective of a user when working with this plug-in is to generate a
 
 \begin_layout Itemize
 Select from the drop-down menu what algorithm is going to be used, at this
- point the only alternatives are MACWB or MGAC but more could be added in
+ point the only alternatives are MACWE or MGAC but more could be added in
  the future.
  
 \end_layout
@@ -1824,7 +1829,7 @@ Click on the selector tool to get the proper cursor.
 
 \begin_layout Itemize
 When moving the cursor over the image a green area will become highlighted
- (a disk if using MGAC and a sphere if using MACWB), this represents the
+ (a disk if using MGAC and a sphere if using MACWE), this represents the
  initial contour that will be the seed for the iterative growing process.
  
 \end_layout
@@ -1960,7 +1965,7 @@ SnakesFilterManager
 \family typewriter
 MorphologicalSnakesFilter
 \family default
-: wrapper for MGAC and MACWB filters implemented in VTK.
+: wrapper for MGAC and MACWE filters implemented in VTK.
 \end_layout
 
 \begin_layout Itemize
@@ -2086,7 +2091,7 @@ Manage Plugins
 \color inherit
 Load New...
  and then navigate to the compiled binary file.
- After successfully executing these steps, there should be a new toolbar
+ After successfully executing these steps, there should be a new tool bar
  on ESPina that allows the user to interact with our plug-in.
  
 \end_layout
@@ -2145,7 +2150,7 @@ name "chap:Results"
 \end_layout
 
 \begin_layout Standard
-Since our main objective was to implement the MGAC and MACWB algorithms
+Since our main objective was to implement the MGAC and MACWE algorithms
  proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -2169,13 +2174,13 @@ In figure [IMAGEN DE LA EVOLUCION DEL ALGORITUMO] we can appreciate the
  evolution of both algorithms when trying to segment the same structure
  from approximately the same starting condition (remember that they cannot
  start exactly with the same curve because MGAC's initial curve is a disk
- while MACWB's is a sphere).
+ while MACWE's is a sphere).
 \end_layout
 
 \begin_layout Standard
 As we can see, MGAC grows faster but it's less accurate on the borders,
  it presents a lot of "leaking" in some points.
- MACWB on the other hand evolves more slowly, but is more accurate in keeping
+ MACWE on the other hand evolves more slowly, but is more accurate in keeping
  within the borders of the objective structure.
  It is very hard to show on this report the performance of both algorithms
  in every situation, however, it's clear to us that none of the two is right
@@ -2198,7 +2203,7 @@ To go a little more into detail into what we perceive were the factors impending
 \end_layout
 
 \begin_layout Standard
-As for MACWB we find that it works pretty well "out-of- the-box", and is
+As for MACWE we find that it works pretty well "out-of- the-box", and is
  even capable of overcoming some of the challenges posed by the images we
  had on hand to try our tool.
  We think that this has a lot to do with the fact that it doesn't rely so
@@ -2311,11 +2316,60 @@ Although we found that with the parameters used by the authors in their
  come up with this parameters in a more automated fashion, taking into account
  user input as well as any other characteristics of the image that could
  be extracted automatically.
- 
+ This could be accomplished in several ways, for example:
 \end_layout
 
 \begin_layout Standard
-INCLUDE SOME EXAMPLES
+We propose a two stage procedure to obtain a fully automated parameterization
+ for the segmentation algorithms:
+\end_layout
+
+\begin_layout Standard
+The objective of the first stage would be to obtain training data for the
+ fully automatic system.
+ It would work like this: 
+\end_layout
+
+\begin_layout Itemize
+The scientist would choose a structure within an image that he wishes to
+ label.
+\end_layout
+
+\begin_layout Itemize
+The scientist would generate at random a new "individual" represented by
+ the different values of the parameters that have to be established.
+ 
+\end_layout
+
+\begin_layout Itemize
+The system would run a number of iterations of curve evolution starting
+ from a seed selected by the user.
+ 
+\end_layout
+
+\begin_layout Itemize
+The user will give a fitness rating to these solution.
+\end_layout
+
+\begin_layout Itemize
+Depending on the fitness of the individual it is selected as a viable solution
+ or it is mutated using known genetic techniques.
+\end_layout
+
+\begin_layout Itemize
+The process is repeated until a fit enough solution is found.
+ 
+\end_layout
+
+\begin_layout Itemize
+All the data generated by the process is stored in a database, relatoin
+ the kind of structure being labeled, the characteristics of the image and
+ the corresponding solution.
+\end_layout
+
+\begin_layout Standard
+Once a suitable database has been populated with the knowledge of the experts
+ the second stage would be the training of a machine learning algorithm
 \end_layout
 
 \begin_layout Standard
@@ -2346,7 +2400,7 @@ From a certain perspective, the stop function is not more than a preprocessing
 \begin_layout Itemize
 Sometimes, user input is indispensable for the proper labeling of an image,
  in those cases, it would be interesting if the user could provide the algorithm
- an aid to use in conjuction with the stop function obtained automatically.
+ an aid to use in conjunction with the stop function obtained automatically.
  The main idea would be to provide the user with the tool to set special
  attraction and repulsion areas in the image, to actively aid in the evolution
  of the curve.
@@ -2374,10 +2428,11 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename Images/stopCriterion.png
 	display false
-	width 100text%
+	width 90text%
 
 \end_inset
 
@@ -2501,7 +2556,7 @@ reference "chap:Previous-Work"
 
  we gave a very brief overview of the many approaches that have been proposed
  in the literature regarding the segmentation problem.
- One of the most succesful of these approaches is known as Active Contours,
+ One of the most successful of these approaches is known as Active Contours,
  or Snakes.
  These techniques are based on the evolution of a curve, normally by finding
  the solution of a partial differential equation (PDE).
@@ -2518,7 +2573,7 @@ key "Marquez_2012"
  to apply a morphological approach to the evolution of the Snakes, avoiding
  the use of PDEs and lowering the computational cost of the solution.
  The algorithms they propose are called Morphological Geodesic Active Contours
- (MGAC) and Morphological Active Contours Without Borders (MACWB).
+ (MGAC) and Morphological Active Contours Without Edges (MACWE).
  An explanation of the workings of these algorithm can be found in sections
  
 \begin_inset CommandInset ref
@@ -2540,11 +2595,11 @@ reference "sub:Morphological-ACWB"
 
 \begin_layout Standard
 Our main objective in the present work was to create a tool to allow a scientist
- to interactively segment an image with the aid of the MGAC and MACWB algorithms.
+ to interactively segment an image with the aid of the MGAC and MACWE algorithms.
  This tool is a plug-in for a software system called ESPina that was developed
  by members of the Cajal Blue Brain Project as an interaction and visualization
  tool for the analysis of neuronal images.
- Our plug-in adds a toolbar to ESPina that allows the user to do segmentation
+ Our plug-in adds a tool bar to ESPina that allows the user to do segmentation
  with the morphological algorithms described earlier.
  This toool was designed to be interactive in order to fully harnesss the
  input of the experts at hand.

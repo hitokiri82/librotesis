@@ -2161,25 +2161,75 @@ key "Marquez_2012"
 , we can report that the objective was reached and that both the algorithms
  were successfully implemented and that the result is a tool which allows
  the users to interactively segment an image in 3D.
- In figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ejec1"
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/progression/comparative/comp.svg
+	display false
+	width 50page%
 
 \end_inset
 
- through 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ejec3"
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+An example of the evolution of a single curve.
+ The input image (a), the stop function derived from it (b), and the evolution
+ of both algorithms up to thirty iterations.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Evolution"
 
 \end_inset
 
- we show some snapshots of the segmentation process f from the initial seed
- of a curve, the evolution of that up to its limits, in this case dictated
- by the size of the initial VOI, the adding of a second curve to that same
- segmentation and then the generation of the segmentation object in ESPina's
- model and a 3D representation of the segmentation obtained.
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From our preliminary testing and evaluation we find that both algorithms
+ work as expected, but present some shortcomings on their performance, specially
+ the MGAC.
+\end_layout
+
+\begin_layout Standard
+In figure [IMAGEN DE LA EVOLUCION DEL ALGORITUMO] we can appreciate the
+ evolution of both algorithms when trying to segment the same structure
+ from approximately the same starting condition (remember that they cannot
+ start exactly with the same curve because MGAC's initial curve is a disk
+ while MACWE's is a sphere).
+\end_layout
+
+\begin_layout Standard
+As we can see, MGAC grows faster but it's less accurate on the borders,
+ it presents a lot of "leaking" in some points.
+ MACWE on the other hand evolves more slowly, but is more accurate in keeping
+ within the borders of the objective structure.
+ It is very hard to show on this report the performance of both algorithms
+ in every situation, however, it's clear to us that none of the two is right
+ for every situation and that the performance of each depends on a lot of
+ both external and internal variables.
  
 \end_layout
 
@@ -2274,6 +2324,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename Images/progression/correct/v3.svg
@@ -2304,79 +2358,7 @@ name "fig:ejec3"
 
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-From our preliminary testing and evaluation we find that both algorithms
- work as expected, but present some shortcomings on their performance, specially
- the MGAC.
-\end_layout
-
-\begin_layout Standard
-In figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Evolution"
-
-\end_inset
-
- we can appreciate the evolution of a similar curve by both algorithms when
- trying to segment the same structure from approximately the same starting
- condition (remember that they cannot start exactly with the same curve
- because MGAC's initial curve is a disk while MACWE's is a sphere).
-\end_layout
-
-\begin_layout Standard
-As we can see, MGAC grows faster but it's less accurate on the borders,
- it presents a lot of "leaking" in some points.
- MACWE on the other hand evolves more slowly, but is more accurate in keeping
- within the borders of the objective structure.
- It is very hard to show on this report the performance of both algorithms
- in every situation, however, it's clear to us that none of the two is right
- for every situation and that the performance of each depends on a lot of
- both external and internal variables.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
 \begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename Images/progression/comparative/comp.svg
-	display false
-	width 50page%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-An example of the evolution of a single curve.
- The input image (a), the stop function derived from it (b), and the evolution
- of both algorithms up to thirty iterations.
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Evolution"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 
 \end_layout
 
@@ -2387,7 +2369,7 @@ name "fig:Evolution"
 
 \begin_layout Standard
 To go a little more into detail into what we perceive were the factors impending
- the performance of the MGAC, we find that is highly dependent on two external
+ the performance of the MGAC, we find that is highly dependant on two external
  factors, one is the selection of the parameters for the algorithm and the
  other is in the selection of the stop criterion used to guide the evolution
  (for example, when images have fuzzy edges, a criterion that favors stopping

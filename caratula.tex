@@ -1,0 +1,64 @@
+\newenvironment{titlemargin}[2]{%
+\enlargethispage{4cm}%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{0cm}%
+\setlength{\rightmargin}{-1.5cm}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+\begin{titlepage}
+\begin{titlemargin}
+\noindent
+\rlap{\parbox[c]{0.12\linewidth}{\includegraphics[width=\linewidth]{facultad}}}
+\hfil
+\parbox{0.8\textwidth}{
+\centering
+\bfseries
+\protect \textsc{\Large Facultad de Informática}
+\vspace{0.5cm}
+{\textsc{\large Universidad Politécnica de Madrid}}
+}\hfil
+\vfil
+\begin{center}
+\Large \bfseries
+\textsc{\LARGE Tesis de Máster} \\
+\bigskip
+\textsc{\LARGE Máster Universitario en Inteligencia Artificial}
+\end{center}
+\vfil
+\begin{center}
+\Huge \bfseries \textsc{Automated Multi-Scale Detection and Segmentation of Dendrites and Spines from Three-Dimensional Confocal Microscopy Images}
+\end{center}
+\vspace{3cm}
+\vfil
+\textbf{AUTOR:} José Miguel Suárez Alvarado
+\textbf{TUTOR:} Luis Baumela Molina
+\bigskip
+\begin{center}
+\textbf{\textsc{Junio, 2012}}
+\end{center}
+\end{titlemargin}
+\end{titlepage}
+\cleardoublepage
+% Segundo título.
+%\maketitle
+% \vspace*{\stretch{1}}
+% \begin{center}
+% \rule{\textwidth}{1ex}
+% {\Huge\textsf{Template-based 3D Tracking}\par}
+% \end{center}
+% \rule{\textwidth}{1ex}
+% \begin{center}
+% \LARGE\textsf{Pablo Márquez Neila}
+% \end{center}
+% \vspace*{\stretch{2}}
+%\clearpage
+% Fin segundo título.
+% Página de copyright.
+% \begin{small}
+% Copyright \copyright{} 2009 Pablo Márquez Neila
+% \end{small}
+%\cleardoublepage

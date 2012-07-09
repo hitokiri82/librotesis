@@ -1,0 +1,241 @@
+#LyX file created by tex2lyx 2.0.0
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass report
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize 12
+\spacing single
+\use_hyperref 0
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{titlepage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\begin_inset Graphics 
+	filename facultad.eps
+	scale 20
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\size larger
+FACULTAD DE INFORMÁTICA
+\size default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\size larger
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\size larger
+UNIVERSIDAD POLITÉCNICA DE MADRID
+\size default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\size larger
+
+\end_layout
+
+\begin_layout Standard
+
+
+\size larger
+
+\begin_inset VSpace 2cm
+\end_inset
+
+ 
+\size default
+
+\size larger
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\size larger
+Máster Universitario en Inteligencia Artificial
+\size default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\size larger
+
+\end_layout
+
+\begin_layout Standard
+
+
+\size larger
+
+\begin_inset VSpace bigskip
+\end_inset
+
+ 
+\size default
+
+\size larger
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\size larger
+Tesis de Máster
+\size default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\size larger
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\size largest
+An interactive 3D image segmentation tool based on Morphological Snakes
+\size default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\size largest
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+Autor: Francisco Antonio Caraballo La Riva
+\end_layout
+
+\begin_layout Standard
+
+Tutor: Luis Baumela Molina
+\end_layout
+
+\begin_layout Standard
+\align center
+
+Julio, 2012 
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{titlepage}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_body
+\end_document

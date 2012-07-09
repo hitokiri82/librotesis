@@ -73,6 +73,137 @@ status open
 
 
 \backslash
+begin{titlepage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename facultad.eps
+	display false
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size larger
+\lang spanish
+FACULTAD DE INFORMÁTICA
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size larger
+\lang spanish
+UNIVERSIDAD POLITÉCNICA DE MADRID
+\end_layout
+
+\begin_layout Standard
+
+\size larger
+\lang spanish
+\begin_inset VSpace 2cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size larger
+\lang spanish
+Máster Universitario en Inteligencia Artificial
+\end_layout
+
+\begin_layout Standard
+
+\size larger
+\lang spanish
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size larger
+\lang spanish
+Tesis de Máster
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size largest
+\lang spanish
+An interactive 3D image segmentation tool based on Morphological Snakes
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Autor: Francisco Antonio Caraballo La Riva
+\end_layout
+
+\begin_layout Standard
+Tutor: Luis Baumela Molina
+\end_layout
+
+\begin_layout Standard
+\align center
+Julio, 2012
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{titlepage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
 pagenumbering{roman}
 \end_layout
 
@@ -81,16 +212,166 @@ pagenumbering{roman}
 
 \end_layout
 
-\begin_layout Title
-An interactive 3D image segmentation tool based on Morphological Snakes
+\begin_layout Chapter*
+Acknowledgments
 \end_layout
 
-\begin_layout Author
-Francisco Antonio Caraballo La Riva
+\begin_layout Standard
+oiwiwiwiw
 \end_layout
 
 \begin_layout Chapter*
-Acknowledgments
+Summary
+\end_layout
+
+\begin_layout Standard
+The Madrid Technical University (UPM), together with other scientific institutio
+ns from Spain, formed the Cajal Blue Brain Project.
+ This project is part of an European project, the Blue Brain Project, started
+ in 2005 by the EPFL and IBM with the objective of simulating an anatomically
+ correct human brain inside a supercomputer.
+ 
+\end_layout
+
+\begin_layout Standard
+One of the main areas of involvement of the UPM in this project is in the
+ development of new technologies for image analysis and visualization.
+ These new technologies are needed to obtain useful information from 3d
+ images obtained with modern electronic microscopes that are being used
+ to obtain images from real cortical tissue.
+ 
+\end_layout
+
+\begin_layout Standard
+This task presents a series of challenges, given amongst other things from
+ the huge amount of that can be obtained from a small volume of tissue as
+ well as from the characteristics innate to this images.
+\end_layout
+
+\begin_layout Standard
+Today, the analysis of the images is done by hand by trained scientists,
+ this represents a huge bottleneck for the project, as a well as a very
+ expensive and error prone process.
+ 
+\end_layout
+
+\begin_layout Standard
+The objective of the present work is the creation of an interactive tool
+ that could be used by a scientist to segment a stack of brain tissue images
+ efficiently and effectively.
+ This tool will use moder segmentation techniques, specifically the curve
+ evolution technique known as Snakes.
+ We will implement two moder Snakes algorithms proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Marquez_2012"
+
+\end_inset
+
+, which are based on the use of morphological operators to overcome some
+ of the limitations of more traditional Snakes evolution methods.
+ 
+\end_layout
+
+\begin_layout Standard
+The result of the implementation was successful, a plug-in for a neuronal
+ analysis system (ESPina) that allows the user to interactively segment
+ an image stack.
+ We then analyzed the challenges that arose during the implementation of
+ the algorithms as well as the new opportunities and improvements that could
+ be done based on our work.
+ 
+\end_layout
+
+\begin_layout Chapter*
+
+\lang spanish
+Resumen
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+La Universidad Politécnica de Madrid (UPM) conforma junto con otras institucione
+s científicas Españolas el proyecto Cajal Blue Brain, el cual a su vez forma
+ parte de un proyecto europeo con el nombre de Blue Brain Project y el cual
+ fue iniciado en el año 2005 mediante una asociación entre la EPFL y IBM
+ con el objetivo de realizar una simulación anatómicamente correcta de un
+ cerebro humano en un supercomputador.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Dado este contexto, una de las aéreas del proyecto en la cual está involucrada
+ la UPM es en el desarrollo de nuevas tecnologías de análisis y visualización
+ de imágenes.
+ La necesidad de estas nuevas tecnologías viene dada por el hecho de que
+ uno de los principales retos del proyecto CBB es el de poder obtener informació
+n útil a partir de imágenes obtenidas mediante técnicas modernas de microscopia
+ electrónica aplicadas a especímenes reales de tejido cortical.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Esta tarea presenta una serie de retos muy importantes que vienen dados
+ entre otras cosas por el inmenso volumen de imágenes que se generan a partir
+ de un volumen muy pequeño de tejido así como por las características propias
+ de las imágenes.
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El análisis de estas imágenes hoy en día se hace a mano por científicos
+ entrenados, esto representa además de un cuello de botella importante para
+ el proyecto, un altísimo costo y un potencial de error humano.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El objetivo de este trabajo es el de crear una herramienta interactiva,
+ que permita a un usuario realizar la segmentación de una pila de imágenes
+ de tejido cerebral de una manera eficaz y eficiente.
+ Para conseguir dicho objetivo planteamos la aplicación de técnicas modernas
+ de segmentación de imágenes.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+Una de las técnicas de segmentación clásicas más exitosas es conocida como
+ Snakes, y se basa en utilizar evolución de curvas para delimitar las regiones
+ de interés de una imagen.
+ En particular implementamos dos algoritmos propuestos recientemente por
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Marquez_2012"
+
+\end_inset
+
+ los cuales se basan en la idea de utilizar operadores morfológicos para
+ superar algunas de las limitaciones de los enfoques tradicionales de evolución
+ de Snakes.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang spanish
+El resultado de la implementación fue exitoso, se construyo un plug-in para
+ el sistema de visualización y análisis neuronal ESPina el cual permite
+ a los usuarios de manera interactiva segmentar pilas de imágenes.
+ Por último, analizamos los retos que se nos presentaron para la implementación
+ de la herramienta así como las posibles mejoras y avenidas de investigación
+ que se abren a partir de nuestro trabajo.
 \end_layout
 
 \begin_layout Standard
@@ -212,7 +493,11 @@ Example of a segmented image.
  Image A is the original picture.
  Image B is the result of the segmentation, with blue labeled pixels representin
 g the road and red labeled pixels representing not-road.
- [Original image source: http://www.flickr.com/photos/liao/2549120611]
+ 
+\begin_inset Newline newline
+\end_inset
+
+[Original image source: http://www.flickr.com/photos/liao/2549120611]
 \end_layout
 
 \end_inset

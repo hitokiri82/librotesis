@@ -1157,8 +1157,7 @@ In order to be able to replicate this work, the interested party would need
 \begin_layout Itemize
 Cmake: a cross-platform, open-source build system.
  It is necessary to build from sources all the other required libraries
- as well as our own code.
- 
+ as well as our own code 
 \begin_inset Flex URL
 status collapsed
 
@@ -1176,8 +1175,7 @@ www.cmake.org
 \begin_layout Itemize
 ITK: an open-source, cross-platform system that provides developers with
  an extensive suite of software tools for image analysis.
- It is required by ESPina.
- 
+ It is required by ESPina 
 \begin_inset Flex URL
 status collapsed
 
@@ -1198,8 +1196,7 @@ ParaView: an open-source, multi-platform data analysis and visualization
  It is designed as a client-server application aimed at allowing the use
  of a massively parallel architecture for data processing.
  ESPina is built as an extension to the ParaView ecosystem, and uses its
- server implementation as a backbone.
- 
+ server implementation as a backbone 
 \begin_inset Flex URL
 status collapsed
 
@@ -1217,8 +1214,7 @@ www.paraview.org
 VTK: is an open-source, freely available software system for 3D computer
  graphics, image processing and visualization.
  VTK consists of a C++ class library and several interpreted interface layers.
- It is used extensively in our work.
- 
+ It is used extensively in our work 
 \begin_inset Flex URL
 status collapsed
 
@@ -1235,8 +1231,7 @@ www.vtk.org
 \begin_layout Itemize
 ESPina: the ESPina Interactive Neuron Analizer is the system that hosts
  our plug-in and provides user interaction capabilities.
- A copy should be available upon request in.
- 
+ A copy should be available upon request in 
 \begin_inset Flex URL
 status collapsed
 
@@ -1252,8 +1247,7 @@ http://cajalbbp.cesvima.upm.es/espina
 
 \begin_layout Itemize
 QuaZIP: is a simple C++ wrapper that can be used to access ZIP archives.
- It is required by ESPina.
- 
+ It's required by ESPina 
 \begin_inset Flex URL
 status collapsed
 
@@ -1271,7 +1265,7 @@ http://quazip.sourceforge.net/
 \begin_layout Itemize
 The source code for our tool, which should be available from the same source
  as this document.
- 
+ [WOULD IT BE OK TO PUT HERE A LINK TO A GITHUB REPOSITORY?]
 \end_layout
 
 \begin_layout Section

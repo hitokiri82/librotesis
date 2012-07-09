@@ -1,51 +1,70 @@
-#LyX file created by tex2lyx 2.0.0
-\lyxformat 345
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
 \begin_document
 \begin_header
 \textclass report
 \use_default_options false
+\maintain_unincluded_children false
 \language english
+\language_package default
 \inputencoding auto
+\fontencoding global
 \font_roman default
 \font_sans default
 \font_typewriter default
 \font_default_family default
+\use_non_tex_fonts false
 \font_sc false
 \font_osf false
 \font_sf_scale 100
 \font_tt_scale 100
+
 \graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
 \paperfontsize 12
 \spacing single
-\use_hyperref 0
+\use_hyperref false
 \papersize a4paper
 \use_geometry false
 \use_amsmath 1
 \use_esint 1
+\use_mhchem 1
+\use_mathdots 1
 \cite_engine basic
 \use_bibtopic false
+\use_indices false
 \paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
-\defskip medskip
+\paragraph_indentation default
 \quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
 \end_header
 
 \begin_body
 
 \begin_layout Standard
-
-
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -59,10 +78,9 @@ begin{titlepage}
 
 \begin_layout Standard
 \align center
-
-
-\begin_inset Graphics 
+\begin_inset Graphics
 	filename facultad.eps
+	display false
 	scale 20
 
 \end_inset
@@ -73,7 +91,6 @@ begin{titlepage}
 \begin_layout Standard
 \align center
 
-
 \size larger
 FACULTAD DE INFORMÁTICA
 \size default
@@ -82,14 +99,10 @@ FACULTAD DE INFORMÁTICA
 
 \begin_layout Standard
 
-
-\size larger
-
 \end_layout
 
 \begin_layout Standard
 \align center
-
 
 \size larger
 UNIVERSIDAD POLITÉCNICA DE MADRID
@@ -99,29 +112,19 @@ UNIVERSIDAD POLITÉCNICA DE MADRID
 
 \begin_layout Standard
 
-
-\size larger
-
 \end_layout
 
 \begin_layout Standard
 
-
 \size larger
-
 \begin_inset VSpace 2cm
 \end_inset
 
  
-\size default
-
-\size larger
-
 \end_layout
 
 \begin_layout Standard
 \align center
-
 
 \size larger
 Máster Universitario en Inteligencia Artificial
@@ -131,29 +134,19 @@ Máster Universitario en Inteligencia Artificial
 
 \begin_layout Standard
 
-
-\size larger
-
 \end_layout
 
 \begin_layout Standard
 
-
 \size larger
-
 \begin_inset VSpace bigskip
 \end_inset
 
  
-\size default
-
-\size larger
-
 \end_layout
 
 \begin_layout Standard
 \align center
-
 
 \size larger
 Tesis de Máster
@@ -163,14 +156,9 @@ Tesis de Máster
 
 \begin_layout Standard
 
-
-\size larger
-
 \end_layout
 
 \begin_layout Standard
-
-
 \begin_inset VSpace medskip
 \end_inset
 
@@ -180,7 +168,6 @@ Tesis de Máster
 \begin_layout Standard
 \align center
 
-
 \size largest
 An interactive 3D image segmentation tool based on Morphological Snakes
 \size default
@@ -189,14 +176,9 @@ An interactive 3D image segmentation tool based on Morphological Snakes
 
 \begin_layout Standard
 
-
-\size largest
-
 \end_layout
 
 \begin_layout Standard
-
-
 \begin_inset VSpace vfill
 \end_inset
 
@@ -204,28 +186,23 @@ An interactive 3D image segmentation tool based on Morphological Snakes
 \end_layout
 
 \begin_layout Standard
-
 Autor: Francisco Antonio Caraballo La Riva
 \end_layout
 
 \begin_layout Standard
-
 Tutor: Luis Baumela Molina
 \end_layout
 
 \begin_layout Standard
 \align center
-
 Julio, 2012 
 \end_layout
 
 \begin_layout Standard
-
-
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash

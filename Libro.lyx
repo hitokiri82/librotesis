@@ -120,7 +120,7 @@ The objective of the present work is the creation of an interactive tool
  efficiently and effectively.
  This tool will use modern segmentation techniques, specifically the curve
  evolution technique known as Snakes.
- I will implement two modern Snakes algorithms proposed by 
+ We will implement two modern Snakes algorithms proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Marquez_2012"
@@ -135,7 +135,7 @@ key "Marquez_2012"
 \begin_layout Standard
 The result of the implementation was a plug-in for a neuronal analysis system
  (ESPina) that allows the user to interactively segment an image stack.
- I also analyzed the challenges that arose during the implementation of
+ We also analyzed the challenges that arose during the implementation of
  the algorithms as well as the improvements and opportunities that open
  up based on this work.
  
@@ -162,7 +162,7 @@ s científicas Españolas el proyecto Cajal Blue Brain, el cual a su vez forma
 \begin_layout Standard
 
 \lang spanish
-Dado este contexto, una de las aéreas del proyecto en la cual está involucrada
+Dado este contexto, una de las áreas del proyecto en la cual está involucrada
  la UPM es en el desarrollo de nuevas tecnologías de análisis y visualización
  de imágenes.
  La necesidad de estas nuevas tecnologías viene dada por el hecho de que
@@ -196,7 +196,7 @@ El análisis de estas imágenes hoy en día se hace a mano por científicos
 El objetivo de este trabajo es el de crear una herramienta interactiva,
  que permita a un usuario realizar la segmentación de una pila de imágenes
  de tejido cerebral de una manera eficaz y eficiente.
- Para conseguir dicho objetivo planteo la aplicación de técnicas modernas
+ Para conseguir dicho objetivo planteamos la aplicación de técnicas modernas
  de segmentación de imágenes.
  
 \end_layout
@@ -226,9 +226,9 @@ key "Marquez_2012"
 El resultado de la implementación fue exitoso, se construyó un plug-in para
  el sistema de visualización y análisis neuronal ESPina el cual permite
  a los usuarios de manera interactiva segmentar pilas de imágenes.
- Por último, analizé los retos que se nos presentaron para la implementación
- de la herramienta así como las posibles mejoras y avenidas de investigación
- que se abren a partir de nuestro trabajo.
+ Por último, presentamos el análisis de los retos que se nos presentaron
+ para la implementación de la herramienta así como las posibles mejoras
+ y avenidas de investigación que se abren a partir de nuestro trabajo.
 \end_layout
 
 \begin_layout Standard
@@ -396,7 +396,7 @@ The solution
 \end_layout
 
 \begin_layout Standard
-Given the previous description of the problem, I propose a solution based
+Given the previous description of the problem, we propose a solution based
  on two elements.
  First, an environment or framework on which the scientists can interact
  with the images in a useful way and secondly an implementation of an algorithm
@@ -406,8 +406,8 @@ Given the previous description of the problem, I propose a solution based
 \end_layout
 
 \begin_layout Standard
-For the first part of the solution I am going to be developing a plug-in
- for a system called ESPina, created as part of the Cajal Blue Brain initiative.
+For the first part of the solution we are going to develop a plug-in for
+ a system called ESPina, created as part of the Cajal Blue Brain initiative.
  This program allows a user to load a 3D stack of images and interact with
  them in useful ways.
  It also provides two key functionalities, first it was designed from the
@@ -424,9 +424,9 @@ The second component of the solution is the implementation of the two algorithms
  mentioned before.
  The segmentation problem has been around for quite some time and a lot
  of approaches have been tried in solving it.
- In the next chapter I provide an overview of what some of those approaches
+ In the next chapter we provide an overview of what some of those approaches
  have been and their limitations.
- My solution is based on the use of active contours, also known as Snakes.
+ Our solution is based on the use of active contours, also known as Snakes.
  This approach is based on the idea of iteratively evolving a curve using
  a gradient descent technique based on the minimization of some energy function.
  The classical way of solving this problem is using Partial Differential
@@ -832,7 +832,7 @@ key "Szeliski_2010"
 
 ) and the evolution of the curve is done by modifying the underlying embedding
  function.
- I am going to analyze two models that use this representation: 
+ We are going to analyze two models that use this representation: 
 \shape italic
 Geodesic Active Contours 
 \shape default
@@ -970,8 +970,8 @@ key "Marquez_2012"
 \begin_inset Formula 
 \begin{flalign}
 u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
-\left(D_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)>\theta\\
-\left(E_{d}u^{n}\right)\left(x\right) & \text{if }|v|g\left(I\right)\left(x\right)<\theta\\
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }|\nu|g\left(I\right)\left(x\right)>\theta\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }|\nu|g\left(I\right)\left(x\right)<\theta\\
 u^{n}\left(x\right) & \text{otherwise}
 \end{cases}\nonumber \\
 u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
@@ -1010,7 +1010,7 @@ Where
 
  represents a function that has low values in the areas of interest of the
  image, 
-\begin_inset Formula $v$
+\begin_inset Formula $\nu$
 \end_inset
 
  is a parameter that controls the effect of the balloon force and 
@@ -1079,8 +1079,8 @@ As with MGAC the steps necessary to model the evolution of the curve are
 \begin_inset Formula 
 \begin{flalign}
 u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
-\left(D_{d}u^{n}\right)\left(x\right) & \text{if }v>0\\
-\left(E_{d}u^{n}\right)\left(x\right) & \text{if }v<0\\
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }\nu>0\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }\nu<0\\
 u^{n}\left(x\right) & \text{otherwise}
 \end{cases}\nonumber \\
 u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
@@ -1106,7 +1106,7 @@ Where
 \end_inset
 
 , 
-\begin_inset Formula $v$
+\begin_inset Formula $\nu$
 \end_inset
 
  and 
@@ -1141,7 +1141,7 @@ This chapter will document the work that was necessary to get a functional
  system.
  First a small section specifying the requisites necessary for anyone trying
  to replicate or do some derivative work based on the work presented.
- I will then present the work done to implement the algorithms and finally
+ We will then present the work done to implement the algorithms and finally
  the implementation of the user interaction logic and the ESPina plug-in.
 \end_layout
 
@@ -1286,13 +1286,11 @@ name "sec:ImplementationAlgorithms"
 \end_layout
 
 \begin_layout Standard
-Given that ESPina is based on ParaView, and that ParaView (since they are
- made by he same company) is compatible with VTK and allows user-provided
- VTK filters to be added to its filter pool, the most straightforward way
- to implement new image segmentation algorithms to be used in ESPina is
- to program them as VTK filters and then make them available for the ParaView
- server instance behind ESPina.
- In order to do that our tool had to comply with the following conventions:
+The most straightforward way to implement new image segmentation algorithms
+ to be used in ESPina is to program them as VTK filters and then make them
+ available for the ParaView server instance behind ESPina.
+ In order for that to work, the filters have to comply with the following
+ conventions:
 \end_layout
 
 \begin_layout Itemize
@@ -1317,20 +1315,20 @@ The curve to be evolved by our morphological operators will be represented
 \end_layout
 
 \begin_layout Itemize
-Our tool will receive as an input the image that is being processed and
+The filter will receive as an input the image that is being processed and
  the output it provides must be a binary image that represents the labeling
  of the pixels in the image (background pixels are black and foreground
  pixels are white).
 \end_layout
 
 \begin_layout Itemize
-Upon receiving the output from our tool, ESPina will add a new segmentation
+Upon receiving the output from the filter, ESPina will add a new segmentation
  object to its model.
 \end_layout
 
 \begin_layout Standard
 The use of VTK provides several advantages because it provides an abundant
- library of filters that can be used internally by our own filters (ie.
+ library of filters that can be used internally by the new filters (ie.
  Gaussian smooth operators, dilate and erode operators).
  This filters are very efficient and by lowering the amount of work that
  has to be done "by hand" they help to reduce the amount of code needed
@@ -1341,20 +1339,19 @@ The use of VTK provides several advantages because it provides an abundant
 \begin_layout Standard
 For performance reasons, it is not advisable to always use the whole image/stack
  when executing the algorithms.
- To address this issue we pass along the pipeline only a fraction of the
- image, called the Volume of Interest (VOI), right now in our tool that
- parameter is fixed and we pass to our filters a box that is 121 x 121 x
- 121 voxels, centered around the initial seed of the curve.
- As we will discuss in chapter 
+ To address this issue in our implementation we pass along the pipeline
+ only a fraction of the image, called the Volume of Interest (VOI), right
+ now that parameter is fixed, it is a box that is 121 x 121 x 121 voxels,
+ centered around the initial seed of the curve.
+ As will be discussed in chapter 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:Results"
 
 \end_inset
 
- we believe this is having a negative effect in some cases on the performance
- of the WACWE and propose an alternative way to handle this situation when
- using that algorithm.
+ this selection seems to be having a negative effect in some cases on the
+ performance of the WACWE.
 \end_layout
 
 \begin_layout Subsection
@@ -1385,7 +1382,7 @@ As was explained earlier, in this model the evolution is dependent on an
 \end_layout
 
 \begin_layout Standard
-The stop function that we are using is the one shown in equation 
+The stop function that is being used is the one shown in equation 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:stopf"
@@ -1405,8 +1402,8 @@ reference "eq:stopf"
  (a scaling parameter and the standard deviation for the Gaussian filter,
  respectively), and returns the values of the function for the specified
  image.
- We do this by sequentially applying several VTK filters to the image, by
- doing it like this it is very easy to develop any number of stop functions
+ This is done by sequentially applying several VTK filters to the image,
+ by doing it like this it is very easy to develop any number of stop functions
  that could be used for trying out alternatives.
  
 \end_layout
@@ -1424,10 +1421,10 @@ The second filter necessary for the execution of MGAC takes as input the
  result of the previous stage, optionally it takes a second image that represent
 s an initial curve to be evolved.
  If this second image is not present then the filter expects amongst its
- inputs a "seed" parameter and a radius, additionally the filter takes four
- additional parameters: the number of evolution iterations that have to
- be executed, the size of the dilation/erosion kernel (typically 3) and
- 
+ inputs a "seed" parameter and a radius.
+ Additionally the filter takes four additional parameters: the number of
+ evolution iterations that have to be executed, the size of the dilation/erosion
+ kernel (typically 3) and 
 \begin_inset Formula $v$
 \end_inset
 
@@ -1469,9 +1466,9 @@ reference "eq:mgac"
 .
  Most of the operations that have to be performed during this steps could
  be done with a combination of VTK filters.
- One exception to that is the SIoIS operator, which was implemented by the
- author as an independent filter, details about this implementation are
- provided in a following section.
+ One exception to that is the SIoIS operator, which was implemented as an
+ independent filter, details about this implementation are provided in a
+ following section.
  
 \end_layout
 
@@ -1523,8 +1520,8 @@ reference "eq:macwb"
 \end_inset
 
 .
- Again we use functionality already implemented in VTK's libraries and the
- SIoIS operator.
+ Again, this filter uses functionality already implemented in VTK's libraries
+ and the SIoIS operator.
  
 \end_layout
 
@@ -1543,8 +1540,8 @@ Morphological Curvature Operator
 \begin_layout Standard
 Both MGAC and MACWE require a morphological curvature operator that acts
  as a kind of "smoothing" force on the evolving curve.
- It is based on the composition of the Sup - Inf (SI) and Inf-Sup (IS) morpholog
-ical operators (this composition is noted from now on as 
+ It is based on the composition of the Sup-Inf (SI) and Inf-Sup (IS) morphologic
+al operators (this composition is noted from now on as 
 \begin_inset Formula $SI\circ IS$
 \end_inset
 
@@ -1737,14 +1734,14 @@ reference "alg:Algorithm1"
 \end_inset
 
  for a pseudo-code representation of our implementation.
- To make this more clear, we can see in figure 
+ To make this more clear, figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:2dbase"
 
 \end_inset
 
- what straight edges we will be looking for in each case.
+ shows what straight edges the algorithm will be looking for in each case.
  
 \end_layout
 
@@ -1846,7 +1843,7 @@ Segmentation Logic Filter
 
 \begin_layout Standard
 In addition to the VTK filters required for the segmentation algorithm,
- we needed to develop an additional filter that would be necessary for our
+ we needed to develop an additional filter that would be necessary for the
  user interaction model.
  
 \end_layout
@@ -1888,7 +1885,7 @@ extent
 \end_layout
 
 \begin_layout Standard
-This implementation cam be found in the class 
+This implementation can be found in the class 
 \family typewriter
 vtkSegmentationLogicFilter
 \family default
@@ -1922,7 +1919,7 @@ In ESPina's architecture all VTK filters have to be wrapped in an object
 \end_layout
 
 \begin_layout Standard
-In our case, both algorithmic filters (MGAC and MACWE) are wrapped in the
+In this case, both algorithmic filters (MGAC and MACWE) are wrapped in the
  same class (
 \family typewriter
 MorphologicalSnakesFilter
@@ -1945,7 +1942,7 @@ In case the user needs to call any of VTK's own filters directly from an
  server in the same way as user-provided filters.
  That means that an XML file describing the interface of that filter has
  to be included when building the plug-in.
- In our case we used this option to enable the use of the filter 
+ We used this procedure to enable the use of the filter 
 \family typewriter
 vtkImageEllipsoidSource
 \family default
@@ -2030,7 +2027,7 @@ Once the curve has reached the desired size the user must left click again
  Now the user has a choice, he could repeat the process and grow a new curve
  which when done will be annexed to the existing (light blue) curve or if
  he is satisfied with the current state of the segmentation he will click
- on the Add Segmentation button on the tool bar which will add the curve
+ on the "Add Segmentation" button on the tool bar which will add the curve
  to ESPina's model as a completed segmentation.
  
 \end_layout
@@ -2049,14 +2046,14 @@ Architecture Of The Plug-in
 \end_layout
 
 \begin_layout Standard
-In figure 
+Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:classdiag"
 
 \end_inset
 
- we present a schematic representation of the architecture of our plug-in.
+ presents a schematic representation of the architecture of the plug-in.
  The main class of the system is called 
 \family typewriter
 MorphologicalSnakes
@@ -2188,28 +2185,28 @@ Putting It All Together
 \end_layout
 
 \begin_layout Standard
-We have already explained the way our algorithms were implemented and also
+We have already explained the way the algorithms were implemented and also
  how the plug-in was designed.
  The key to putting it all together and actually being able to use the plug-in
  in ESPina is the use of Cmake.
- As we said in the prerequisites section, this is a building tool that is
- very configurable and it is indispensable for building our plug-in.
+ As explained in the prerequisites section, this is a building tool that
+ is very configurable and it is indispensable for building the plug-in.
  One of it greatest strengths is that it allows for expert users to define
  macros and routines specific for their application.
- In this case, since our plug-in is technically a plug-in for ParaView,
+ In this case, since this plug-in is technically a plug-in for ParaView,
  it is built using some macros specifically created for that purpose by
  Kitware to be used in a CMake configuration file.
  Cmake works based on a file that is called CMakeLists.txt which contains
  all the instructions to build a file using CMake.
  For further reference, we recommend going to CMake documentation online
- and consulting our own CMakeLists.txt file which is distributed with our
- codebase.
+ and consulting the CMakeLists.txt file which is distributed with the codebase
+ of the plug-in.
  
 \end_layout
 
 \begin_layout Standard
-What CMake actually does is to generate all the files necessary to build
- the binaries, depending on the toolset that is being used.
+What CMake actually does is generate all the files necessary to build the
+ binaries, depending on the toolset that is being used.
  During our work we generated files to be compiled using the standard GNU
  make tool that comes with most modern *NIX systems.
  It can also generate files to be compiled using certain IDEs like Code::Blocks,
@@ -2251,10 +2248,9 @@ Manage Plugins
 \uwave default
 \noun default
 \color inherit
-Load New...
- and then navigate to the compiled binary file.
+"Load New..." and then navigate to the compiled binary file.
  After successfully executing these steps, there should be a new tool bar
- on ESPina that allows the user to interact with our plug-in.
+ on ESPina that allows the user to interact with the plug-in.
  
 \end_layout
 
@@ -2279,7 +2275,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-The result of correctly loading our plug-in on ESPina.
+The result of correctly loading the plug-in on ESPina.
  Accented in red is the new tool bar.
 \begin_inset CommandInset label
 LatexCommand label
@@ -2312,7 +2308,7 @@ name "chap:Results"
 \end_layout
 
 \begin_layout Standard
-Since our main objective was to implement the MGAC and MACWE algorithms
+Since the main objective was to implement the MGAC and MACWE algorithms
  proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -2321,8 +2317,8 @@ key "Marquez_2012"
 \end_inset
 
 , we can report that the objective was reached and that both the algorithms
- were successfully implemented and that the result is a tool which allows
- the users to interactively segment an image in 3D.
+ were successfully implemented, resulting in a tool which allows the users
+ to interactively segment an image in 3D.
  In figures 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2330,18 +2326,25 @@ reference "fig:ejec1"
 
 \end_inset
 
- through 
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ejec2"
+
+\end_inset
+
+ we show some snapshots of the segmentation process: the initial seed of
+ a curve, the evolution of that curve up to its limits (in this case dictated
+ by the size of the initial VOI), the adding of a second curve to that segmentat
+ion, and then the generation of the segmentation object in ESPina's model.
+ Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:ejec3"
 
 \end_inset
 
- we show some snapshots of the segmentation process f from the initial seed
- of a curve, the evolution of that up to its limits, in this case dictated
- by the size of the initial VOI, the adding of a second curve to that same
- segmentation and then the generation of the segmentation object in ESPina's
- model and a 3D representation of the segmentation obtained.
+ shows a 3D representation of the segmentation obtained.
  
 \end_layout
 
@@ -2472,8 +2475,8 @@ name "fig:ejec3"
 \end_layout
 
 \begin_layout Standard
-From our preliminary testing and evaluation we find that both algorithms
- work as expected, but present some shortcomings on their performance, specially
+From preliminary testing and evaluation we find that both algorithms work
+ as expected, but present some shortcomings on their performance, specially
  the MGAC.
 \end_layout
 
@@ -2497,7 +2500,7 @@ As we can see, MGAC grows faster but it's less accurate on the borders,
  MACWE on the other hand evolves more slowly, but is more accurate in keeping
  within the borders of the objective structure.
  It is very hard to show on this report the performance of both algorithms
- in every situation, however, it's clear to us that none of the two is right
+ in every situation, however, it's clear to that none of the two is right
  for every situation and that the performance of each depends on a lot of
  both external and internal variables.
  
@@ -2548,27 +2551,27 @@ name "fig:Evolution"
 \end_layout
 
 \begin_layout Standard
-To go a little more into detail into what we perceive were the factors impending
- the performance of the MGAC, we find that is highly dependent on two external
- factors, one is the selection of the parameters for the algorithm and the
- other is in the selection of the stop criterion used to guide the evolution
- (for example, when images have fuzzy edges, a criterion that favors stopping
- on edges might have some trouble to actually stop the evolution in the
- right area).
- Further ahead we discuss some ideas about ways to overcome this problems,
+To go a little more into detail into the factors that seem to be impending
+ the performance of the MGAC, we find that it is highly dependent on two
+ external factors, one is the selection of the parameters for the algorithm
+ and the other is in the selection of the stop criterion used to guide the
+ evolution (for example, when images have fuzzy edges, a criterion that
+ favors stopping on edges might have some trouble to actually stop the evolution
+ in the right area).
+ Further ahead we present some ideas about ways to overcome these problems,
  and enhance the results obtained from this approach.
  
 \end_layout
 
 \begin_layout Standard
 As for MACWE we find that it works pretty well "out-of- the-box", and is
- even capable of overcoming some of the challenges posed by the images we
- had on hand to try our tool.
- We think that this has a lot to do with the fact that it doesn't rely so
- heavily on external parameters bur rather works with global information
- directly from the image.
- We did run into some situations where the curve instead of growing, disappears
- within a few iterations of the algorithm, we believe this has to do with
+ even capable of overcoming some of the challenges posed by the images on
+ which it was tested.
+ This appears to be related to the fact that it doesn't rely so heavily
+ on external parameters bur rather works with global information directly
+ from the image.
+ It did run into some situations where the curve instead of growing, disappears
+ within a few iterations of the algorithm, this seems to have to do with
  the selection of the initial volume of interest (as discussed in section
  
 \begin_inset CommandInset ref
@@ -2581,32 +2584,32 @@ reference "sec:ImplementationAlgorithms"
  Maybe a more sensitive approach would be to modify the selection of the
  VOI so that it is not fixed, but it is always kept at at certain distance
  from the edges of the curve.
- For reasons of time we couldn't test this hypothesis.
+ This hypothesis was not tested.
  
 \end_layout
 
 \begin_layout Standard
-One of the aspects that we found greatly affected the performance of these
- algorithms was the quality of the image being processed, in our case our
- main test image had some issues regarding the distribution of data on its
- Z axis.
+One of the aspects that seems to affect the performance of these algorithms
+ is the quality of the image being processed, in this case the main test
+ image had some issues regarding the distribution of data on its Z axis.
  This was caused by the fact that the image had a different resolution on
  that axis than on the X and Y axes.
  This resulted in some distortions on the image that made it difficult for
  the curve to stay within certain boundaries, specially on the Z axis.
- We found that the distortions on the image were not evenly distributed
- along the Z axis, while in some areas the discontinuity was barely perceivable
- in other parts of the image we found big leaps from one slice to another,
- this inconsistency had a great effect on the performance of our tool.
- In figure 
+ The distortions on the image were not evenly distributed along the Z axis,
+ while in some areas the discontinuity was barely perceivable in other parts
+ of the image we found big leaps from one slice to another, this inconsistency
+ seems to have had had an effect on the performance of the segmentation
+ tool.
+ Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:discontinuity"
 
 \end_inset
 
- we can appreciate the kinds of discontinuity that are very detrimental
- to the performance of 3D segmentation.
+ the reader can appreciate the kinds of discontinuity that were present
+ in some of the images.
 \end_layout
 
 \begin_layout Standard
@@ -2662,16 +2665,16 @@ Possible Improvements And Future Work
 \end_layout
 
 \begin_layout Standard
-For the improvement of the performance of WGAC we have to focus our attention
- on the selection of the parametric components of the algorithms, as well
- as in the selection of a stop criterion function.
+For the improvement of the performance of WGAC, the key areas are the selection
+ of the parametric components of the algorithms, as well as the selection
+ of a stop criterion function.
  
 \end_layout
 
 \begin_layout Standard
 Although we found that with the parameters used by the authors in their
- work we obtained acceptable results, it might be interesting to try to
- come up with this parameters in a more automated fashion, taking into account
+ work the results were acceptable, it might be interesting to try to come
+ up with this parameters in a more automated fashion, taking into account
  user input as well as any other characteristics of the image that could
  be extracted automatically.
  This could be accomplished in several ways, for example:
@@ -2679,7 +2682,7 @@ Although we found that with the parameters used by the authors in their
 
 \begin_layout Standard
 We propose a two stage procedure to obtain a fully automated parameterization
- for the segmentation algorithms:
+ for the segmentation algorithms.
 \end_layout
 
 \begin_layout Standard
@@ -2694,8 +2697,8 @@ The scientist would choose a structure within an image that he wishes to
 \end_layout
 
 \begin_layout Itemize
-The scientist would generate at random a new "individual" represented by
- the different values of the parameters that have to be established.
+The system would generate at random a new "individual" represented by the
+ different values of the parameters that have to be established.
  
 \end_layout
 
@@ -2710,8 +2713,8 @@ The user will give a fitness rating to this solution.
 \end_layout
 
 \begin_layout Itemize
-Depending on the fitness of the individual it is selected as a viable solution
- or it is mutated using known genetic techniques.
+Depending on the fitness of the individual, it is selected as a viable solution
+ or it is evolved using known evolutionary techniques.
 \end_layout
 
 \begin_layout Itemize
@@ -2728,18 +2731,22 @@ All the data generated by the process is stored in a database, relating
 \begin_layout Standard
 Once a suitable database has been populated with the knowledge of the experts
  the second stage would be the training of a machine learning algorithm
+ which could be used to do automatic segmentation on an image.
+ In this second stage the user would just supply the seed for the structures
+ and the system would be able to select the parameters and run the necessary
+ iterations based on the training obtained in the first stage.
 \end_layout
 
 \begin_layout Standard
-As for the selection of the stop criterion function used for the curve evolution.
- Right now we are using a known function that favors stopping in the image
- borders, however, the kind of images that we have been working on have
- very fuzzy borders so that criteria might not necessarily be the best.
+As for the selection of the stop criterion function used for the curve evolution
+, the one that is being used right now favors stopping in the image borders,
+ however, the kind of images that have been used have very fuzzy borders
+ so that criteria might not necessarily be the best.
  Could there be another way to select, construct or improve the performance
  of that function?.
  Could this function be derived using user input, including interactive
  information about where the function should stop?.
- Some alternatives that could be considered to address this issue:
+ We present some alternatives that could be considered to address this issue:
 \end_layout
 
 \begin_layout Itemize
@@ -2749,9 +2756,9 @@ From a certain perspective, the stop function is not more than a preprocessing
  Maybe different sets of filters or operations could be identified that
  produce stop criteria that is particularly well suited for certain kinds
  of structures.
- We could provide the users with a methodology to obtain the best possible
- stop criterion before starting segmentation depending on the objective
- structure.
+ It might be possible to provide the users with a methodology to obtain
+ the best possible stop criterion before starting segmentation depending
+ on the objective structure.
  
 \end_layout
 
@@ -2759,7 +2766,7 @@ From a certain perspective, the stop function is not more than a preprocessing
 Sometimes, user input is indispensable for the proper labeling of an image,
  in those cases, it would be interesting if the user could provide the algorithm
  an aid to use in conjunction with the stop function obtained automatically.
- The main idea would be to provide the user with the tool to set special
+ The main idea would be to provide the user with the tools to set special
  attraction and repulsion areas in the image, to actively aid in the evolution
  of the curve.
 \end_layout
@@ -2773,8 +2780,9 @@ reference "fig:stopCriterionImage"
 \end_inset
 
  we can better appreciate the aspect the stop criterion function has once
- it has been computed, and how some of the actions we have just described
- could work.
+ it has been computed, and how some of the actions just described could
+ work, by modifying the aspect of the stop criterion function in some way
+ or another.
  The objective would be to obtain a function with very clear dark zones
  (low values) in the parts of the image we would like it to stop.
 \end_layout
@@ -2832,18 +2840,18 @@ The following ideas are not aimed specifically at improving the performance
 \end_layout
 
 \begin_layout Standard
-We believe that the initial shape and size of the curve has an impact on
+It appears that the initial shape and size of the curve has an impact on
  the effectiveness of the tool to evolve the curve correctly.
  For example, in our images there are a lot of structures that have a sort
  of tubular shape along the Z axis.
- If we knew that kind of details beforehand, with the input of the experts,
- the shape of the initial curve as well as that of the VOI could be designed
- to improve the performance of the algorithm in detecting that kind of structure.
- Instead of a disk or a sphere, like we are using now, it could be useful
- to start with some kind of "strand" that goes from the top slice to the
- bottom slice that the user could approximate to the position of the structure,
- that might be a better starting point for the evolution of our curves in
- that context.
+ If the developer knew that kind of details beforehand, with the input of
+ the experts, the shape of the initial curve as well as that of the VOI
+ could be designed to improve the performance of the algorithm in detecting
+ that kind of structure.
+ For example, instead of a disk or a sphere like it is being used now, it
+ could be useful to use as an initial shape for the curve a "strand" that
+ the user could approximate to the position of the structure, going from
+ the top slice to the bottom slice.
  A library could be developed with the initial shapes that are found to
  be of use and this could help speed up the process of labeling by allowing
  the user to always start the evolution with the most fitting initial shape
@@ -2853,9 +2861,9 @@ We believe that the initial shape and size of the curve has an impact on
 
 \begin_layout Standard
 With regards to the usability of our tool and the value added to the scientists,
- we think that the next step should be a series of live tests with the users
- to get some data about the increase in efficiency in the segmentation process
- when comparing the status quo with the use of our tool.
+ we consider that the next step should be a series of live tests with the
+ users to get some data about the increase in efficiency in the segmentation
+ process when comparing the status quo with the use of this tool.
  Once that data is available we could do some A/B tests to try out interaction
  alternatives and fine tune the interface of the tool with the aim of maximizing
  the productivity of the experts and allowing them to process as many images
@@ -2864,13 +2872,14 @@ With regards to the usability of our tool and the value added to the scientists,
 \end_layout
 
 \begin_layout Standard
-On a more practical note and this work being more of a proof-of-concept
- approach, the particulars of our implementation could use some polishing
- with an eye on improving the computational efficiency of the code, in particula
-r aiming to take advantage of multi-threading or other possible parallelizations
- of the code.This could also be achieved, with a loss in modularity, by replacing
- the use of some of the more generic VTK filters with some custom made filters
- that could combine multiple operations in one.
+On a more practical note, and this work being more of a proof-of-concept
+ approach, the particulars of the implementation of the algorithms could
+ use some polishing with an eye on improving the computational efficiency
+ of the code, in particular aiming to take advantage of multi-threading
+ or other possible parallelizations techniques.
+ This could also be achieved, with a loss in modularity, by replacing the
+ use of some of the more generic VTK filters with some custom made filters
+ that combined multiple operations in one.
 \end_layout
 
 \begin_layout Chapter
@@ -2889,12 +2898,12 @@ The extraction of meaningful and useful data from images is a complex and
  time consuming task.
  More specifically the scientists of the Cajal Blue Brain have a clear need
  for a tool that allows them to address the problem of having too many images
- to process and the amount it takes to manually label every slice of every
- image.
- This labeling is needed, in the context of the project, to be able to extract
- meaningful data from electronic microscopy images of brain tissue that
+ to process and the amount of time it takes to manually label every slice
+ of every image.
+ This labeling is needed, in the context of the project, to allow the extraction
+ of meaningful data from electronic microscopy images of brain tissue that
  would allow to fulfill one of the objectives of the Blue Brain Project
- which is the simulation of a big network of neuronal cells based on modelling
+ which is the simulation of a big network of neuronal cells based on modeling
  the interaction of this kind of cells in a real brain.
  
 \end_layout
@@ -2914,7 +2923,7 @@ reference "chap:Previous-Work"
 
  we gave a very brief overview of the many approaches that have been proposed
  in the literature regarding the segmentation problem.
- One of the most successful of these approaches is known as Active Contours,
+ One of the most successful of these approaches is known as active contours,
  or Snakes.
  These techniques are based on the evolution of a curve, normally by finding
  the solution of a partial differential equation (PDE).
@@ -2952,20 +2961,21 @@ reference "sub:Morphological-ACWB"
 \end_layout
 
 \begin_layout Standard
-Our main objective in the present work was to create a tool to allow a scientist
- to interactively segment an image with the aid of the MGAC and MACWE algorithms.
+Our main objective in the present work was to create a tool that allows
+ a scientist to interactively segment an image with the aid of the MGAC
+ and MACWE algorithms.
  This tool is a plug-in for a software system called ESPina that was developed
  by members of the Cajal Blue Brain Project as an interaction and visualization
  tool for the analysis of neuronal images.
- Our plug-in adds a tool bar to ESPina that allows the user to do segmentation
+ This plug-in adds a tool bar to ESPina that allows the user to do segmentation
  with the morphological algorithms described earlier.
- This toool was designed to be interactive in order to fully harnesss the
+ This tool was designed to be interactive in order to fully harness the
  input of the experts at hand.
- The way this works is that the user have full control over where the initial
- curve is placed, and then controls the evolution of that curve until they
- are satisfied with the results.
- This iterative process allows for the user to iteratively add togeteher
- several independantly evolved curves into final labeling of a single structure.
+ The way this works is that the user has full control over where the initial
+ curve is placed, as well as over the evolution of that curve until he is
+ satisfied with the results.
+ This iterative process allows for the user to iteratively add together
+ several independently evolved curves into a final labeling of a structure.
  
 \end_layout
 
@@ -2979,9 +2989,9 @@ reference "chap:Implementation"
 
 the interested user can find all the technical details of the way the algorithms
  and the user interaction were implemented.
- As a brief reminder, we can say that the algorithmical part of the implementati
-on was done using VTK, a library develeoped by Kitware for image data processing
-, analysis and visualization, it required the use of some filters that come
+ As a brief reminder, we can say that the algorithmic part of the implementation
+ was done using VTK, a library developed by Kitware for image data processing,
+ analysis and visualization, it required the use of some filters that come
  bundled in VTK's libraries and also the development of some new stand-alone
  filters.
  The user interaction parts of the tool were done complying with ESPina's
@@ -2993,9 +3003,9 @@ The primary result of our work is a tool that allows a user to interactively
  do 3D image segmentation in the ESPina environment, based on morphological
  active contour algorithms.
  The performance of this tool is relatively good, but depends heavily on
- several factors for its accuracy (paramaterization, quality of image, shape
- of initial curve, etc.).
- Seeign these results, we propose several avenues for further development
+ several factors for its accuracy (parameterization, quality of the image,
+ shape of initial curve, etc.).
+ Seeing these results, we propose several avenues for further development
  of this subject: the use of machine learning techniques for automatic parameter
 ization, and a redesign of user input and interactivity being the ones with
  the most potential.
@@ -3005,7 +3015,7 @@ ization, and a redesign of user input and interactivity being the ones with
 The objectives of projects Blue Brain and Cajal Blue Brain are large and
  inspiring, and reliable image segmentation techniques are a key part of
  the puzzle these projects are trying to solve.
- Our tool aims to take a bold step into solving that problem and we consider
+ This tool aims to take a bold step into solving that problem and we consider
  that it opens up several paths that could eventually lead to a more solid
  solution.
  

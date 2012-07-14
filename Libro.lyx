@@ -386,7 +386,7 @@ http://www.flickr.com/photos/liao/2549120611
 To summarize, the problem is the following: how can the scientists of the
  Cajal Blue Brain segment images of brain tissue obtained with electronic
  microscopes with the objective of differentiating several types of structures
- within those cells (i.e.
+ within those cells (e.g.
  synapses, vesicles, spines, dendrites) in the easiest, fastest and most
  automated way?
 \end_layout
@@ -625,7 +625,7 @@ The use of modern electronic microscopy techniques (cross-beam type microscopes)
  using these new microscopes when compared to traditional ways of doing
  image acquisition via electronic microscopy.
  This images are obtained by serially imaging "cuts" of the brain tissue
- (ie.
+ (e.g.
  every 25 nm) and then stacking this slices into 3D representations of the
  sampled tissue.
  These images have to be analyzed with the objective of obtaining morphological
@@ -702,7 +702,7 @@ ESPina
 \end_layout
 
 \begin_layout Standard
-The ESPina Interacive Neuron Analyzer, is a tool developed by the Cajal
+The ESPina Interactive Neuron Analyzer, is a tool developed by the Cajal
  Blue Brain Project to allow the scientists to visualize the images obtained
  with the electronic microscopes.
  
@@ -844,11 +844,13 @@ key "Caselles_Kimmel_Sapiro_1997"
 \end_inset
 
 , the main idea in this model is that the evolution of the curve is dictated
- by the minimization of an energy function, commonly called 
-\begin_inset Formula $g(x)$
+ by the minimization of an energy functional whose gradient dictates the
+ direction of movement for the curve, this energy functional is dependent
+ on a function (normally called the "stop criterion" and noted 
+\begin_inset Formula $g\left(I\right)\left(x\right)$
 \end_inset
 
-, whose gradient dictates the direction of movement for the curve.
+) thats takes low values in the areas of interest of the image.
  Another model, originally proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -860,9 +862,9 @@ key "Chan_Vese_2001"
 \shape italic
 Active Contours Without Edges
 \shape default
- (ACWE), it does not require an energy function but instead relies in global
- information regarding the contents of pixels inside and outside of the
- evolving curve.
+ (ACWE), it does not require a stop criterion function for minimizing its
+ energy functional, but instead relies in global information regarding the
+ contents of pixels inside and outside of the evolving curve.
 \end_layout
 
 \begin_layout Standard
@@ -911,16 +913,23 @@ key "Chan_Vese_2001"
 \end_layout
 
 \begin_layout Standard
-Both of this approaches require the calculation of partial differential
+Both of these approaches require the calculation of partial differential
  equations which can be computationally costly, add complexity to the implementa
-tion and can introduce numerical instabilities that sometimes require the
- reinitialization of the level-set function.
+tion, can introduce numerical instabilities and require frequent reinitializatio
+ns of the level-set function as it degrades over time.
  
 \end_layout
 
 \begin_layout Standard
 As a proposed solution to this shortcomings of the traditional approach
  to snakes evolution
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Alvarez_2010"
+
+\end_inset
+
+ and 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Marquez_2012"
@@ -949,6 +958,13 @@ name "sub:Morphological-Geodesic-Active"
 As seen in 
 \begin_inset CommandInset citation
 LatexCommand citet
+key "Alvarez_2010"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
 key "Marquez_2012"
 
 \end_inset
@@ -957,7 +973,7 @@ key "Marquez_2012"
  evolution in the traditional GAC as the composition of three morphological
  operators.
  In general the PDE can be divided in three components, one represents the
- attraction applied to the curve by the areas of interest in the image (i.e.
+ attraction applied to the curve by the areas of interest in the image (e.g.
  edges), one represents the balloon force that ensures that the curve does
  not get stuck in parts of the image with little information and the third
  component is the mean curvature operator which can be seen as a smoothing
@@ -1017,8 +1033,8 @@ Where
 \begin_inset Formula $\theta$
 \end_inset
 
- is a parameter that controls the effect of both the balloon force and the
- smoothing force.
+ is a threshold parameter that controls the effect of both the balloon force
+ and the smoothing force.
  
 \end_layout
 
@@ -1061,7 +1077,14 @@ name "sub:Morphological-ACWB"
 \begin_layout Standard
 In the same manner that GAC can be approximated with morphological operators
  the ACWE model can also be approximated in a similar fashion by composing
- several morphological operators.
+ several morphological operators, as shown by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Marquez_2012"
+
+\end_inset
+
+.
  In the case of ACWE the energy function to be minimized is not dependent
  on an external function but is derived directly from information from the
  image.
@@ -1233,7 +1256,7 @@ www.vtk.org
 \end_layout
 
 \begin_layout Itemize
-ESPina: the ESPina Interactive Neuron Analizer is the system that hosts
+ESPina: the ESPina Interactive Neuron Analyzer is the system that hosts
  our plug-in and provides user interaction capabilities.
  A copy should be available upon request in.
  
@@ -1298,7 +1321,7 @@ Images are represented as objects of type
 \family typewriter
 vtkImageData
 \family default
- and are grayscale.
+ and are gray-scale.
  The pixels are stored as 
 \family typewriter
 unsigned char
@@ -1328,7 +1351,7 @@ Upon receiving the output from the filter, ESPina will add a new segmentation
 
 \begin_layout Standard
 The use of VTK provides several advantages because it provides an abundant
- library of filters that can be used internally by the new filters (ie.
+ library of filters that can be used internally by the new filters (e.g.
  Gaussian smooth operators, dilate and erode operators).
  This filters are very efficient and by lowering the amount of work that
  has to be done "by hand" they help to reduce the amount of code needed
@@ -1374,10 +1397,9 @@ As was explained earlier, in this model the evolution is dependent on an
  The motivation to separate the evaluation of this function from the actual
  evolution of the curve is that it gives us the flexibility to eventually
  use different functions as stop criteria for the evolution of the snakes
- on images with different characteristics (ie.
- you might be interested on using a function that favors stopping the curve
- evolution on the edges of the image, or in the center of dark segments,
- for example).
+ on images with different characteristics (for example, you might be interested
+ on using a function that favors stopping the curve evolution on the edges
+ of the image, or in the center of dark segments).
  
 \end_layout
 
@@ -1486,8 +1508,8 @@ Morphological Active Contours Without Edges
 
 \begin_layout Standard
 The execution of the MACWE is relatively simpler, because it works directly
- with the data from the image, so its not necessary to pre calculate an
- energy function, as was the case with the MGAC.
+ with the data from the image, so its not necessary to precalculate an energy
+ function, as was the case with the MGAC.
  
 \end_layout
 
@@ -1909,7 +1931,11 @@ Wrapping VTK functionality
 
 \begin_layout Standard
 In ESPina's architecture all VTK filters have to be wrapped in an object
- of type pqFilter.
+ of type 
+\family typewriter
+pqFilter
+\family default
+.
  This object will handle all calls to the VTK filter in ParaView's server,
  ensuring that all parameters are of the right type.
  Additionally, every VTK filter's interface must be made known to the server
@@ -1965,7 +1991,7 @@ User Interaction
 The objective of a user when working with this plug-in is to generate a
  segmentation object in ESPina's data model.
  In this model a segmentation is a group of voxels that have been labeled
- as belonging to a structure according to certain taxonomy (i.e.
+ as belonging to a structure according to certain taxonomy (e.g.
  a synapse).
  Before starting the process of segmentation the user must choose what kind
  of structure he is going to be labeling using ESPina's taxonomy selector.

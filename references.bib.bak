@@ -1,14 +1,20 @@
 % This file was created with JabRef 2.7b.
 % Encoding: UTF-8
 
-@ARTICLE{Baumela_2010,
+
+@INPROCEEDINGS{Alvarez_2010, 
   author = {\'{A}lvarez, Luis and Baumela, Luis and Henr\'{i}quez, Pedro and
-	M\'{a}rquez-neila, Pablo and Inform\'{a}tica, Dep},
-  title = {Morphological Snakes},
-  journal = {Inteligencia Artificial},
-  year = {2010},
-  pages = {2197--2202}
-}
+	M\'{a}rquez-neila, Pablo},
+booktitle={Computer Vision and Pattern Recognition (CVPR), 2010 IEEE Conference on}, 
+title={Morphological snakes}, 
+year={2010}, 
+month={june}, 
+volume={}, 
+number={}, 
+pages={2197 -2202}, 
+keywords={binary level set;binary piecewise constant function;contour distance function estimation;curve evolution;morphological snake approach;partial differential equation;snake evolution algorithm;standard PDE snake models;image processing;partial differential equations;}, 
+doi={10.1109/CVPR.2010.5539900}, 
+ISSN={1063-6919},}
 
 @ARTICLE{Boykov_Jolly_2001,
   author = {Boykov, Y Y and Jolly, M P},

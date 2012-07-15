@@ -86,59 +86,45 @@ Summary
 \end_layout
 
 \begin_layout Standard
-The Cajal Blue Brain Project is an entity formed by the Madrid Technical
- University (UPM) and other Spanish scientific institutions.
- This project is part of an European project, the Blue Brain Project, started
- in 2005 by the EPFL and IBM with the objective of simulating an anatomically
- correct human brain inside a supercomputer.
- 
-\end_layout
-
-\begin_layout Standard
-One of the main areas of involvement of the UPM in this project is in the
+This thesis has been developed as part of the Cajal Blue Brain research
+ project, whose long-term goal is simulating an anatomically correct human
+ brain inside a supercomputer.
+ One of the main areas of involvement of the UPM in this project is in the
  development of new technologies for image analysis and visualization.
  These new technologies are needed to extract useful information from 3D
  images obtained with modern electronic microscopes from real cortical tissue.
-\end_layout
-
-\begin_layout Standard
-This task presents a series of challenges, derived amongst other things
+ This task presents a series of challenges, derived amongst other things
  from the large amount of images that can be obtained from a small volume
  of tissue as well as from the characteristics innate to this images.
-\end_layout
-
-\begin_layout Standard
-Today, the analysis of the images is done by hand by trained scientists,
+ Today, the analysis of the images is done by hand by trained scientists,
  this represents a huge bottleneck for the project, as a well as a very
  expensive and error prone process.
- 
 \end_layout
 
 \begin_layout Standard
-The objective of the present work is the creation of an interactive tool
- that could be used by a scientist to segment a stack of brain tissue images
- efficiently and effectively.
- This tool will use modern segmentation techniques, specifically the curve
- evolution technique known as Snakes.
- We will implement two modern Snakes algorithms proposed by 
+The objective of this master thesis is the development of an interactive
+ tool for segmenting a stack of brain tissue images.
+ This tool will use segmentation techniques based on curve evolution or
+ Snakes.
+ A major limitation of curve evolution algorithms is their robustness and
+ computational complexity, which prevents them from being used in an interactive
+ segmentation tool.
+ In this thesis we will implement two recent evolution algorithms proposed
+ by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Marquez_2012"
 
 \end_inset
 
-, which are based on the use of morphological operators to overcome some
- of the limitations of more traditional Snakes evolution methods.
- 
-\end_layout
-
-\begin_layout Standard
-The result of the implementation was a plug-in for a neuronal analysis system
- (ESPina) that allows the user to interactively segment an image stack.
- We also analyzed the challenges that arose during the implementation of
- the algorithms as well as the improvements and opportunities that open
- up based on this work.
- 
+, that are based on the use of morphological operators to overcome some
+ of the limitations of traditional Snakes evolution methods.
+ The result of the implementation is a plug-in for a neuronal analysis system,
+ called ESPina, which is being developed by various research groups in the
+ UPM.
+ In the thesis we also analyze the challenges that arise during the implementati
+on of these algorithms as well as the improvements and opportunities that
+ this work opens.
 \end_layout
 
 \begin_layout Chapter*
@@ -150,85 +136,52 @@ Resumen
 \begin_layout Standard
 
 \lang spanish
-La Universidad Politécnica de Madrid (UPM) conforma junto con otras institucione
-s científicas Españolas el proyecto Cajal Blue Brain, el cual a su vez forma
- parte de un proyecto europeo con el nombre de Blue Brain Project, el cual
- fue iniciado en el año 2005 mediante una asociación entre la EPFL y IBM
- con el objetivo de realizar una simulación anatómicamente correcta de un
- cerebro humano en un supercomputador.
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang spanish
-Dado este contexto, una de las áreas del proyecto en la cual está involucrada
- la UPM es en el desarrollo de nuevas tecnologías de análisis y visualización
+Esta tesis ha sido desarrollada como parte del proyecto de investigación
+ Cajal Blue Brain cuyo principal objetivo a largo plazo es el de realizar
+ una simulación anatómicamente correcta de un cerebro humano en un supercomputad
+or.
+ Una de las principales áreas del proyecto en la cual está involucrada la
+ UPM es en el desarrollo de nuevas tecnologías de análisis y visualización
  de imágenes.
- La necesidad de estas nuevas tecnologías viene dada por el hecho de que
- uno de los principales retos del proyecto CBB es el de poder obtener informació
-n útil a partir de imágenes obtenidas mediante técnicas modernas de microscopia
- electrónica aplicadas a especímenes reales de tejido cortical.
+ Estas tecnologías son necesarias para extraer información útil de imágenes
+ en 3D obtenidas mediante técnicas modernas de microscopia electrónica aplicadas
+ a especímenes reales de tejido cortical.
+ Esta tarea presenta una serie de retos, derivados entre otras cosas por
+ el inmenso volumen de imágenes que se generan a partir de un volumen muy
+ pequeño de tejido así como por las características propias de las imágenes.
+ Hoy en día, este análisis se hace a mano por científicos entrenados, esto
+ representa además de un cuello de botella importante para el proyecto,
+ un proceso sumamente costoso y propenso a errores.
  
 \end_layout
 
 \begin_layout Standard
 
 \lang spanish
-Esta tarea presenta una serie de retos muy importantes que vienen dados
- entre otras cosas por el inmenso volumen de imágenes que se generan a partir
- de un volumen muy pequeño de tejido así como por las características propias
- de las imágenes.
-\end_layout
-
-\begin_layout Standard
-
-\lang spanish
-El análisis de estas imágenes hoy en día se hace a mano por científicos
- entrenados, esto representa además de un cuello de botella importante para
- el proyecto, un proceso sumamente costoso  y propenso a errores.
+El objetivo de esta tesis es el desarrollo de una herramienta interactiva
+ de segmentación de imágenes de tejido cerebral.
+ Esta herramienta utilizará tecnicas de segmentacion de imagenes basadas
+ en evolucion de curvas o Snakes.
+ Los algoritmos de evolución de curvas presentan limitaciones en cuanto
+ a robustez y complejidad computacional que limitan su utilidad en una herramien
+ta interactiva.
+ En esta tesis implementaremos dos algoritmos propuestos recientemente por
  
-\end_layout
-
-\begin_layout Standard
-
-\lang spanish
-El objetivo de este trabajo es el de crear una herramienta interactiva,
- que permita a un usuario realizar la segmentación de una pila de imágenes
- de tejido cerebral de una manera eficaz y eficiente.
- Para conseguir dicho objetivo planteamos la aplicación de técnicas modernas
- de segmentación de imágenes.
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang spanish
-Una de las técnicas de segmentación clásicas más exitosas es conocida como
- Snakes, y se basa en utilizar evolución de curvas para delimitar las regiones
- de interés de una imagen.
- En particular implementé dos algoritmos propuestos recientemente por 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Marquez_2012"
 
 \end_inset
 
- los cuales se basan en la idea de utilizar operadores morfológicos para
- superar algunas de las limitaciones de los enfoques tradicionales de evolución
+, los cuales se basan en el uso de operadores morfológicos para superar
+ algunas de las limitaciones de los enfoques tradicionales de evolución
  de Snakes.
- 
-\end_layout
-
-\begin_layout Standard
-
-\lang spanish
-El resultado de la implementación fue exitoso, se construyó un plug-in para
- el sistema de visualización y análisis neuronal ESPina el cual permite
- a los usuarios de manera interactiva segmentar pilas de imágenes.
- Por último, presentamos el análisis de los retos que se nos presentaron
- para la implementación de la herramienta así como las posibles mejoras
- y avenidas de investigación que se abren a partir de nuestro trabajo.
+ El resultado de la implementación es un un plug-in para el sistema de visualiza
+ción y análisis neuronal ESPina, el cual está siendo desarrollando por varios
+ grupos de investigación de la UPM.
+ En la tesis también analizamos los retos que se nos presentaron para la
+ implementación de los algoritmos así como las posibles mejoras y avenidas
+ de investigación que se abren a partir de nuestro trabajo.
 \end_layout
 
 \begin_layout Standard
@@ -294,14 +247,14 @@ The Blue Brain Project, a collaboration between Switzerland's EPFL and IBM,
 
 \begin_layout Standard
 In order to obtain morphological information about the structure of the
- brain directly from actual brain tissue very modern electronic microscopy
- techniques are being used to obtain highly detailed images from samples
- of cerebral cortex.
+ brain directly from actual brain tissue modern electronic microscopy techniques
+ are being used to obtain highly detailed images from samples of cerebral
+ cortex.
  These images are extremely useful because when properly analyzed by trained
- scientist they can yield very important quantitative as well as qualitative
+ scientist they can yield important quantitative as well as qualitative
  data.
  When done by hand, the processing of the images is a very time consuming
- task that is very labor intensive and therefore expensive.
+ task that is labor intensive and therefore expensive.
  Combine the cost (in every sense) of this process to the fact that the
  amount of images that have to be processed is immense and you have a really
  hard problem in your hands 
@@ -414,7 +367,7 @@ For the first part of the solution we are going to develop a plug-in for
  ground up to support image segmentation and provides a system for categorizing
  hierarchically the labeled structures and secondly and more importantly,
  it provides an open architecture that can be enhanced with external plug-ins
- which will allow me to build a tool to do segmentation interactively using
+ which will allow us to build a tool to do segmentation interactively using
  two selected algorithms.
  
 \end_layout
@@ -424,17 +377,17 @@ The second component of the solution is the implementation of the two algorithms
  mentioned before.
  The segmentation problem has been around for quite some time and a lot
  of approaches have been tried in solving it.
- In the next chapter we provide an overview of what some of those approaches
- have been and their limitations.
+ In the next chapter we provide an overview of those approaches and their
+ limitations.
  Our solution is based on the use of active contours, also known as Snakes.
  This approach is based on the idea of iteratively evolving a curve using
  a gradient descent technique based on the minimization of some energy function.
  The classical way of solving this problem is using Partial Differential
  Equations (PDEs) but, as will be discussed later on, this process has some
- limitations that can be overcome by the use of certain morphological operators
+ limitations that can be solved by the use of certain morphological operators
  that have been proposed recently.
  The use of morphological operators, has the advantage of being simpler,
- faster and more numerically stable than the their differential counterparts.
+ faster and numerically more stable than the their differential counterparts.
  
 \end_layout
 
@@ -459,7 +412,7 @@ One of the main objectives in the design of the segmentation tool is for
 \end_layout
 
 \begin_layout Chapter
-A little context.
+Some context.
  The Cajal Blue Brain Project.
 \begin_inset CommandInset label
 LatexCommand label
@@ -748,12 +701,13 @@ Image Segmentation
 
 \begin_layout Standard
 Image segmentation is the process of labeling the pixels of an image in
- way that allows us to group together pixels that share certain characteristics.
- A common use of segmentation is to separate a subject in an image from
- the background of the image, because of this, it is common to refer to
- the pixels that are part of the structure that is being segmented as foreground
- pixels and every other pixel as background pixels even on the cases when
- this names do not make much sense.
+ a way that allows us to group together pixels that share certain characteristic
+s.
+ A common use of segmentation is to separate an object in an image from
+ its background, because of this, it is common to refer to the pixels that
+ are part of the structure that is being segmented as foreground pixels
+ and every other pixel as background pixels even on the cases when this
+ names do not make much sense.
  The segmentation problem has been approached from several directions: Split
  and merge techniques (
 \begin_inset CommandInset citation
@@ -864,7 +818,25 @@ Active Contours Without Edges
 \shape default
  (ACWE), it does not require a stop criterion function for minimizing its
  energy functional, but instead relies in global information regarding the
- contents of pixels inside and outside of the evolving curve.
+ contents (i.e.
+ the gray levels) of pixels inside and outside of the evolving curve.
+ In figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:chan_vese_curve"
+
+\end_inset
+
+ we can see a schematic representation of an evolving curve, notice how
+ the curve 
+\begin_inset Formula $C$
+\end_inset
+
+ is represented by the zero level-set of the function 
+\begin_inset Formula $\phi$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -896,14 +868,17 @@ key "Chan_Vese_2001"
 \end_inset
 
 ]
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:chan_vese_curve"
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
 
@@ -922,7 +897,7 @@ ns of the level-set function as it degrades over time.
 
 \begin_layout Standard
 As a proposed solution to this shortcomings of the traditional approach
- to snakes evolution
+ to snakes evolution 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Alvarez_2010"
@@ -938,8 +913,8 @@ key "Marquez_2012"
 
  propose a method that replaces the terms of the PDEs in traditional algorithms
  with infinitesimally equivalent morphological operators.
- Using these new operators the curve can be represented more simply and
- the operations required to obtain it become become simpler and less costly.
+ Using these new operators the representation of the curve is simpler and
+ the operations required to obtain it become less costly.
  
 \end_layout
 
@@ -978,28 +953,18 @@ key "Marquez_2012"
  not get stuck in parts of the image with little information and the third
  component is the mean curvature operator which can be seen as a smoothing
  force on the curve.
- With this in mind, the following steps applied sequentially are equivalent
- to the PDE:
+ 
+\end_layout
+
+\begin_layout Standard
+The PDE that we will approximate using the morphological operators is:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{flalign}
-u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
-\left(D_{d}u^{n}\right)\left(x\right) & \text{if }|\nu|g\left(I\right)\left(x\right)>\theta\\
-\left(E_{d}u^{n}\right)\left(x\right) & \text{if }|\nu|g\left(I\right)\left(x\right)<\theta\\
-u^{n}\left(x\right) & \text{otherwise}
-\end{cases}\nonumber \\
-u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
-1 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)>0\\
-0 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)<0\\
-u^{n+\frac{1}{3}}\left(x\right) & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)=0
-\end{cases}\label{eq:mgac}\\
-u^{n+1}\left(x\right) & =\begin{cases}
-\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right) & \text{if }g\left(I\right)\left(x\right)>\theta\\
-u^{n+\frac{2}{3}}\left(x\right) & \text{otherwise}
-\end{cases}\nonumber 
-\end{flalign}
+\begin{equation}
+\frac{\partial u}{\partial t}=g\left(I\right)|\nabla u|\text{div}\left(\frac{\nabla u}{|\nabla u|}\right)+g\left(I\right)|\nabla u|\nu+\nabla g\left(I\right)\nabla u\label{eq:pde_gac}
+\end{equation}
 
 \end_inset
 
@@ -1012,30 +977,15 @@ Where
 \end_inset
 
  represents the embedding function, 
-\begin_inset Formula $D_{d}$
-\end_inset
-
- and 
-\begin_inset Formula $E_{d}$
-\end_inset
-
- represent the discretized dilation and erosion operators respectively,
- 
-\begin_inset Formula $g\left(I\right)\left(x\right)$
+\begin_inset Formula $g\left(I\right)$
 \end_inset
 
  represents a function that has low values in the areas of interest of the
- image, 
+ image and 
 \begin_inset Formula $\nu$
 \end_inset
 
- is a parameter that controls the effect of the balloon force and 
-\begin_inset Formula $\theta$
-\end_inset
-
- is a threshold parameter that controls the effect of both the balloon force
- and the smoothing force.
- 
+ is a parameter that controls the effect of the balloon force
 \end_layout
 
 \begin_layout Standard
@@ -1063,6 +1013,63 @@ g\left(I\right)=\frac{1}{\sqrt{1+\alpha|G_{\sigma}*I|}},\label{eq:stopf}
 which takes low values in the edges of the image.
 \end_layout
 
+\begin_layout Standard
+With this in mind, the following steps applied sequentially are equivalent
+ to the PDE 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:pde_gac"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{flalign}
+u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }|\nu|g\left(I\right)\left(x\right)>\theta\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }|\nu|g\left(I\right)\left(x\right)<\theta\\
+u^{n}\left(x\right) & \text{otherwise}
+\end{cases}\nonumber \\
+u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
+1 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)>0\\
+0 & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)<0\\
+u^{n+\frac{1}{3}}\left(x\right) & \text{if }\nabla u^{n+\frac{1}{3}}\nabla g\left(I\right)\left(x\right)=0
+\end{cases}\label{eq:mgac}\\
+u^{n+1}\left(x\right) & =\begin{cases}
+\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right) & \text{if }g\left(I\right)\left(x\right)>\theta\\
+u^{n+\frac{2}{3}}\left(x\right) & \text{otherwise}
+\end{cases}\nonumber 
+\end{flalign}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this equation the first step represents the balloon force (
+\begin_inset Formula $D_{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $E_{d}$
+\end_inset
+
+ represent the discretized dilation and erosion operators respectively),
+ the second step represents the attraction of the interesting areas of the
+ image and the third step is the application of the smoothing force.
+ Parameter 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is a threshold that controls the effect of both the balloon force and the
+ smoothing force.
+ 
+\end_layout
+
 \begin_layout Subsection
 Morphological Active Contours Without Edges (MACWE)
 \begin_inset CommandInset label
@@ -1075,7 +1082,7 @@ name "sub:Morphological-ACWB"
 \end_layout
 
 \begin_layout Standard
-In the same manner that GAC can be approximated with morphological operators
+In the same manner that GAC can be approximated with morphological operators,
  the ACWE model can also be approximated in a similar fashion by composing
  several morphological operators, as shown by 
 \begin_inset CommandInset citation
@@ -1085,34 +1092,27 @@ key "Marquez_2012"
 \end_inset
 
 .
- In the case of ACWE the energy function to be minimized is not dependent
+ In the case of ACWE the energy functional to be minimized is not dependent
  on an external function but is derived directly from information from the
- image.
+ image, in particular it takes into account the levels of gray of the pixels
+ that are inside vs.
+ outside of the curve.
  In that sense, is different from GAC in that it uses more global information
  instead of just local information around the curve.
+ It can also be divided in three terms: a smoothing term, a balloon term
+ and an image attachment term.
  
 \end_layout
 
 \begin_layout Standard
-As with MGAC the steps necessary to model the evolution of the curve are
- the following:
+The PDE that needs to be solved in this case is:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\begin{flalign}
-u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
-\left(D_{d}u^{n}\right)\left(x\right) & \text{if }\nu>0\\
-\left(E_{d}u^{n}\right)\left(x\right) & \text{if }\nu<0\\
-u^{n}\left(x\right) & \text{otherwise}
-\end{cases}\nonumber \\
-u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
-1 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)<0\\
-0 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-C_{1}\right)^{2}-\lambda_{2}\left(I-C_{2}\right)^{2}\right)\left(x\right)>0\\
-u^{n+\frac{1}{3}}\left(x\right) & \text{otherwise}
-\end{cases}\label{eq:macwb}\\
-u^{n+1}\left(x\right) & =\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right)\nonumber 
-\end{flalign}
+\begin{equation}
+\frac{\partial u}{\partial t}=|\nabla u|\left(\mu\text{div}\left(\frac{\nabla u}{|\nabla u|}\right)-\nu-\lambda_{1}\left(I-c_{1}\right)^{2}+\lambda_{2}\left(I-c_{2}\right)^{2}\right)\label{eq:pde_acwe}
+\end{equation}
 
 \end_inset
 
@@ -1137,14 +1137,46 @@ Where
 \end_inset
 
  represent the strength of each term and 
-\begin_inset Formula $C_{1}$
+\begin_inset Formula $c_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $C_{2}$
+\begin_inset Formula $c_{2}$
 \end_inset
 
  represent the mean values of the image inside and outside the contour.
+\end_layout
+
+\begin_layout Standard
+As with MGAC the steps necessary to model the evolution of the curve with
+ morphological operators are the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{flalign}
+u^{n+\frac{1}{3}}\left(x\right) & =\begin{cases}
+\left(D_{d}u^{n}\right)\left(x\right) & \text{if }\nu>0\\
+\left(E_{d}u^{n}\right)\left(x\right) & \text{if }\nu<0\\
+u^{n}\left(x\right) & \text{otherwise}
+\end{cases}\nonumber \\
+u^{n+\frac{2}{3}}\left(x\right) & =\begin{cases}
+1 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-c_{1}\right)^{2}-\lambda_{2}\left(I-c_{2}\right)^{2}\right)\left(x\right)<0\\
+0 & \text{if }|\nabla u^{n+\frac{1}{3}}|\left(\lambda_{1}\left(I-c_{1}\right)^{2}-\lambda_{2}\left(I-c_{2}\right)^{2}\right)\left(x\right)>0\\
+u^{n+\frac{1}{3}}\left(x\right) & \text{otherwise}
+\end{cases}\label{eq:macwb}\\
+u^{n+1}\left(x\right) & =\left(\left(SI_{d}\circ IS_{d}\right)^{\mu}u^{n+\frac{2}{3}}\right)\left(x\right)\nonumber 
+\end{flalign}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These steps represent respectively: the balloon force, the image attachment
+ and the smoothing force.
+ 
 \end_layout
 
 \begin_layout Chapter
@@ -2215,8 +2247,8 @@ We have already explained the way the algorithms were implemented and also
  how the plug-in was designed.
  The key to putting it all together and actually being able to use the plug-in
  in ESPina is the use of Cmake.
- As explained in the prerequisites section, this is a building tool that
- is very configurable and it is indispensable for building the plug-in.
+ As explained in the prerequisites section, this is a configurable building
+ tool and it is indispensable for building the plug-in.
  One of it greatest strengths is that it allows for expert users to define
  macros and routines specific for their application.
  In this case, since this plug-in is technically a plug-in for ParaView,
@@ -2302,7 +2334,7 @@ status open
 
 \begin_layout Plain Layout
 The result of correctly loading the plug-in on ESPina.
- Accented in red is the new tool bar.
+ Emphasized in red is the new tool bar.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Toolbar_loaded"
@@ -2607,7 +2639,7 @@ reference "sec:ImplementationAlgorithms"
 \end_inset
 
 ).
- Maybe a more sensitive approach would be to modify the selection of the
+ Maybe a more sensible approach would be to modify the selection of the
  VOI so that it is not fixed, but it is always kept at at certain distance
  from the edges of the curve.
  This hypothesis was not tested.
@@ -2625,9 +2657,8 @@ One of the aspects that seems to affect the performance of these algorithms
  The distortions on the image were not evenly distributed along the Z axis,
  while in some areas the discontinuity was barely perceivable in other parts
  of the image we found big leaps from one slice to another, this inconsistency
- seems to have had had an effect on the performance of the segmentation
- tool.
- Figure 
+ had an effect on the performance of the segmentation tool.
+ In Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:discontinuity"
@@ -2953,9 +2984,9 @@ reference "chap:Previous-Work"
  or Snakes.
  These techniques are based on the evolution of a curve, normally by finding
  the solution of a partial differential equation (PDE).
- The use of PDEs has a number of disadvantages, specially about the complexity
- of the calculations involved as well as the numerical stability of the
- methods.
+ The use of PDEs has a number of disadvantages, specially concerning the
+ complexity of the calculations involved as well as the numerical stability
+ of the methods.
  A recent proposal was made by 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -2967,8 +2998,7 @@ key "Marquez_2012"
  the use of PDEs and lowering the computational cost of the solution.
  The algorithms they propose are called Morphological Geodesic Active Contours
  (MGAC) and Morphological Active Contours Without Edges (MACWE).
- An explanation of the workings of these algorithm can be found in sections
- 
+ An explanation of these algorithm can be found in sections 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Morphological-Geodesic-Active"
@@ -2993,15 +3023,14 @@ Our main objective in the present work was to create a tool that allows
  This tool is a plug-in for a software system called ESPina that was developed
  by members of the Cajal Blue Brain Project as an interaction and visualization
  tool for the analysis of neuronal images.
- This plug-in adds a tool bar to ESPina that allows the user to do segmentation
+ The plug-in adds a tool bar to ESPina that allows the user to do segmentation
  with the morphological algorithms described earlier.
  This tool was designed to be interactive in order to fully harness the
- input of the experts at hand.
- The way this works is that the user has full control over where the initial
- curve is placed, as well as over the evolution of that curve until he is
- satisfied with the results.
- This iterative process allows for the user to iteratively add together
- several independently evolved curves into a final labeling of a structure.
+ input of the experts, who have full control over where the initial curve
+ is placed, as well as over the evolution of that curve until they are satisfied
+ with the results.
+ This process allows for the user to iteratively add together several independen
+tly evolved curves into a final labeling of a structure.
  
 \end_layout
 
@@ -3013,13 +3042,12 @@ reference "chap:Implementation"
 
 \end_inset
 
-the interested user can find all the technical details of the way the algorithms
- and the user interaction were implemented.
- As a brief reminder, we can say that the algorithmic part of the implementation
- was done using VTK, a library developed by Kitware for image data processing,
- analysis and visualization, it required the use of some filters that come
- bundled in VTK's libraries and also the development of some new stand-alone
- filters.
+ the interested user can find all the technical details of the way the algorithm
+s and the user interaction were implemented.
+ The algorithmic part of the implementation was done using VTK, a library
+ developed by Kitware for image data processing, analysis and visualization,
+ it required the use of some filters that come bundled in VTK's libraries
+ and also the development of some new stand-alone filters.
  The user interaction parts of the tool were done complying with ESPina's
  extensibility model.
 \end_layout

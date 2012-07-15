@@ -5,9 +5,9 @@
 \textclass report
 \use_default_options false
 \maintain_unincluded_children false
-\language english
+\language spanish
 \language_package default
-\inputencoding auto
+\inputencoding utf8x
 \fontencoding global
 \font_roman default
 \font_sans default
@@ -169,8 +169,10 @@ Tesis de Máster
 \align center
 
 \size largest
+\lang english
 An interactive 3D image segmentation tool based on Morphological Snakes
 \size default
+\lang spanish
  
 \end_layout
 
@@ -212,6 +214,28 @@ end{titlepage}
 \end_inset
 
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+clearpage
+\backslash
+thispagestyle{empty}
+\backslash
+mbox{}
+\backslash
+clearpage
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
